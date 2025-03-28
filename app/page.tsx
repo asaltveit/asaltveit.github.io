@@ -12,7 +12,7 @@ export default function Home() {
         <Container title="About Me">
           <div className="grid">
             <div className="text-slate-700 pb-8 text-xl">
-              I'm a web developer who enjoys creating beautiful and accessible products.
+              I&apos;m a web developer who enjoys creating beautiful and accessible products.
             </div>
             <div className="text-slate-700 text-2xl font-bold grid mb-4">
               Technical Skills
