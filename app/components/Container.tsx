@@ -1,12 +1,13 @@
 
 interface ContainerProps {
     title: string;
+    id: string;
     children: React.ReactNode;
   }
 
-export default function Container ({ title, children } : ContainerProps) {
+export default function Container ({ title, id, children } : ContainerProps) {
     return (
-        <div className="relative max-w-md mx-auto md:max-w-5xl mt-6 min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-xl mt-16">
+        <div id={`${id}`} className="relative max-w-sm mx-auto md:max-w-5xl mt-6 min-w-0 break-words bg-white w-full mb-3 shadow-lg rounded-xl mt-16">
             <div className="px-20 py-18">
                 <div className="flex flex-wrap"> 
                     <div className="w-full justify-center">

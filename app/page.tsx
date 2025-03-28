@@ -1,15 +1,25 @@
 import Container from './components/Container'
+import NavBar from './components/NavBar';
 //import Image from 'next/image'
 //import mapScreenshotSrc from "@/public/map-screenshot-032725.png"
 export default function Home() {
+  const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
+  /* 
+    NavBar positioning 
+      w- doesn't scale/resize with screen size
+      max-w- doesn't change width of header
+      w-4/5 is closest, but scale is weird 
+  */
   return (
     <div className="bg-indigo-700 grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <header className="text-6xl font-medium text-black dark:text-white" >
-        Anna Saltveit
+      <header className="text-black dark:text-white w-4/5" >
+        <NavBar links={navLinks} />
+        <div className="text-6xl font-medium" >
+          Anna Saltveit
+        </div>
       </header>
-      {/* gap-[32px] */}
       <main className="flex flex-col gap-[4px] row-start-2 items-start sm:items-start">
-        <Container title="About Me">
+        <Container title="About Me" id="about" >
           <div className="grid">
             <div className="text-slate-700 pb-8 text-xl">
               I&apos;m a web developer who enjoys creating beautiful and accessible products.
@@ -43,7 +53,7 @@ export default function Home() {
             </div>
           </div>
         </Container>
-        <Container title="Experience">
+        <Container title="Experience" id="experience" >
           <div className="grid grid-cols-1">
             <div className="grid items-start justify-items-start pb-8">
               <div className="text-slate-700 text-2xl font-bold">
@@ -75,7 +85,7 @@ export default function Home() {
             </div>
           </div>
         </Container>
-        <Container  title="Projects">
+        <Container title="Projects" id="projects" >
           <div>
             <div className="grid grid-cols-1">
               <div className="grid grid-cols-2 justify-items-start pb-8">
