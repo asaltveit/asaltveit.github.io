@@ -1,5 +1,6 @@
 import Container from './components/Container'
 import NavBar from './components/NavBar';
+import Experience from './components/Experience';
 //import Image from 'next/image'
 //import mapScreenshotSrc from "@/public/map-screenshot-032725.png"
 export default function Home() {
@@ -55,34 +56,15 @@ export default function Home() {
         </Container>
         <Container title="Experience" id="experience" >
           <div className="grid grid-cols-1">
-            <div className="grid items-start justify-items-start pb-8">
-              <div className="text-slate-700 text-2xl font-bold">
-                Included Health, Web Developer
-              </div>
-              <div className="text-slate-500 text-xl pb-2">
-                2021 - 2024
-              </div>
-              <ul className='marker:text-green list-outside list-disc ml-6 text-slate-700 text-xl justify-items-start'>
-                <li> I led the development of medium and large features from code design to release. </li>
-                <li> I collaborated with cross-functional teams, including project managers, designers, and
-                data engineers among others. </li>
-                <li> I led code base maintenance initiatives for my team and collaborated with a multi-team
-              committee to improve maintenance using Github Actions and Rollbar, reducing bug and
-              Dependabot alerts by 80% and preventing deployment locks. </li>
-              </ul>
-            </div>
-            <div className="grid items-start justify-items-start pb-3">
-              <div className="text-slate-700 text-2xl font-bold">
-                Code for PDX, Frontend Developer
-              </div>
-              <div className="text-slate-500 text-xl pb-2">
-                2020 - 2020
-              </div>
-              <ul className='marker:text-green list-outside list-disc ml-6 text-slate-700 text-xl justify-items-start'>
-                <li> I volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing. </li>
-                <li> I contributed components in React and SCSS. </li>
-              </ul>
-            </div>
+            <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
+              "I led the development of medium and large features from code design to release.",
+              "I collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
+              "I led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks."
+            ]} />
+            <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
+              "I volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
+              "I contributed components in React and SCSS."
+            ]} />
           </div>
         </Container>
         <Container title="Projects" id="projects" >
