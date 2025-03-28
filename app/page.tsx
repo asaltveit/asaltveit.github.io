@@ -1,5 +1,5 @@
 import Container from './components/Container'
-import Image from 'next/image'
+//import Image from 'next/image'
 //import mapScreenshotSrc from "@/public/map-screenshot-032725.png"
 export default function Home() {
   return (
