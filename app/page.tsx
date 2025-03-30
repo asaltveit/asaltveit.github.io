@@ -1,8 +1,12 @@
 import Container from './components/Container'
 import NavBar from './components/NavBar';
 import Experience from './components/Experience';
-//import Image from 'next/image'
-//import mapScreenshotSrc from "@/public/map-screenshot-032725.png"
+import Project from './components/Project'
+
+// Project Images
+import mapScreenshotSrc from "../public/map-screenshot-032725.png"
+import createBiblioScreenshot from "../public/create-biblio-screenshot-032825.png"
+
 export default function Home() {
   const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
   /* 
@@ -54,6 +58,7 @@ export default function Home() {
             </div>
           </div>
         </Container>
+        {/* TODO: Add months to dates? */}
         <Container title="Experience" id="experience" >
           <div className="grid grid-cols-1">
             <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
@@ -68,42 +73,32 @@ export default function Home() {
           </div>
         </Container>
         <Container title="Projects" id="projects" >
-          <div>
-            <div className="grid grid-cols-1">
-              <div className="grid grid-cols-2 justify-items-start pb-8">
-                <div className="grid items-start" >
-                  <div className="text-slate-700 text-2xl font-bold">
-                    ROTAS Squares Map
-                  </div>
-                  <div className="text-slate-500 text-xl pb-2">
-                    2024 - Present
-                  </div>
-                  <ul className='marker:text-green list-outside list-disc ml-6 text-slate-700 text-xl justify-items-start'>
-                    <li> An interactive map and timeline using Observable Plot, React, and JavaScript on the frontend and Node.js, Express.js, and
-                    PostgreSQL on the backend. </li>
-                    <li> Includes filters and functionality to manipulate the data (add, update, delete). </li>
-                    <li> Created upon request of a researcher. </li>
-                  </ul>
-                </div>
-                {/*<div className="items-end">
-                   Include an image / video 
-                  <Image
-                    src={mapScreenshotSrc}
-                    alt="ROTAS Squares Map"
-                    width={2746} //automatically provided
-                    height={1508} //automatically provided
-                    className="max-w-[150px]"
-                    // blurDataURL="data:..." automatically provided
-                    // placeholder="blur" // Optional blur-up while loading
-                  />
-                </div>*/}
-              </div>
-            </div>
+          <div className="grid grid-cols-1 space-y-12">
+            <Project title="ROTAS Squares Map" dates="2024 - Present" items={[
+              "An interactive map and timeline using Observable Plot, React, and JavaScript on the frontend and Node.js, Express.js, and PostgreSQL on the backend.",
+              "Includes filters and functionality to manipulate the data (add, update, delete).",
+              "Created upon request of a researcher."
+            ]}
+            image={mapScreenshotSrc}
+            imageTitle='ROTAS Map Image'
+            imageLink="https://github.com/asaltveit/ROTAS-squares-map"
+            />
+            <Project title="Create Biblio" dates="2024 - Present" items={[
+              "Creates a citation for each PDF in a given folder (and all sub-folders) and adds them to an RIS file which can be uploaded to Zotero and/or other programs which accept RIS format.",
+              "Developed with Python.",
+              "Created upon request of a researcher."
+            ]}
+            image={createBiblioScreenshot}
+            imageTitle='ROTAS Map Image'
+            imageLink="https://github.com/asaltveit/create-biblio"
+            isEven
+            />
           </div>
         </Container>
       </main>
 
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+        {/* TODO: Use Link instead of a? */}
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://github.com/asaltveit"
