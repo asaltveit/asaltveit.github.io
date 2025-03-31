@@ -77,4 +77,8 @@ describe('Project', () => {
 
         expect(screen.getByRole('link')).toHaveAttribute('href', '#')
     })
+
+    it('renders for mobile', () => {
+        // TODO
+    })
 })
