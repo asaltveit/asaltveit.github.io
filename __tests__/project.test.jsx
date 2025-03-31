@@ -1,7 +1,14 @@
 import '@testing-library/jest-dom'
 import { render, screen, within } from '@testing-library/react'
+import './mocks/matchMediaFalse.mock'
 import Project from '@/components/Project'
 import mapScreenshotSrc from "../public/map-screenshot-032725.png"
+
+const matchMediaMock = jest.spyOn(window, 'matchMedia');
+
+beforeEach(() => {
+  matchMediaMock.mockClear();
+});
  
 describe('Project', () => {
     it('renders without image', () => {
@@ -24,6 +31,11 @@ describe('Project', () => {
         
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
+
+        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
+
+        const imageElement = document.querySelector('img');
+        expect(imageElement).not.toBeInTheDocument();
     })
     it('renders with image and not isEven', () => {
         render(<Project title="Test" dates="1-1" items={["bullet1", "bullet2"]} image={mapScreenshotSrc} />)
@@ -46,10 +58,12 @@ describe('Project', () => {
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
 
-        const imageElement = document.querySelector('img');
-        expect(imageElement.alt).toBe('image');
+        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
 
-        expect(screen.getByRole('link')).toHaveAttribute('href', '#')
+        const imageElement = document.querySelector('img');
+        expect(imageElement.alt).toBe('image image');
+
+        expect(screen.getByRole('link', {name: 'image image'})).toHaveAttribute('href', '#')
     })
     it('renders with image and isEven', () => {
         render(<Project title="Test" dates="1-1" items={["bullet1", "bullet2"]} image={mapScreenshotSrc} isEven />)
@@ -72,13 +86,17 @@ describe('Project', () => {
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
 
-        const imageElement = document.querySelector('img');
-        expect(imageElement.alt).toBe('image');
+        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
 
-        expect(screen.getByRole('link')).toHaveAttribute('href', '#')
-    })
+        const imageElement = document.querySelector('img');
+        expect(imageElement.alt).toBe('image image');
+
+        expect(screen.getByRole('link', {name: 'image image'})).toHaveAttribute('href', '#')    })
 
     it('renders for mobile', () => {
+        matchMediaMock.mockReturnValueOnce({ matches: true });
+        const imageElement = document.querySelector('img');
+        expect(imageElement).not.toBeInTheDocument();
         // TODO
     })
 })

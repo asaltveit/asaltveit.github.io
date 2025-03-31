@@ -50,13 +50,13 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                     <Link href={imageLink} >
                         <Image
                             src={image}
-                            alt={imageTitle}
+                            alt={`${imageTitle} image`}
                             // placeholder="blur" // Optional blur-up while loading
                         />
                     </Link>
                 }
                 </div> 
-                <div className="grid items-end" >
+                <div className="grid items-end md:pr-10" >
                     <div className="text-slate-700 text-xl md:text-2xl font-bold">
                     <Link href={imageLink} className='hover:underline hover:underline-offset-4'> {title} </Link>
                     </div>
@@ -93,7 +93,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                     <Link href={imageLink} >
                         <Image
                             src={image}
-                            alt={imageTitle}
+                            alt={`${imageTitle} image`}
                             // placeholder="blur" // Optional blur-up while loading
                         />
                     </Link>
