@@ -28,33 +28,33 @@ export default function Home() {
       <main className="flex flex-col gap-[4px] row-start-2 items-start sm:items-start">
         <Container title="About Me" id="about" >
           <div className="grid">
-            <div className="text-slate-700 pb-6 md:pb-8 text-lg md:text-xl">
+            <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
               I&apos;m a web developer who enjoys creating beautiful and accessible products.
             </div>
-            <div className="text-slate-700 text-xl md:text-2xl font-bold grid mb-4">
+            <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
               Technical Skills
             </div>
             <div className='mb-2'>
-              <span className="text-slate-700 text-lg md:text-xl font-bold items-start pr-3">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
                 Frontend:
               </span>
-              <span className="text-slate-700 text-lg md:text-xl items-end">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
                 React, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, CSS, Vitest, Jest
               </span>
             </div>
             <div className='mb-2'>
-              <span className="text-slate-700 text-lg md:text-xl font-bold items-start pr-3">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
                 Backend:
               </span>
-              <span className="text-slate-700 text-lg md:text-xl items-end">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
                 Python, Node.js, Express.js, Sequelize.js, PostgreSQL
               </span>
             </div>
             <div>
-              <span className="text-slate-700 text-lg md:text-xl font-bold items-start pr-3">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
                 Tools:
               </span>
-              <span className="text-slate-700 text-lg md:text-xl items-end">
+              <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
                 Git, Github Actions, Figma, Agile Development
               </span>
             </div>
