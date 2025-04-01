@@ -60,13 +60,13 @@ export default function Home() {
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
-                  "I led the development of medium and large features from code design to release.",
-                  "I collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
-                  "I led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks."
+                  "Led the development of medium and large features from code design to release.",
+                  "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
+                  "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks."
                 ]} />
                 <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
-                  "I volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
-                  "I contributed components in React and SCSS."
+                  "Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
+                  "Contributed components in React and SCSS."
                 ]} />
               </div>
             </Container>
