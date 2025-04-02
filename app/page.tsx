@@ -59,14 +59,18 @@ export default function Home() {
             {/* TODO: Add months to dates? */}
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-                <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
+                <Experience title="Included Health, Web Developer" dates="Feb. 2021 - Jan. 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
                   "Led the development of medium and large features from code design to release.",
                   "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
                 ]} />
-                <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
+                <Experience title="Code for PDX, Frontend Developer" dates="Feb. 2020 - Oct. 2020" items={[
                   "Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
                   "Contributed components in React and SCSS."
+                ]} />
+                <Experience title="Waitrainer, Intern" dates="June 2020 - Aug. 2020" items={[
+                  "Worked with the full stack (PHP, MongoDB, Vue.js) in a waiter-training startup.",
+                  "Designed and implemented features such as live search menus and refactored webpages."
                 ]} />
               </div>
             </Container>
