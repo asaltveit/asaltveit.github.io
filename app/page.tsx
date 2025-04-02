@@ -59,16 +59,16 @@ export default function Home() {
             {/* TODO: Add months to dates? */}
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-                <Experience title="Included Health, Web Developer" dates="Feb. 2021 - Jan. 2024" items={[
+                <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
                   "Led the development of medium and large features from code design to release.",
                   "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
                 ]} />
-                <Experience title="Code for PDX, Frontend Developer" dates="Feb. 2020 - Oct. 2020" items={[
+                <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
                   "Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
                   "Contributed components in React and SCSS."
                 ]} />
-                <Experience title="Waitrainer, Intern" dates="June 2020 - Aug. 2020" items={[
+                <Experience title="Waitrainer, Intern" dates="2017 - 2017" items={[
                   "Worked with the full stack (PHP, MongoDB, Vue.js) in a waiter-training startup.",
                   "Designed and implemented features such as live search menus and refactored webpages."
                 ]} />
@@ -76,7 +76,7 @@ export default function Home() {
             </Container>
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <Project title="ROTAS Squares Map" dates="Nov. 2024 - Present" items={[
+                <Project title="ROTAS Squares Map" dates="2024 - Present" items={[
                   "An interactive map and timeline using Observable Plot, React, and JavaScript on the frontend and Node.js, Express.js, and PostgreSQL on the backend.",
                   "Includes filters and functionality to manipulate the data (add, update, delete).",
                   "Created upon request of a researcher."
@@ -85,7 +85,7 @@ export default function Home() {
                 imageTitle='ROTAS Map'
                 link="https://github.com/asaltveit/ROTAS-squares-map"
                 />
-                <Project title="Create Biblio" dates="Dec. 2024 - Present" items={[
+                <Project title="Create Biblio" dates="2024 - Present" items={[
                   "Creates a citation for each PDF in a given folder (and all sub-folders) and adds them to an RIS file which can be uploaded to Zotero and/or other programs which accept RIS format.",
                   "Developed with Python.",
                   "Created upon request of a researcher."
@@ -95,7 +95,7 @@ export default function Home() {
                 link="https://github.com/asaltveit/create-biblio"
                 isEven
                 />
-                <Project title="This Website" dates="March 2025 - Present" items={[
+                <Project title="This Website" dates="2025 - Present" items={[
                   "Developed with React, Next.js, TypeScript, and TailwindCSS.",
                 ]}
                 image={personalWebsiteScreenshot}
