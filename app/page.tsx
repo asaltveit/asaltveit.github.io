@@ -6,6 +6,7 @@ import Project from './components/Project'
 // Project Images
 import mapScreenshotSrc from "../public/map-screenshot-032725.png"
 import createBiblioScreenshot from "../public/create-biblio-screenshot-032825.png"
+import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
 
 export default function Home() {
   const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
@@ -77,8 +78,8 @@ export default function Home() {
                   "Created upon request of a researcher."
                 ]}
                 image={mapScreenshotSrc}
-                imageTitle='ROTAS Map Image'
-                imageLink="https://github.com/asaltveit/ROTAS-squares-map"
+                imageTitle='ROTAS Map'
+                link="https://github.com/asaltveit/ROTAS-squares-map"
                 />
                 <Project title="Create Biblio" dates="2024 - Present" items={[
                   "Creates a citation for each PDF in a given folder (and all sub-folders) and adds them to an RIS file which can be uploaded to Zotero and/or other programs which accept RIS format.",
@@ -86,9 +87,16 @@ export default function Home() {
                   "Created upon request of a researcher."
                 ]}
                 image={createBiblioScreenshot}
-                imageTitle='ROTAS Map Image'
-                imageLink="https://github.com/asaltveit/create-biblio"
+                imageTitle='Create Biblio'
+                link="https://github.com/asaltveit/create-biblio"
                 isEven
+                />
+                <Project title="This Website" dates="2025 - Present" items={[
+                  "Developed with React, Next.js, TypeScript, and TailwindCSS.",
+                ]}
+                image={personalWebsiteScreenshot}
+                imageTitle='asaltveit.github.io'
+                link="https://github.com/asaltveit/asaltveit.github.io"
                 />
               </div>
             </Container>
