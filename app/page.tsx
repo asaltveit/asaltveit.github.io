@@ -13,7 +13,6 @@ export default function Home() {
   // first div: items-center justify-items-center sm:p-20 p-8 md:grid-rows-[20px_1fr_20px] md:gap-16
   return (
     <div className="bg-indigo-700 grid min-h-screen pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
-      {/*<div className="" >*/}
         <header className="text-white" >
           <NavBar links={navLinks} />
         </header>
@@ -25,7 +24,7 @@ export default function Home() {
             <Container title="About Me" id="about" >
               <div className="grid">
                 <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
-                  I&apos;m a web developer who enjoys creating beautiful and accessible products.
+                  I&apos;m a web developer who enjoys creating attractive and accessible products.
                 </div>
                 <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
                   Technical Skills
@@ -35,7 +34,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    React, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, CSS, Vitest, Jest
+                    React, Next, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, Material UI, CSS, HTML, Jest, Vitest
                   </span>
                 </div>
                 <div className='mb-2'>
@@ -60,9 +59,9 @@ export default function Home() {
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
+                  "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
                   "Led the development of medium and large features from code design to release.",
                   "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
-                  "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks."
                 ]} />
                 <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
                   "Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
@@ -115,7 +114,6 @@ export default function Home() {
             LinkedIn
           </a>
         </footer>
-      {/*</div>*/}
     </div>
   );
 }
