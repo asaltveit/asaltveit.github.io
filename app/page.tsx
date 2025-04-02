@@ -51,7 +51,7 @@ export default function Home() {
                     Tools:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Git, Github Actions, Figma, Agile Development
+                    Git, Github Actions, Figma, Agile Development, LaunchDarkly, npm, Slack, Jira, Confluence, PagerDuty
                   </span>
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function Home() {
             </Container>
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <Project title="ROTAS Squares Map" dates="2024 - Present" items={[
+                <Project title="ROTAS Squares Map" dates="Nov. 2024 - Present" items={[
                   "An interactive map and timeline using Observable Plot, React, and JavaScript on the frontend and Node.js, Express.js, and PostgreSQL on the backend.",
                   "Includes filters and functionality to manipulate the data (add, update, delete).",
                   "Created upon request of a researcher."
@@ -81,7 +81,7 @@ export default function Home() {
                 imageTitle='ROTAS Map'
                 link="https://github.com/asaltveit/ROTAS-squares-map"
                 />
-                <Project title="Create Biblio" dates="2024 - Present" items={[
+                <Project title="Create Biblio" dates="Dec. 2024 - Present" items={[
                   "Creates a citation for each PDF in a given folder (and all sub-folders) and adds them to an RIS file which can be uploaded to Zotero and/or other programs which accept RIS format.",
                   "Developed with Python.",
                   "Created upon request of a researcher."
@@ -91,7 +91,7 @@ export default function Home() {
                 link="https://github.com/asaltveit/create-biblio"
                 isEven
                 />
-                <Project title="This Website" dates="2025 - Present" items={[
+                <Project title="This Website" dates="March 2025 - Present" items={[
                   "Developed with React, Next.js, TypeScript, and TailwindCSS.",
                 ]}
                 image={personalWebsiteScreenshot}
