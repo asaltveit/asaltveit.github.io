@@ -56,7 +56,6 @@ export default function Home() {
                 </div>
               </div>
             </Container>
-            {/* TODO: Add months to dates? */}
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
