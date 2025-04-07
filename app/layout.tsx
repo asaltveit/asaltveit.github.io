@@ -32,3 +32,23 @@ export default function RootLayout({
     </html>
   );
 }
+
+
+/*
+publish.yml
+
+a separate test.yml file and 
+
+on: 
+  workflow_run:
+      workflows: [test]
+      types: [completed]
+
+and
+
+if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+OR
+
+Does the checkout+set up need to be done twice?
+*/
