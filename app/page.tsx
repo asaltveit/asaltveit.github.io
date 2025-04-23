@@ -4,14 +4,10 @@ import Experience from './components/Experience';
 import Project from './components/Project'
 
 // Project Images
-import mapScreenshotSrc from "../public/map-screenshot-032725.png"
-import createBiblioScreenshot from "../public/create-biblio-screenshot-032825.png"
 import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
 
 export default function Home() {
   const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
-  // main className="flex flex-col gap-[4px] row-start-2"
-  // first div: items-center justify-items-center sm:p-20 p-8 md:grid-rows-[20px_1fr_20px] md:gap-16
   return (
     <div className="bg-indigo-700 grid min-h-screen pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
         <header className="text-white" >
@@ -43,7 +39,7 @@ export default function Home() {
                     Backend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Python, Node.js, Express.js, Sequelize.js, PostgreSQL
+                    Python, Node.js, Express.js, Sequelize.js, PostgreSQL, Supabase
                   </span>
                 </div>
                 <div>
@@ -51,13 +47,30 @@ export default function Home() {
                     Tools:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Git, Github Actions, Figma, Agile Development, LaunchDarkly, npm, Slack, Jira, Confluence, PagerDuty
+                    Git, Github Actions, Figma, Vercel, Agile Development, LaunchDarkly, npm, Slack, Jira, Confluence, PagerDuty
                   </span>
                 </div>
               </div>
             </Container>
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+                <Experience title="ROTAS Squares Map, Web Developer" dates="2024 - Present" items={[
+                  "Designed and developed a responsive, client-facing web app, handling end-to-end responsibilities including UI/UX design, backend architecture, deployment, requirements gathering, and client collaboration.",
+                  "Developed a clean, modular frontend using React.js and Material UI, with an interactive map powered by Observable Plot.",
+                  "Configured and integrated Supabase client with the frontend, including Google OAuth for seamless user sign-in.",
+                  "Architected and maintained a PostgreSQL database.",
+                  ]} 
+                  linkLocation="https://rotas-squares-map.vercel.app/"
+                  linkName='ROTAS Map'
+                />
+                <Experience title="Create Biblio, Software Developer" dates="2024 - Present" items={[
+                  "Created an open-source PDF-analyzing tool for an independent researcher.",
+                  "Gathered requirements, designed, implemented, and tested a Python program that creates citations in RIS format for every PDF in a given folder. ",
+                  "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
+                  ]} 
+                  linkLocation="https://github.com/asaltveit/create-biblio"
+                  linkName='Create Biblio'
+                />
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
                   "Led the development of medium and large features from code design to release.",
@@ -75,25 +88,6 @@ export default function Home() {
             </Container>
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <Project title="ROTAS Squares Map" dates="2024 - Present" items={[
-                  "An interactive map and timeline using Observable Plot, React, and JavaScript on the frontend and Node.js, Express.js, and PostgreSQL on the backend.",
-                  "Includes filters and functionality to manipulate the data (add, update, delete).",
-                  "Created upon request of a researcher."
-                ]}
-                image={mapScreenshotSrc}
-                imageTitle='ROTAS Map'
-                link="https://github.com/asaltveit/ROTAS-squares-map"
-                />
-                <Project title="Create Biblio" dates="2024 - Present" items={[
-                  "Creates a citation for each PDF in a given folder (and all sub-folders) and adds them to an RIS file which can be uploaded to Zotero and/or other programs which accept RIS format.",
-                  "Developed with Python.",
-                  "Created upon request of a researcher."
-                ]}
-                image={createBiblioScreenshot}
-                imageTitle='Create Biblio'
-                link="https://github.com/asaltveit/create-biblio"
-                isEven
-                />
                 <Project title="This Website" dates="2025 - Present" items={[
                   "Developed with React, Next.js, TypeScript, and TailwindCSS.",
                 ]}
