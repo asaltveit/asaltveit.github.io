@@ -1,3 +1,4 @@
+// Components
 import Container from './components/Container'
 import NavBar from './components/NavBar';
 import Experience from './components/Experience';
@@ -9,12 +10,12 @@ import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-
 export default function Home() {
   const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
   return (
-    <div className="bg-indigo-700 grid min-h-screen pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
+    <div className="bg-indigo-700 grid min-h-screen px-10 pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
         <header className="text-white" >
           <NavBar links={navLinks} />
         </header>
         <main>
-          <h1 className="text-white text-4xl mt-10 md:text-6xl items-center text-center font-medium" >
+          <h1 className="text-white text-4xl mt-6 md:mt-10 md:text-6xl items-center text-center font-medium" >
             Anna Saltveit
           </h1>
           <div className="flex flex-col gap-[4px] row-start-2 items-start sm:items-start">
