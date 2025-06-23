@@ -15,6 +15,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Anna Saltveit",
   description: "Anna Saltveit's portfolio website",
+  keywords: ['Next.js', 'React', 'TypeScript', 'Front-end Development', 'web developer', 'TailwindCSS', 'San Francisco', 'JavaScript', 'Python', 'PostgreSQL'],
+  creator: 'Anna Saltveit',
 };
 
 export default function RootLayout({
