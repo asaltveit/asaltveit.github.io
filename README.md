@@ -14,6 +14,6 @@ Access at [asaltveit.github.io](asaltveit.github.io)
   - It's free and comes with a URL.
 
  ## Future Work
- - 3D or interesting effects with Three.js
+ - 3D or other interesting effects with Three.js
 
 
