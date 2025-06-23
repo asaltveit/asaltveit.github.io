@@ -1,8 +1,10 @@
 // Components
-import Container from './components/Container'
+import Container from './components/Container';
 import NavBar from './components/NavBar';
 import Experience from './components/Experience';
-import Project from './components/Project'
+import Project from './components/Project';
+
+import Link from 'next/link';
 
 // Project Images
 import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
@@ -102,23 +104,22 @@ export default function Home() {
         </main>
 
         <footer className="row-start-3 flex gap-[24px] text-white flex-wrap items-center justify-center">
-          {/* TODO: Use Link instead of a? */}
-          <a
+          <Link
             className="flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
             href="https://github.com/asaltveit"
             target="_blank"
             rel="noopener noreferrer"
           >
             Github
-          </a>
-          <a
+          </Link>
+          <Link
             className="flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
             href="https://www.linkedin.com/in/anna-saltveit-4a70b2184/"
             target="_blank"
             rel="noopener noreferrer"
           >
             LinkedIn
-          </a>
+          </Link>
         </footer>
     </div>
   );
