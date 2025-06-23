@@ -15,14 +15,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Anna Saltveit",
   description: "Anna Saltveit's portfolio website",
-  robots: {
-    index: true,
-    follow: true,
-    //"max-image-preview": "large",
-    //"max-snippet": -1,
-    //"max-video-preview": -1,
-    googleBot: "index, follow"
-  },
 };
 
 export default function RootLayout({

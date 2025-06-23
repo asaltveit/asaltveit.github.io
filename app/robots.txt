@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://asaltveit.github.io/sitemap.xml
