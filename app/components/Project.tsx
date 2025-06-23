@@ -26,7 +26,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
             <div className="grid justify-items-start">
                 <div className="grid items-end" >
                     <div className="text-slate-700 dark:text-white text-xl underline underline-offset-5 md:text-2xl font-bold">
-                        <Link href={link}> {title} </Link>
+                        <Link href={link} aria-label={`link to ${title}`}> {title} </Link>
                     </div>
                     <div className="text-slate-500 dark:text-slate-400 mt-1 text-lg md:text-xl pb-2">
                         {dates}
@@ -47,7 +47,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 <div className="items-start md:pr-10">
                 {
                     image && 
-                    <Link href={link} >
+                    <Link href={link} aria-label={`link to ${title}`}>
                         <Image
                             src={image}
                             alt={`${imageTitle} image`}
@@ -58,7 +58,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 </div> 
                 <div className="grid items-end md:pr-10" >
                     <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
-                    <Link href={link} className='hover:underline hover:underline-offset-4'> {title} </Link>
+                    <Link href={link} aria-label={`link to ${title}`} className='hover:underline hover:underline-offset-4'> {title} </Link>
                     </div>
                     <div className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
                         {dates}
@@ -76,7 +76,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
             <div className="grid md:grid-cols-2 items-start justify-items-start">
                 <div className="grid items-start md:pr-10" >
                     <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
-                    <Link href={link} className='hover:underline hover:underline-offset-4'> {title} </Link>
+                    <Link href={link} aria-label={`link to ${title}`} className='hover:underline hover:underline-offset-4'> {title} </Link>
                     </div>
                     <div className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
                         {dates}
@@ -90,10 +90,10 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 <div className="items-end">
                 {
                     image && 
-                    <Link href={link} >
+                    <Link href={link} aria-label={`link to ${title}`}>
                         <Image
                             src={image}
-                            alt={`${imageTitle} image`}
+                            alt={`${imageTitle} screenshot`}
                             // placeholder="blur" // Optional blur-up while loading
                         />
                     </Link>

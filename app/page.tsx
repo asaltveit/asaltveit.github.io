@@ -64,7 +64,7 @@ export default function Home() {
                   "Architected and maintained a PostgreSQL database.",
                   ]} 
                   linkLocation="https://rotas-squares-map.vercel.app/"
-                  linkName='ROTAS Map'
+                  linkName='ROTAS Map website'
                 />
                 <Experience title="Create Biblio, Software Developer" dates="2024 - Present" items={[
                   "Created an open-source PDF-analyzing tool for an independent researcher.",
@@ -72,7 +72,7 @@ export default function Home() {
                   "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
                   ]} 
                   linkLocation="https://github.com/asaltveit/create-biblio"
-                  linkName='Create Biblio'
+                  linkName='Create Biblio github repository'
                 />
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
@@ -107,6 +107,7 @@ export default function Home() {
           <Link
             className="flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
             href="https://github.com/asaltveit"
+            aria-label={`link to Github`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -115,6 +116,7 @@ export default function Home() {
           <Link
             className="flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
             href="https://www.linkedin.com/in/anna-saltveit-4a70b2184/"
+            aria-label={`link to LinkedIn`}
             target="_blank"
             rel="noopener noreferrer"
           >

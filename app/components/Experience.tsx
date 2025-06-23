@@ -24,6 +24,7 @@ export default function Experience ({ title, dates, items, linkLocation, linkNam
                         <span className='mr-2' > Located at: </span>
                         <Link 
                             href={linkLocation}
+                            aria-label={`link to ${title}`}
                             className='md:hover:underline md:hover:underline-offset-5 md:no-underline underline underline-offset-5'
                         >
                             {linkName}
