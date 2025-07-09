@@ -32,7 +32,7 @@ describe('Project', () => {
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
 
-        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
+        expect(screen.getByRole('link', {name: 'link to Test'})).toHaveAttribute('href', '#')
 
         const imageElement = document.querySelector('img');
         expect(imageElement).not.toBeInTheDocument();
@@ -58,12 +58,12 @@ describe('Project', () => {
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
 
-        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
+        expect(screen.getByRole('link', {name: 'link to Test'})).toHaveAttribute('href', '#')
 
         const imageElement = document.querySelector('img');
-        expect(imageElement.alt).toBe('image image');
+        expect(imageElement.alt).toBe('image screenshot');
 
-        expect(screen.getByRole('link', {name: 'image image'})).toHaveAttribute('href', '#')
+        expect(screen.getByRole('link', {name: 'image link to Test'})).toHaveAttribute('href', '#')
     })
     it('renders with image and isEven', () => {
         render(<Project title="Test" dates="1-1" items={["bullet1", "bullet2"]} image={mapScreenshotSrc} isEven />)
@@ -86,12 +86,12 @@ describe('Project', () => {
         const item2 = screen.getByText('bullet2')
         expect(item2).toBeInTheDocument()
 
-        expect(screen.getByRole('link', {name: 'Test'})).toHaveAttribute('href', '#')
+        expect(screen.getByRole('link', {name: 'link to Test'})).toHaveAttribute('href', '#')
 
         const imageElement = document.querySelector('img');
         expect(imageElement.alt).toBe('image image');
 
-        expect(screen.getByRole('link', {name: 'image image'})).toHaveAttribute('href', '#')    })
+        expect(screen.getByRole('link', {name: 'image link to Test'})).toHaveAttribute('href', '#')    })
 
     it('renders for mobile', () => {
         matchMediaMock.mockReturnValueOnce({ matches: true });

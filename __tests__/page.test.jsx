@@ -24,7 +24,7 @@ describe('Page', () => {
             })
             it('works', () => {
                 render(<Page />)
-                expect(screen.getByRole('link', { name: 'Github' })).toHaveAttribute('href', 'https://github.com/asaltveit')
+                expect(screen.getByRole('link', { name: 'link to Github' })).toHaveAttribute('href', 'https://github.com/asaltveit')
             })
         })
         describe('LinkedIn', () => {
@@ -35,7 +35,7 @@ describe('Page', () => {
             })
             it('works', () => {
                 render(<Page />)
-                expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/in/anna-saltveit-4a70b2184/')
+                expect(screen.getByRole('link', { name: 'link to LinkedIn' })).toHaveAttribute('href', 'https://www.linkedin.com/in/anna-saltveit-4a70b2184/')
             })
         })
     })

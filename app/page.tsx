@@ -91,12 +91,15 @@ export default function Home() {
             </Container>
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <Project title="This Website" dates="2025 - Present" items={[
-                  "Developed with React, Next.js, TypeScript, and TailwindCSS.",
-                ]}
-                image={personalWebsiteScreenshot}
-                imageTitle='asaltveit.github.io'
-                link="https://github.com/asaltveit/asaltveit.github.io"
+                <Project 
+                  title="This Website" 
+                  dates="2025 - Present" 
+                  items={[
+                    "Developed with React, Next.js, TypeScript, and TailwindCSS.",
+                  ]}
+                  image={personalWebsiteScreenshot}
+                  imageTitle='asaltveit.github.io'
+                  link="https://github.com/asaltveit/asaltveit.github.io"
                 />
               </div>
             </Container>
