@@ -16,6 +16,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.10.2",
     "@babel/preset-typescript": "^7.27.0",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",

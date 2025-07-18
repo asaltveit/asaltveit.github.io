@@ -87,18 +87,19 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                         }
                     </ul>
                 </div>
-                <div className="items-end">
+                
                 {
-                    image && 
-                    <Link href={link} aria-label={`image link to ${title}`}>
-                        <Image
-                            src={image}
-                            alt={`${imageTitle} screenshot`}
-                            // placeholder="blur" // Optional blur-up while loading
-                        />
-                    </Link>
+                    image && <div className="items-end"> 
+                        <Link href={link} aria-label={`image link to ${title}`}>
+                            <Image
+                                src={image}
+                                alt={`${imageTitle} screenshot`}
+                                // placeholder="blur" // Optional blur-up while loading
+                            />
+                        </Link>
+                    </div> 
                 }
-                </div>  
+                 
             </div>
         )   
     }

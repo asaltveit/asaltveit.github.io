@@ -34,7 +34,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    React, Next, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, Material UI, CSS, HTML, Jest, Vitest
+                    React, Next, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, Material UI, HTML5, CSS3, Jest, Vitest
                   </span>
                 </div>
                 <div className='mb-2'>
@@ -42,7 +42,7 @@ export default function Home() {
                     Backend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Python, Node.js, Express.js, Sequelize.js, PostgreSQL, Supabase
+                    Python, Supabase, Node.js, Express.js, Sequelize.js, PostgreSQL
                   </span>
                 </div>
                 <div>
@@ -57,6 +57,11 @@ export default function Home() {
             </Container>
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+                <Experience title="Less Flourescence, Software Developer" dates="2025 - Present" items={[
+                  "Building the frontends for the web and mobile prototypes for a MedTech startup.",
+                  "Developing in plain JavaScript, HTML5, CSS3 with Capacitor.js for mobile.",
+                  ]}
+                />
                 <Experience title="ROTAS Squares Map, Web Developer" dates="2024 - Present" items={[
                   "Designed and developed a responsive, client-facing web app, handling end-to-end responsibilities including UI/UX design, backend architecture, deployment, requirements gathering, and client collaboration.",
                   "Developed a clean, modular frontend using React.js and Material UI, with an interactive map powered by Observable Plot.",
@@ -66,7 +71,7 @@ export default function Home() {
                   linkLocation="https://rotas-squares-map.vercel.app/"
                   linkName='ROTAS Map website'
                 />
-                <Experience title="Create Biblio, Software Developer" dates="2024 - Present" items={[
+                <Experience title="Create Biblio, Software Developer" dates="2024 - 2025" items={[
                   "Created an open-source PDF-analyzing tool for an independent researcher.",
                   "Gathered requirements, designed, implemented, and tested a Python program that creates citations in RIS format for every PDF in a given folder. ",
                   "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
@@ -92,6 +97,15 @@ export default function Home() {
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
                 <Project 
+                  title="ROTAS Map Monitor" 
+                  dates="2025 - Present" 
+                  items={[
+                    "The back of house for the ROTAS Map.",
+                    "Includes admin functions (add user access, add data to map) and analytics."
+                  ]}
+                  link="https://github.com/asaltveit/ROTAS-Map-monitor"
+                />
+                <Project 
                   title="This Website" 
                   dates="2025 - Present" 
                   items={[
@@ -100,6 +114,7 @@ export default function Home() {
                   image={personalWebsiteScreenshot}
                   imageTitle='asaltveit.github.io'
                   link="https://github.com/asaltveit/asaltveit.github.io"
+                  isEven
                 />
               </div>
             </Container>
