@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.2",
-    "@babel/preset-typescript": "^7.27.0",
+    "@babel/preset-typescript": "^7.27.1",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.0",
