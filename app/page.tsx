@@ -6,6 +6,13 @@ import Project from './components/Project';
 
 import Link from 'next/link';
 
+/*
+TODO:
+  styling for projects - images or not?
+  mobile vs web responsiveness
+  ThreeJS animation/background
+*/
+
 // Project Images
 import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
 
@@ -34,7 +41,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    React, Next, Vue, TypeScript, JavaScript, Observable Plot, Zustand, Redux, GraphQL, TailwindCSS, Material UI, HTML5, CSS3, Jest, Vitest
+                    React, Next.js, TypeScript, JavaScript, Observable Plot, Zustand, TailwindCSS, Material UI, HTML, CSS, Jest, Vitest, GraphQL, Vue,
                   </span>
                 </div>
                 <div className='mb-2'>
@@ -50,17 +57,18 @@ export default function Home() {
                     Tools:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Git, Github Actions, Figma, Vercel, Agile Development, LaunchDarkly, npm, Slack, Jira, Confluence, PagerDuty
+                    Git, Github Actions, Vercel, Agile Development, npm, LaunchDarkly, Slack, Jira, Confluence, PagerDuty
                   </span>
                 </div>
               </div>
             </Container>
             <Container title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-                <Experience title="Less Flourescence, Software Developer" dates="2025 - Present" items={[
-                  "Building the frontends for the web and mobile prototypes for a MedTech startup.",
-                  "Developing in plain JavaScript, HTML5, CSS3 with Capacitor.js for mobile.",
-                  ]}
+                <Experience title="Less Fluorescent, Software Developer" dates="2025 - 2025" items={[
+                  "Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.",
+                  "Built responsive web and mobile prototypes using JavaScript, HTML, CSS.",
+                  "Worked on early-stage architecture and component design for MVP validation."
+                  ]} 
                 />
                 <Experience title="ROTAS Squares Map, Web Developer" dates="2024 - Present" items={[
                   "Designed and developed a responsive, client-facing web app, handling end-to-end responsibilities including UI/UX design, backend architecture, deployment, requirements gathering, and client collaboration.",
@@ -70,14 +78,6 @@ export default function Home() {
                   ]} 
                   linkLocation="https://rotas-squares-map.vercel.app/"
                   linkName='ROTAS Map website'
-                />
-                <Experience title="Create Biblio, Software Developer" dates="2024 - 2025" items={[
-                  "Created an open-source PDF-analyzing tool for an independent researcher.",
-                  "Gathered requirements, designed, implemented, and tested a Python program that creates citations in RIS format for every PDF in a given folder. ",
-                  "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
-                  ]} 
-                  linkLocation="https://github.com/asaltveit/create-biblio"
-                  linkName='Create Biblio github repository'
                 />
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
@@ -105,6 +105,14 @@ export default function Home() {
                   ]}
                   link="https://github.com/asaltveit/ROTAS-Map-monitor"
                 />
+                <Project title="Create Biblio, Software Developer" dates="2024 - 2025" items={[
+                  "Created an open-source PDF-analyzing tool for an independent researcher.",
+                  "Gathered requirements, designed, implemented, and tested a Python program that creates citations in RIS format for every PDF in a given folder. ",
+                  "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
+                  ]} 
+                  link="https://github.com/asaltveit/create-biblio"
+                  isEven
+                />
                 <Project 
                   title="This Website" 
                   dates="2025 - Present" 
@@ -114,7 +122,6 @@ export default function Home() {
                   image={personalWebsiteScreenshot}
                   imageTitle='asaltveit.github.io'
                   link="https://github.com/asaltveit/asaltveit.github.io"
-                  isEven
                 />
               </div>
             </Container>
