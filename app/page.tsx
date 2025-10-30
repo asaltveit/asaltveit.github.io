@@ -1,20 +1,24 @@
+import Link from 'next/link';
+
 // Components
 import Container from './components/Container';
 import NavBar from './components/NavBar';
 import Experience from './components/Experience';
-import Project from './components/Project';
+import Project from '@/components/Project';
+import BackToTopButton from './components/BackToTopButton';
 
-import Link from 'next/link';
+// Media
+import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
 
 /*
 TODO:
   styling for projects - images or not?
+    Change organization of projects
   mobile vs web responsiveness
   ThreeJS animation/background
+
 */
 
-// Project Images
-import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
 
 export default function Home() {
   const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
@@ -148,6 +152,8 @@ export default function Home() {
             LinkedIn
           </Link>
         </footer>
+
+        <BackToTopButton />
     </div>
   );
 }
