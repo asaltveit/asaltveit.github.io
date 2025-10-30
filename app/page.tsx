@@ -10,11 +10,7 @@ import { projects, navLinks } from './data';
 
 /*
 TODO:
-  mobile vs web responsiveness
   ThreeJS animation/background
-
-  TEST MOBILE!!!!
-
 */
 
 
@@ -42,7 +38,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    React, Next.js, TypeScript, JavaScript, Observable Plot, Zustand, TailwindCSS, Material UI, HTML, CSS, Jest, Vitest, GraphQL, Vue,
+                    React, Next.js, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Vitest, Vue
                   </span>
                 </div>
                 <div className='mb-2'>

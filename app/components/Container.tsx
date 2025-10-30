@@ -3,7 +3,9 @@ interface ContainerProps {
     title: string;
     id: string;
     children: React.ReactNode;
-  }
+}
+
+// TODO: Widen containers?
 
 export default function Container ({ title, id, children } : ContainerProps) {
     return (
