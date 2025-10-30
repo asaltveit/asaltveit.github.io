@@ -47,7 +47,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 <div className="items-start md:pr-10">
                 {
                     image && 
-                    <Link href={link} aria-label={`image link to ${title}`}>
+                    <Link href={link} aria-label={`image link to ${title}`} className='focus:outline-offset-4'>
                         <Image
                             src={image}
                             alt={`${imageTitle} image`}
@@ -90,7 +90,7 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 
                 {
                     image && <div className="items-end"> 
-                        <Link href={link} aria-label={`image link to ${title}`}>
+                        <Link href={link} aria-label={`image link to ${title}`} className='focus:outline-offset-4'>
                             <Image
                                 src={image}
                                 alt={`${imageTitle} screenshot`}

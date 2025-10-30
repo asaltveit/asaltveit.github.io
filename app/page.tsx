@@ -8,7 +8,7 @@ import Project from '@/components/Project';
 import BackToTopButton from './components/BackToTopButton';
 
 // Media
-import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png"
+import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png";
 
 /*
 TODO:
@@ -21,7 +21,8 @@ TODO:
 
 
 export default function Home() {
-  const navLinks = [{title: "About", id: "about"}, {title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}]
+  // Don't need {title: "About", id: "about"} - it's right there at the top
+  const navLinks = [{title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}];
   return (
     <div className="bg-indigo-700 grid min-h-screen px-10 pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
         <header className="text-white" >

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+// TODO: Add tests
+
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false);

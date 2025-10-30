@@ -37,7 +37,7 @@ export default function NavBar ({ links } : NavBarProps) {
                 <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
                     <ul role="menu" className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                         {
-                            links.map((link: Link) => <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}><Link href={`#${link.id}`} aria-label={`link to ${link.title} section`} className=" underline underline-offset-4 md:no-underline hover:underline hover:underline-offset-4"> {link.title} </Link></li>)
+                            links.map((link: Link) => <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}><a href={`#${link.id}`} aria-label={`link to ${link.title} section`} className=" underline underline-offset-4 md:no-underline hover:underline hover:underline-offset-4"> {link.title} </a></li>)
                         }
                     </ul>
                 </div>
