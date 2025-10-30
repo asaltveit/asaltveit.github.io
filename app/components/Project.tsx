@@ -12,7 +12,9 @@ interface ProjectProps {
     link: string;
     isEven?: boolean;
 }
-// TODO: Image sizing
+
+// TODO: TEST MOBILE!!! Then can remove this component
+
 export default function Project ({ title, dates, items, image, imageTitle="image", link="#", isEven } : ProjectProps) {
     const [isMobile, setIsMobile] = useState(false);
 
@@ -39,9 +41,28 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                 </div> 
             </div>
         )
+    } else {
+        return (
+            <div className="grid md:grid-cols-2 items-start">
+                <div className="grid items-end md:pr-10" >
+                    <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+                    <Link href={link} aria-label={`link to ${title}`} className='hover:underline hover:underline-offset-4'> {title} </Link>
+                    </div>
+                    <div className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
+                        {dates}
+                    </div>
+                    <ul className='marker:text-green list-outside list-disc ml-6 text-slate-700 dark:text-white text-lg md:text-xl justify-items-start'>
+                        {
+                            items.map((item: string, i: number) => <li key={`${i}`}> {item} </li>)
+                        }
+                    </ul>
+                </div> 
+            </div>
+
+        )
     }
 
-    if (isEven) {
+    /*if (isEven) {
         return (
             <div className="grid md:grid-cols-2 items-start justify-items-start">
                 <div className="items-start md:pr-10">
@@ -102,5 +123,5 @@ export default function Project ({ title, dates, items, image, imageTitle="image
                  
             </div>
         )   
-    }
+    }*/
 }

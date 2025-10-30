@@ -7,7 +7,7 @@ interface Link {
 
 interface NavBarProps {
     links: Link[]
-  }
+}
 
 export default function NavBar ({ links } : NavBarProps) {
     // Another clickable link possibility: md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent

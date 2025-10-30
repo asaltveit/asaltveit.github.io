@@ -1,28 +1,24 @@
 import Link from 'next/link';
 
-// Components
+// Custom Components
 import Container from './components/Container';
 import NavBar from './components/NavBar';
 import Experience from './components/Experience';
-import Project from '@/components/Project';
 import BackToTopButton from './components/BackToTopButton';
-
-// Media
-import personalWebsiteScreenshot from "../public/asaltveit.github.io-screenshot-040225.png";
+import ProjectsContainer from './components/ProjectsContainer';
+import { projects, navLinks } from './data';
 
 /*
 TODO:
-  styling for projects - images or not?
-    Change organization of projects
   mobile vs web responsiveness
   ThreeJS animation/background
+
+  TEST MOBILE!!!!
 
 */
 
 
 export default function Home() {
-  // Don't need {title: "About", id: "about"} - it's right there at the top
-  const navLinks = [{title: "Experience", id: "experience"}, {title: "Projects", id: "projects"}];
   return (
     <div className="bg-indigo-700 grid min-h-screen px-10 pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
         <header className="text-white" >
@@ -75,15 +71,6 @@ export default function Home() {
                   "Worked on early-stage architecture and component design for MVP validation."
                   ]} 
                 />
-                <Experience title="ROTAS Squares Map, Web Developer" dates="2024 - Present" items={[
-                  "Designed and developed a responsive, client-facing web app, handling end-to-end responsibilities including UI/UX design, backend architecture, deployment, requirements gathering, and client collaboration.",
-                  "Developed a clean, modular frontend using React.js and Material UI, with an interactive map powered by Observable Plot.",
-                  "Configured and integrated Supabase client with the frontend, including Google OAuth for seamless user sign-in.",
-                  "Architected and maintained a PostgreSQL database.",
-                  ]} 
-                  linkLocation="https://rotas-squares-map.vercel.app/"
-                  linkName='ROTAS Map website'
-                />
                 <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
                   "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
                   "Led the development of medium and large features from code design to release.",
@@ -101,33 +88,7 @@ export default function Home() {
             </Container>
             <Container title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <Project 
-                  title="ROTAS Map Monitor" 
-                  dates="2025 - Present" 
-                  items={[
-                    "The back of house for the ROTAS Map.",
-                    "Includes admin functions (add user access, add data to map) and analytics."
-                  ]}
-                  link="https://github.com/asaltveit/ROTAS-Map-monitor"
-                />
-                <Project title="Create Biblio, Software Developer" dates="2024 - 2025" items={[
-                  "Created an open-source PDF-analyzing tool for an independent researcher.",
-                  "Gathered requirements, designed, implemented, and tested a Python program that creates citations in RIS format for every PDF in a given folder. ",
-                  "Decreased time needed to find citations for a backlog of hundreds of PDFs by 85%, removing weeks-worth of work.",
-                  ]} 
-                  link="https://github.com/asaltveit/create-biblio"
-                  isEven
-                />
-                <Project 
-                  title="This Website" 
-                  dates="2025 - Present" 
-                  items={[
-                    "Developed with React, Next.js, TypeScript, and TailwindCSS.",
-                  ]}
-                  image={personalWebsiteScreenshot}
-                  imageTitle='asaltveit.github.io'
-                  link="https://github.com/asaltveit/asaltveit.github.io"
-                />
+                <ProjectsContainer projects={projects} />
               </div>
             </Container>
           </div>
