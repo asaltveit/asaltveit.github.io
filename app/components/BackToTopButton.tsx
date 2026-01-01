@@ -34,7 +34,7 @@ export default function BackToTopButton() {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-8 bg-white dark:bg-blue-600 ring-3 ring-blue-300 md:no-ring hover:ring-4 hover:ring-blue-300 dark:hover:bg-blue-700 dark:text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-blue-500/50 focus:outline-none focus:ring-4 focus:ring-blue-300 z-50"
+      className="fixed bottom-8 right-8 bg-white dark:bg-blue-600 hover:ring-4 hover:ring-blue-300 dark:hover:bg-blue-700 dark:text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-blue-500/50 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:bg-blue-700 z-50"
       aria-label="Back to top"
     >
         Top
