@@ -1,12 +1,13 @@
 import Link from 'next/link';
 
 // Custom Components
-import Container from './components/Container';
-import NavBar from './components/NavBar';
-import Experience from './components/Experience';
-import BackToTopButton from './components/BackToTopButton';
-import ProjectsContainer from './components/ProjectsContainer';
-import { projects, navLinks } from './data';
+import Section from '@/components/Section';
+import NavBar from '@/components/NavBar';
+import Experience from '@/components/Experience';
+import BackToTopButton from '@/components/BackToTopButton';
+import ProjectsContainer from '@/components/ProjectsContainer';
+import HackathonsContainer from '@/components/HackathonsContainer';
+import { projects, hackathons, navLinks } from '@/data';
 
 
 export default function Home() {
@@ -20,7 +21,7 @@ export default function Home() {
             Anna Saltveit
           </h1>
           <div className="flex flex-col gap-[4px] row-start-2 items-start sm:items-start">
-            <Container title="About Me" id="about" >
+            <Section title="About Me" id="about" >
               <div className="grid">
                 <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
                   I&apos;m a web developer who enjoys creating attractive and accessible products.
@@ -53,8 +54,8 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-            </Container>
-            <Container title="Experience" id="experience" >
+            </Section>
+            <Section title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
                 <Experience title="Less Fluorescent, Software Developer" dates="2025 - 2025" items={[
                   "Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.",
@@ -76,12 +77,17 @@ export default function Home() {
                   "Designed and implemented features such as live search menus and refactored webpages."
                 ]} />
               </div>
-            </Container>
-            <Container title="Projects" id="projects" >
+            </Section>
+            <Section title="Projects" id="projects" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-12">
                 <ProjectsContainer projects={projects} />
               </div>
-            </Container>
+            </Section>
+            <Section title="Hackathons" id="hackathons" >
+              <div className="grid grid-cols-1 space-y-6 md:space-y-12">
+                <HackathonsContainer hackathons={hackathons} />
+              </div>
+            </Section>
           </div>
         </main>
 
