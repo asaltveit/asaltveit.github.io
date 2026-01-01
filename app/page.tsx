@@ -8,11 +8,6 @@ import BackToTopButton from './components/BackToTopButton';
 import ProjectsContainer from './components/ProjectsContainer';
 import { projects, navLinks } from './data';
 
-/*
-TODO:
-  ThreeJS animation/background
-*/
-
 
 export default function Home() {
   return (
