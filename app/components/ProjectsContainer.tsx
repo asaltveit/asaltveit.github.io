@@ -1,14 +1,4 @@
-import ProjectCard from '@/components/cards/ProjectCard';
-
-interface ProjectProps {
-    title: string;
-    dates: string;
-    items: string[];
-    link: string;
-    techStack?: string[];
-    image?: string;
-    imageTitle?: string;
-}
+import ProjectCard, { ProjectProps } from '@/components/cards/ProjectCard';
 
 interface ProjectContainerProps {
     projects: ProjectProps[];

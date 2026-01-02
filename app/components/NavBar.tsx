@@ -9,6 +9,7 @@ interface NavBarProps {
     links: Link[]
 }
 
+// TODO: mobile version
 export default function NavBar ({ links } : NavBarProps) {
     /*
     Check mobile before deleting

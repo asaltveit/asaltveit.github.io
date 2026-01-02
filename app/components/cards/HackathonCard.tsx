@@ -4,11 +4,11 @@ import BaseCard from '@/components/cards/BaseCard';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 import { Trophy, Users, Clock } from 'lucide-react';
 
-interface HackathonCardProps {
+export interface HackathonProps {
   title: string;
   dates: string;
   items: string[];
-  link: string;
+  link?: string;
   image?: StaticImageData | string;
   imageTitle?: string;
   techStack?: string[];
@@ -28,15 +28,26 @@ export default function HackathonCard({
   award,
   teamSize,
   duration
-}: HackathonCardProps) {
+}: HackathonProps) {
   const imageContent = image ? (
-    <Link 
-      href={link} 
-      aria-label={`image link to ${title}`}
-      className="block w-full h-full hover:opacity-90 transition-opacity"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
+    link ? (
+      <Link 
+        href={link} 
+        aria-label={`image link to ${title}`}
+        className="block w-full h-full relative group"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          src={image}
+          alt={`${imageTitle} screenshot`}
+          width={800}
+          height={450}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 opacity-0 group-hover:opacity-20 group-focus:opacity-20 transition-opacity duration-300" />
+      </Link>
+    ) : (
       <Image
         src={image}
         alt={`${imageTitle} screenshot`}
@@ -44,7 +55,7 @@ export default function HackathonCard({
         height={450}
         className="w-full h-full object-cover"
       />
-    </Link>
+    )
   ) : (
     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-200 via-orange-200 to-red-200 dark:from-yellow-800 dark:via-orange-800 dark:to-red-800">
       <Trophy className="w-16 h-16 text-yellow-600 dark:text-yellow-300 opacity-50" />

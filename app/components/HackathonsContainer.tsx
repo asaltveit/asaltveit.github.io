@@ -1,17 +1,4 @@
-import HackathonCard from './cards/HackathonCard';
-
-interface HackathonProps {
-    title: string;
-    dates: string;
-    items: string[];
-    link: string;
-    techStack?: string[];
-    image?: string;
-    imageTitle?: string;
-    award?: string;
-    teamSize?: number;
-    duration?: string;
-}
+import HackathonCard, { HackathonProps } from './cards/HackathonCard';
 
 interface HackathonsContainerProps {
     hackathons: HackathonProps[];

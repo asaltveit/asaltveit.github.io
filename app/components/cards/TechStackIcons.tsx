@@ -7,7 +7,12 @@ import {
   Server, 
   Terminal,
   FileCode,
-  Zap
+  Zap,
+  Brain,
+  Sparkles,
+  Bot,
+  Mic,
+  Image as ImageIcon
 } from 'lucide-react';
 
 interface TechStackIconsProps {
@@ -36,6 +41,15 @@ const techIconMap: Record<string, React.ReactNode> = {
   'Express.js': <Server className="w-5 h-5" />,
   'Sequelize.js': <Database className="w-5 h-5" />,
   'PostgreSQL': <Database className="w-5 h-5" />,
+  // AI Tools
+  'ElevenLabs': <Mic className="w-5 h-5" />,
+  'Tavus': <Mic className="w-5 h-5" />,
+  'Otter.ai': <Mic className="w-5 h-5" />,
+  'Anthropic': <Brain className="w-5 h-5" />,
+  'Cursor AI': <Bot className="w-5 h-5" />,
+  'fal': <Sparkles className="w-5 h-5" />,
+  'Black Forest (Flux)': <ImageIcon className="w-5 h-5" />,
+  'n8n': <Sparkles className="w-5 h-5" />,
 };
 
 export default function TechStackIcons({ techStack }: TechStackIconsProps) {
@@ -44,9 +58,17 @@ export default function TechStackIcons({ techStack }: TechStackIconsProps) {
   }
 
   return (
-    <div className="flex flex-wrap gap-2 mt-3">
+    <div className="flex flex-wrap gap-2">
       {techStack.map((tech) => {
-        const icon = techIconMap[tech] || <Code2 className="w-5 h-5" />;
+        // Default to Brain icon for AI tools that aren't explicitly mapped
+        const isAITool = tech.toLowerCase().includes('ai') || 
+                         tech.toLowerCase().includes('anthropic') ||
+                         tech.toLowerCase().includes('elevenlabs') ||
+                         tech.toLowerCase().includes('cursor') ||
+                         tech.toLowerCase().includes('fal') ||
+                         tech.toLowerCase().includes('flux') ||
+                         tech.toLowerCase().includes('otter');
+        const icon = techIconMap[tech] || (isAITool ? <Brain className="w-5 h-5" /> : <Code2 className="w-5 h-5" />);
         return (
           <div
             key={tech}

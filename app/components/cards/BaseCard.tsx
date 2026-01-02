@@ -5,7 +5,7 @@ interface BaseCardProps {
   title: string;
   dates: string;
   items: string[];
-  link: string;
+  link?: string;
   children?: React.ReactNode; // For image or other content
   footerContent?: React.ReactNode; // For tech stack or other footer elements
 }
@@ -30,16 +30,22 @@ export default function BaseCard({
       {/* Content section */}
       <div className="p-6 flex flex-col flex-grow">
         <div className="mb-3">
-          <Link 
-            href={link} 
-            aria-label={`link to ${title}`}
-            className="group inline-flex items-center gap-2 text-slate-700 dark:text-white text-xl md:text-2xl font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {title}
-            <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </Link>
+          {link ? (
+            <Link 
+              href={link} 
+              aria-label={`link to ${title}`}
+              className="group inline-flex items-center gap-2 text-slate-700 dark:text-white text-xl md:text-2xl font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {title}
+              <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </Link>
+          ) : (
+            <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+              {title}
+            </div>
+          )}
         </div>
         
         <div className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-4">
