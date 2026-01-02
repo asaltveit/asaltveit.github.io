@@ -24,7 +24,7 @@ export default function Home() {
             <Section title="About Me" id="about" >
               <div className="grid">
                 <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
-                  I&apos;m a web developer who enjoys creating attractive and accessible products.
+                  I&apos;m a web developer who enjoys creating useful and accessible products.
                 </div>
                 <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
                   Technical Skills
@@ -34,7 +34,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    React, Next.js, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Vitest, Vue
+                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Vitest, Vue
                   </span>
                 </div>
                 <div className='mb-2'>

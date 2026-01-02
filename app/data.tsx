@@ -13,7 +13,7 @@ export const projects = [
     },
     {
         title:"ROTAS Squares Map",
-        dates:"2024 - Present",
+        dates:"2024 - 2025",
         items:[
             "Developed a clean, modular frontend using React.js and Material UI, with an interactive map powered by Observable Plot.",
             "Configured and integrated Supabase client with the frontend, including Google OAuth for seamless user sign-in.",
@@ -99,7 +99,6 @@ export const hackathons = [
     }
 ];
 
-// Don't need {title: "About", id: "about"} - it's right there at the top
 export const navLinks = [
     {title: "Experience", id: "experience"}, 
     {title: "Projects", id: "projects"},

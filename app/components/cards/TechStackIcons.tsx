@@ -23,7 +23,7 @@ interface TechStackIconsProps {
 const techIconMap: Record<string, React.ReactNode> = {
   // Frontend
   'React': <Code2 className="w-5 h-5" />,
-  'Next.js': <Globe className="w-5 h-5" />,
+  'Next.js': <Code2 className="w-5 h-5" />,
   'TypeScript': <FileCode className="w-5 h-5" />,
   'JavaScript': <FileCode className="w-5 h-5" />,
   'TailwindCSS': <Layers className="w-5 h-5" />,
