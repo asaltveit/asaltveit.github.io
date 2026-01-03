@@ -219,12 +219,10 @@ describe('Experience', () => {
       expect(mockClick).toHaveBeenCalled();
     });
 
-    // TODO: This test is currently failing - title should use semantic heading element
     it('should use semantic heading for title', () => {
       render(<Experience {...defaultProps} />);
       
       // Title should be a heading element for semantic structure
-      // This test will fail - title is currently a div
       const heading = screen.getByRole('heading', { name: 'Test Experience' });
       expect(heading).toBeInTheDocument();
     });
@@ -240,12 +238,10 @@ describe('Experience', () => {
       expect(timeElement).toHaveTextContent('January 2024 - Present');
     });
 
-    // TODO: This test is currently failing - should have proper heading hierarchy
     it('should have proper heading hierarchy', () => {
       render(<Experience {...defaultProps} />);
       
       // Title should be an h2 or h3 (depending on page structure)
-      // This test will fail until semantic heading is implemented
       const heading = screen.getByRole('heading', { name: 'Test Experience' });
       expect(['h2', 'h3']).toContain(heading.tagName.toLowerCase());
     });
@@ -284,13 +280,11 @@ describe('Experience', () => {
       // OR Option 2: Link should have fallback accessible text
     });
 
-    // TODO: This test is currently failing - lists should have proper accessible labels
     it('should have proper list structure with accessible labels', () => {
       render(<Experience {...defaultProps} />);
       
       const lists = screen.getAllByRole('list');
       // Lists should have accessible names/labels when appropriate
-      // This test will fail if lists need aria-labels for context
       lists.forEach(list => {
         // If list has a specific purpose, it should have an accessible name
         const hasAriaLabel = list.hasAttribute('aria-label');

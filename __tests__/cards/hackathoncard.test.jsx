@@ -268,6 +268,7 @@ describe('HackathonCard', () => {
       );
       
       // All decorative icons should be hidden from screen readers
+      // lucide-react automatically adds aria-hidden="true" to icons
       const icons = container.querySelectorAll('svg');
       icons.forEach(icon => {
         // Icons that are decorative (not providing additional info beyond text) should be hidden
@@ -283,7 +284,51 @@ describe('HackathonCard', () => {
       
       const trophyIcon = container.querySelector('svg.lucide-trophy');
       // Placeholder icon is purely decorative
+      // lucide-react automatically adds aria-hidden="true" to icons
       expect(trophyIcon).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should mark award trophy icon as decorative', () => {
+      const { container } = render(
+        <HackathonCard 
+          {...defaultProps} 
+          award="First Place"
+        />
+      );
+      
+      const trophyIcons = container.querySelectorAll('svg.lucide-trophy');
+      // Find the trophy icon in the award badge (not the placeholder)
+      // lucide-react automatically adds aria-hidden="true" to icons
+      const awardTrophyIcon = Array.from(trophyIcons).find(icon => 
+        icon.closest('[class*="bg-yellow-100"]') || icon.closest('[class*="bg-yellow-900"]')
+      );
+      expect(awardTrophyIcon).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should mark clock icon as decorative', () => {
+      const { container } = render(
+        <HackathonCard 
+          {...defaultProps} 
+          duration="24 hours"
+        />
+      );
+      
+      // lucide-react automatically adds aria-hidden="true" to icons
+      const clockIcon = container.querySelector('svg.lucide-clock');
+      expect(clockIcon).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should mark users icon as decorative', () => {
+      const { container } = render(
+        <HackathonCard 
+          {...defaultProps} 
+          teamSize={3}
+        />
+      );
+      
+      // lucide-react automatically adds aria-hidden="true" to icons
+      const usersIcon = container.querySelector('svg.lucide-users');
+      expect(usersIcon).toHaveAttribute('aria-hidden', 'true');
     });
   });
 });

@@ -3,8 +3,6 @@
 import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-// TODO: Add tests
-
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -39,7 +37,6 @@ export default function BackToTopButton() {
       aria-label="Back to top"
     >
       <ArrowUp size={24} className="text-blue-600 dark:text-white" />
-      <span className="sr-only">Top</span>
     </button>
   );
 }

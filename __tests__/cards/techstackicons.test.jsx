@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '../mocks/matchMediaFalse.mock'
 import TechStackIcons from '@/components/cards/TechStackIcons'
 
@@ -144,6 +144,7 @@ describe('TechStackIcons', () => {
       );
       
       // All icons are decorative since the tech name is already in text
+      // lucide-react automatically adds aria-hidden="true" to icons
       const icons = container.querySelectorAll('svg');
       icons.forEach(icon => {
         expect(icon).toHaveAttribute('aria-hidden', 'true');
@@ -157,6 +158,7 @@ describe('TechStackIcons', () => {
       
       // Since icons are decorative, they should be hidden
       // The text "React" is sufficient for screen readers
+      // lucide-react automatically adds aria-hidden="true" to icons
       const icon = container.querySelector('svg');
       expect(icon).toHaveAttribute('aria-hidden', 'true');
     });

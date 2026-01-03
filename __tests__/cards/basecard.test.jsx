@@ -157,6 +157,9 @@ describe('BaseCard', () => {
       const link = screen.getByRole('link', { name: 'link to Test Card' });
       const externalIcon = link.querySelector('svg');
       
+      expect(externalIcon).toBeInTheDocument();
+      // The icon is decorative since the link text already conveys the information
+      // lucide-react automatically adds aria-hidden="true" to icons
       expect(externalIcon).toHaveAttribute('aria-hidden', 'true');
     });
 

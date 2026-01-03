@@ -206,11 +206,9 @@ describe('NavBar', () => {
       expect(secondLink).toHaveFocus();
     });
 
-    // TODO: Add visible focus indicators for keyboard navigation
     it('should have visible focus indicators', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - need to verify focus styles
       const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
       experienceLink.focus();
       

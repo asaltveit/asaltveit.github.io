@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Section from '@/components/Section'
+import Section from '@/components/containers/Section'
 
 describe('Section', () => {
   const defaultProps = {
@@ -69,44 +69,36 @@ describe('Section', () => {
   })
 
   describe('Accessibility', () => {
-    // TODO: This test is currently failing - title should use semantic heading element
     it('should use semantic heading element for title', () => {
       render(<Section {...defaultProps} />)
       
       // Title should be a heading element (h2) for semantic structure
-      // This test will fail - title is currently a div
       const heading = screen.getByRole('heading', { name: 'Test Section' })
       expect(heading).toBeInTheDocument()
     })
 
-    // TODO: This test is currently failing - should use h2 for proper heading hierarchy
     it('should use h2 element for section title', () => {
       const { container } = render(<Section {...defaultProps} />)
       
       // Since page has h1, sections should use h2 for proper hierarchy
-      // This test will fail - title is currently a div, not h2
       const heading = container.querySelector('h2')
       expect(heading).toBeInTheDocument()
       expect(heading).toHaveTextContent('Test Section')
     })
 
-    // TODO: This test is currently failing - should use semantic section element
     it('should use semantic section element', () => {
       const { container } = render(<Section {...defaultProps} />)
       
       // Should use <section> element instead of <div> for semantic meaning
-      // This test will fail - currently uses div
       const sectionElement = container.querySelector('section')
       expect(sectionElement).toBeInTheDocument()
       expect(sectionElement).toHaveAttribute('id', 'test-section')
     })
 
-    // TODO: This test is currently failing - should have proper heading hierarchy
     it('should have proper heading hierarchy', () => {
       render(<Section {...defaultProps} />)
       
       // Title should be an h2 (since page has h1)
-      // This test will fail until semantic heading is implemented
       const heading = screen.getByRole('heading', { name: 'Test Section' })
       expect(heading.tagName.toLowerCase()).toBe('h2')
     })
@@ -121,12 +113,10 @@ describe('Section', () => {
       expect(region).toBeInTheDocument()
     })
 
-    // TODO: This test is currently failing - should have aria-labelledby linking title to section
     it('should have aria-labelledby linking title to section', () => {
       const { container } = render(<Section {...defaultProps} />)
       
       // Section should have aria-labelledby pointing to the heading id
-      // This test will fail - aria-labelledby not implemented
       const section = container.querySelector('section') || container.querySelector('#test-section')
       const heading = container.querySelector('h2')
       
@@ -139,12 +129,10 @@ describe('Section', () => {
       }
     })
 
-    // TODO: This test is currently failing - heading should have unique id for aria-labelledby
     it('should have heading with id for aria-labelledby reference', () => {
       const { container } = render(<Section {...defaultProps} />)
       
       // Heading should have an id that can be referenced by aria-labelledby
-      // This test will fail - heading doesn't exist or doesn't have id
       const heading = container.querySelector('h2')
       expect(heading).toBeInTheDocument()
       expect(heading).toHaveAttribute('id')

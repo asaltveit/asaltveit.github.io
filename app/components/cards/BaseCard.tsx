@@ -42,15 +42,15 @@ export default function BaseCard({
               <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
           ) : (
-            <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+            <h2 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
               {title}
-            </div>
+            </h2>
           )}
         </div>
         
-        <div className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-4">
+        <time className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-4">
           {dates}
-        </div>
+        </time>
         
         <ul className="list-outside list-disc ml-6 text-slate-700 dark:text-slate-200 text-base md:text-lg space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (

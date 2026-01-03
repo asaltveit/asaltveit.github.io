@@ -219,6 +219,7 @@ describe('ProjectCard', () => {
       const codeIcon = container.querySelector('svg.lucide-code-2') || 
                       container.querySelector('svg[class*="code"]');
       // Placeholder icon is purely decorative
+      // lucide-react automatically adds aria-hidden="true" to icons
       expect(codeIcon).toBeInTheDocument();
       expect(codeIcon).toHaveAttribute('aria-hidden', 'true');
     });

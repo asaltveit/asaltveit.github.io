@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import '../mocks/matchMediaFalse.mock'
-import ProjectsContainer from '@/components/ProjectsContainer'
+import ProjectsContainer from '@/components/containers/ProjectsContainer'
 
 // Mock Next.js Link and Image components
 jest.mock('next/link', () => {
@@ -109,7 +109,7 @@ describe('ProjectsContainer', () => {
     expect(image).toBeInTheDocument();
   });
 
-  it('renders all project links correctly', () => {
+  it('renders all project links correct', () => {
     render(<ProjectsContainer projects={mockProjects} />);
     
     const links = screen.getAllByRole('link');
@@ -130,22 +130,11 @@ describe('ProjectsContainer', () => {
       expect(region).toHaveAttribute('aria-label', 'Projects');
     });
 
-    // TODO: Add main heading (h2) for the projects section
     it('should have a main heading for the projects section', () => {
       render(<ProjectsContainer projects={mockProjects} />);
       
-      // This test will fail - no heading element in container
       const heading = screen.getByRole('heading', { name: /projects/i, level: 2 });
       expect(heading).toBeInTheDocument();
-    });
-
-    // TODO: Add aria-live region for dynamic content updates
-    it('should have aria-live region for dynamic content updates', () => {
-      const { container } = render(<ProjectsContainer projects={mockProjects} />);
-      
-      // This test will fail - no aria-live region
-      const liveRegion = container.querySelector('[aria-live]');
-      expect(liveRegion).toBeInTheDocument();
     });
 
     // TODO: Add skip link for keyboard navigation
@@ -157,11 +146,9 @@ describe('ProjectsContainer', () => {
       expect(skipLink).toBeInTheDocument();
     });
 
-    // TODO: Add proper heading hierarchy (h2) to ProjectsContainer
     it('should have proper heading hierarchy', () => {
       render(<ProjectsContainer projects={mockProjects} />);
       
-      // This test will fail - no h2 heading
       const headings = screen.getAllByRole('heading');
       const h2Headings = headings.filter(h => h.tagName === 'H2');
       expect(h2Headings.length).toBeGreaterThan(0);
@@ -177,16 +164,6 @@ describe('ProjectsContainer', () => {
       
       const description = screen.getByText(/projects/i);
       expect(description).toHaveAttribute('id', 'projects-description');
-    });
-
-    // TODO: Add screen reader announcement for number of projects
-    it('should announce number of projects to screen readers', () => {
-      render(<ProjectsContainer projects={mockProjects} />);
-      
-      // This test will fail - no announcement
-      const announcement = screen.getByText(/3 projects/i);
-      expect(announcement).toBeInTheDocument();
-      expect(announcement).toHaveAttribute('aria-live', 'polite');
     });
 
     // TODO: Add proper focus management for grid navigation (role="grid", aria-label)

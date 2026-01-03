@@ -11,9 +11,9 @@ interface ExperienceProps {
 export default function Experience ({ title, dates, items, linkLocation, linkName } : ExperienceProps) {
     return (
         <div className="grid items-start justify-items-start">
-            <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+            <h2 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
                 {title}
-            </div>
+            </h2>
             <div className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
                 {dates}
             </div>

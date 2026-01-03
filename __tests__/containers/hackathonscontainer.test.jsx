@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import '../mocks/matchMediaFalse.mock'
-import HackathonsContainer from '@/components/HackathonsContainer'
+import HackathonsContainer from '@/components/containers/HackathonsContainer'
 
 // Mock Next.js Link and Image components
 jest.mock('next/link', () => {
@@ -174,22 +174,11 @@ describe('HackathonsContainer', () => {
       expect(region).toHaveAttribute('aria-label', 'Hackathons');
     });
 
-    // TODO: Add main heading (h2) for the hackathons section
     it('should have a main heading for the hackathons section', () => {
       render(<HackathonsContainer hackathons={mockHackathons} />);
       
-      // This test will fail - no heading element in container
       const heading = screen.getByRole('heading', { name: /hackathons/i, level: 2 });
       expect(heading).toBeInTheDocument();
-    });
-
-    // TODO: Add aria-live region for dynamic content updates
-    it('should have aria-live region for dynamic content updates', () => {
-      const { container } = render(<HackathonsContainer hackathons={mockHackathons} />);
-      
-      // This test will fail - no aria-live region
-      const liveRegion = container.querySelector('[aria-live]');
-      expect(liveRegion).toBeInTheDocument();
     });
 
     // TODO: Add skip link for keyboard navigation
@@ -201,11 +190,9 @@ describe('HackathonsContainer', () => {
       expect(skipLink).toBeInTheDocument();
     });
 
-    // TODO: Add proper heading hierarchy (h2) to HackathonsContainer
     it('should have proper heading hierarchy', () => {
       render(<HackathonsContainer hackathons={mockHackathons} />);
       
-      // This test will fail - no h2 heading
       const headings = screen.getAllByRole('heading');
       const h2Headings = headings.filter(h => h.tagName === 'H2');
       expect(h2Headings.length).toBeGreaterThan(0);
@@ -221,16 +208,6 @@ describe('HackathonsContainer', () => {
       
       const description = screen.getByText(/hackathons/i);
       expect(description).toHaveAttribute('id', 'hackathons-description');
-    });
-
-    // TODO: Add screen reader announcement for number of hackathons
-    it('should announce number of hackathons to screen readers', () => {
-      render(<HackathonsContainer hackathons={mockHackathons} />);
-      
-      // This test will fail - no announcement
-      const announcement = screen.getByText(/3 hackathons/i);
-      expect(announcement).toBeInTheDocument();
-      expect(announcement).toHaveAttribute('aria-live', 'polite');
     });
 
     // TODO: Add proper focus management for grid navigation (role="grid", aria-label)

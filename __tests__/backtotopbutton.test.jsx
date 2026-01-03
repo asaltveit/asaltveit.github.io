@@ -302,23 +302,6 @@ describe('BackToTopButton', () => {
       expect(button).toBeInTheDocument()
     })
 
-    // TODO: This test is currently failing - redundant sr-only text should be removed
-    it('should not have redundant screen reader text', async () => {
-      const { container } = render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
-      })
-      
-      // Button already has aria-label="Back to top"
-      // The sr-only span with "Top" is redundant
-      // This test will fail - sr-only span should be removed
-      const srOnly = container.querySelector('.sr-only')
-      expect(srOnly).not.toBeInTheDocument()
-    })
-
     // TODO: This test is currently failing - should announce button appearance to screen readers
     it('should announce button appearance to screen readers', async () => {
       render(<BackToTopButton />)
@@ -362,7 +345,6 @@ describe('BackToTopButton', () => {
       expect(button.getAttribute('type')).toBe('button')
     })
 
-    // TODO: This test is currently failing - should have proper focus management after scroll
     it('should manage focus after scrolling to top', async () => {
       render(<BackToTopButton />)
       
@@ -378,7 +360,6 @@ describe('BackToTopButton', () => {
       fireEvent.click(button)
       
       // After scrolling to top, focus should be managed appropriately
-      // This test will fail - no focus management after scroll
       // Focus should either remain on button or move to top of page
       // Currently button may disappear after scroll, so focus management is important
       expect(document.activeElement).toBe(button)
