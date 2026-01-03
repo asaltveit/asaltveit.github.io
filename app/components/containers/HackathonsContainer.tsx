@@ -1,4 +1,4 @@
-import HackathonCard, { HackathonProps } from './cards/HackathonCard';
+import HackathonCard, { HackathonProps } from '@/components/cards/HackathonCard';
 
 interface HackathonsContainerProps {
     hackathons: HackathonProps[];

@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 // Custom Components
-import Section from '@/components/Section';
+import Section from '@/components/containers/Section';
 import NavBar from '@/components/NavBar';
 import Experience from '@/components/Experience';
 import BackToTopButton from '@/components/BackToTopButton';
-import ProjectsContainer from '@/components/ProjectsContainer';
-import HackathonsContainer from '@/components/HackathonsContainer';
+import ProjectsContainer from '@/components/containers/ProjectsContainer';
+import HackathonsContainer from '@/components/containers/HackathonsContainer';
 import { projects, hackathons, navLinks } from '@/data';
 
 

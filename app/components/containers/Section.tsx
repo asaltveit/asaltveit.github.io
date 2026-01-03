@@ -5,8 +5,6 @@ interface SectionProps {
     children: React.ReactNode;
 }
 
-// TODO: Widen containers?
-
 export default function Section ({ title, id, children } : SectionProps) {
     return (
         <div id={`${id}`} className="relative max-w-sm md:max-w-5xl min-w-0 mx-auto w-full break-words bg-white dark:bg-primary-blue mb-3 shadow-lg rounded-xl md:mt-16 mt-8">
