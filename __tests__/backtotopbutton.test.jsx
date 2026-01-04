@@ -242,7 +242,7 @@ describe('BackToTopButton', () => {
       })
     })
 
-    it('has aria-label attribute', async () => {
+    it('has proper accessibility attributes', async () => {
       render(<BackToTopButton />)
       
       fireEvent.scroll(window)
@@ -253,61 +253,40 @@ describe('BackToTopButton', () => {
       
       const button = screen.getByRole('button', { name: /back to top/i })
       expect(button).toHaveAttribute('aria-label', 'Back to top')
-    })
-
-    it('is keyboard accessible', async () => {
-      render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
-      })
-      
-      const button = screen.getByRole('button', { name: /back to top/i })
-      button.focus()
-      expect(button).toHaveFocus()
-    })
-
-    it('has visible focus indicator', async () => {
-      render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
-      })
-      
-      const button = screen.getByRole('button', { name: /back to top/i })
-      button.focus()
-      
-      // Button has focus:ring-4 focus:ring-blue-300 classes
-      // This test verifies the button can receive focus
-      expect(button).toHaveFocus()
-    })
-
-    it('has proper button type', async () => {
-      render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
-      })
-      
-      const button = screen.getByRole('button', { name: /back to top/i })
-      // This test verifies the button element exists and is accessible
+      expect(button).toHaveAttribute('type', 'button')
       expect(button.tagName.toLowerCase()).toBe('button')
-      // Button should be a button element (not a link or div)
-      expect(button).toBeInTheDocument()
     })
 
-    // TODO: This test is currently failing - should announce button appearance to screen readers
-    it('should announce button appearance to screen readers', async () => {
+    it('is keyboard accessible with visible focus indicator', async () => {
       render(<BackToTopButton />)
+      
+      fireEvent.scroll(window)
+      
+      await waitFor(() => {
+        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
+      })
+      
+      const button = screen.getByRole('button', { name: /back to top/i })
+      button.focus()
+      expect(button).toHaveFocus()
+      // Button has focus:ring-4 focus:ring-blue-300 classes for visible focus indicator
+    })
+
+    it('should announce button appearance to screen readers', async () => {
+      const { container } = render(<BackToTopButton />)
       
       // Initially not visible
       expect(screen.queryByRole('button', { name: /back to top/i })).not.toBeInTheDocument()
+      
+      // Check that live region exists (query by aria-live attribute)
+      const liveRegion = container.querySelector('[aria-live="polite"]')
+      expect(liveRegion).toBeInTheDocument()
+      expect(liveRegion).toHaveAttribute('aria-live', 'polite')
+      expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
+      expect(liveRegion).toHaveClass('sr-only')
+      
+      // Initially live region should be empty
+      expect(liveRegion).toBeEmptyDOMElement()
       
       // Scroll to make button appear
       Object.defineProperty(window, 'pageYOffset', {
@@ -322,27 +301,10 @@ describe('BackToTopButton', () => {
         expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
       })
       
-      // Button should have aria-live region or be announced when it appears
-      // This test will fail - no aria-live region for button appearance
-      const button = screen.getByRole('button', { name: /back to top/i })
-      expect(button).toHaveAttribute('aria-live', 'polite')
-    })
-
-    // TODO: This test is currently failing - should have explicit type="button"
-    it('should have explicit type="button" attribute', async () => {
-      render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
+      // Live region should contain the announcement text
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
+        expect(liveRegion).toHaveTextContent('Back to top button available')
       })
-      
-      const button = screen.getByRole('button', { name: /back to top/i })
-      // Explicit type="button" is clearer than relying on default
-      // This test will fail - button doesn't have explicit type attribute in JSX
-      // Note: HTML buttons default to type="button", but explicit is better practice
-      expect(button.getAttribute('type')).toBe('button')
     })
 
     it('should manage focus after scrolling to top', async () => {
@@ -363,20 +325,6 @@ describe('BackToTopButton', () => {
       // Focus should either remain on button or move to top of page
       // Currently button may disappear after scroll, so focus management is important
       expect(document.activeElement).toBe(button)
-    })
-
-    it('should be accessible via screen reader', async () => {
-      render(<BackToTopButton />)
-      
-      fireEvent.scroll(window)
-      
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
-      })
-      
-      const button = screen.getByRole('button', { name: /back to top/i })
-      expect(button).toBeInTheDocument()
-      expect(button).toHaveAttribute('aria-label', 'Back to top')
     })
 
     it('should have sufficient color contrast (visual test placeholder)', async () => {

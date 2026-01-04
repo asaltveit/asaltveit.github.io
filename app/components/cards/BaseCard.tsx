@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
+import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 interface BaseCardProps {
   title: string;
@@ -37,6 +40,7 @@ export default function BaseCard({
               className="group inline-flex items-center gap-2 text-slate-700 dark:text-white text-xl md:text-2xl font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
+              onKeyDown={handleSpacebarKeyDown}
             >
               {title}
               <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />

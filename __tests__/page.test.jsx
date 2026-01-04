@@ -228,9 +228,13 @@ describe('Page', () => {
 
         it('has proper heading hierarchy', () => {
             render(<Page />)
-            const h1 = screen.getByRole('heading', { level: 1 })
-            expect(h1).toBeInTheDocument()
-            expect(h1).toHaveTextContent('Anna Saltveit')
+            // Check that the main visible h1 heading exists with correct content
+            const mainH1 = screen.getByRole('heading', { name: 'Anna Saltveit', level: 1 })
+            expect(mainH1).toBeInTheDocument()
+            expect(mainH1).toHaveTextContent('Anna Saltveit')
+            
+            // Verify it's the main page heading (not sr-only)
+            expect(mainH1).not.toHaveClass('sr-only')
         })
 
         it('has accessible navigation', () => {

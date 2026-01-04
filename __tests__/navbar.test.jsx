@@ -180,7 +180,6 @@ describe('NavBar', () => {
       expect(experienceLink).toHaveAttribute('aria-current', 'page');
     });
 
-    // TODO: Explicitly add role="navigation" for clarity (though implicit for nav elements)
     it('should have properly labeled navigation landmark', () => {
       const { container } = render(<NavBar links={mockLinks} />);
       
@@ -216,11 +215,9 @@ describe('NavBar', () => {
       expect(computedStyle.outline).not.toBe('none');
     });
 
-    // TODO: Add aria-orientation="horizontal" to menu for screen readers
     it('should specify menu orientation for screen readers', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no aria-orientation
       const menu = screen.getByRole('menu');
       expect(menu).toHaveAttribute('aria-orientation', 'horizontal');
     });
@@ -236,13 +233,17 @@ describe('NavBar', () => {
       expect(srOnly).toHaveTextContent('Open main menu');
     });
 
-    // TODO: Add proper heading structure if navigation has a title/logo
-    it('should have proper heading structure for navigation title', () => {
+    it('should have proper navigation structure without heading', () => {
       const { container } = render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no heading for navigation
+      // NavBar does not require a heading - navigation is identified by the nav element
+      const nav = container.querySelector('nav');
+      expect(nav).toBeInTheDocument();
+      expect(nav).toHaveAttribute('aria-label', 'main navigation');
+      
+      // Verify no heading is present (heading is not required for navigation)
       const heading = container.querySelector('h1, h2, h3');
-      expect(heading).toBeInTheDocument();
+      expect(heading).not.toBeInTheDocument();
     });
   });
 });

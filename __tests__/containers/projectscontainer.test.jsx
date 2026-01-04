@@ -120,60 +120,35 @@ describe('ProjectsContainer', () => {
   });
 
   describe('Accessibility', () => {
-    // TODO: Add region landmark with aria-label to ProjectsContainer
-    it('should have a region landmark with aria-label', () => {
-      const { container } = render(<ProjectsContainer projects={mockProjects} />);
-      
-      // This test will fail - container doesn't have a region landmark
-      const region = container.querySelector('[role="region"]');
-      expect(region).toBeInTheDocument();
-      expect(region).toHaveAttribute('aria-label', 'Projects');
-    });
+    // Note: Section and heading are provided by the Section component wrapper,
+    // not by ProjectsContainer itself. The container only provides the grid.
 
-    it('should have a main heading for the projects section', () => {
+    it('should have skip link for keyboard navigation', () => {
       render(<ProjectsContainer projects={mockProjects} />);
       
-      const heading = screen.getByRole('heading', { name: /projects/i, level: 2 });
-      expect(heading).toBeInTheDocument();
-    });
-
-    // TODO: Add skip link for keyboard navigation
-    it('should have skip link for keyboard navigation', () => {
-      const { container } = render(<ProjectsContainer projects={mockProjects} />);
-      
-      // This test will fail - no skip link
-      const skipLink = screen.getByRole('link', { name: /skip to projects content/i });
+      // Skip link should skip to hackathons (next section)
+      const skipLink = screen.getByRole('link', { name: /skip to hackathons content/i });
       expect(skipLink).toBeInTheDocument();
     });
 
-    it('should have proper heading hierarchy', () => {
-      render(<ProjectsContainer projects={mockProjects} />);
-      
-      const headings = screen.getAllByRole('heading');
-      const h2Headings = headings.filter(h => h.tagName === 'H2');
-      expect(h2Headings.length).toBeGreaterThan(0);
-    });
-
-    // TODO: Add aria-describedby linking to description
     it('should have aria-describedby linking to description', () => {
       const { container } = render(<ProjectsContainer projects={mockProjects} />);
       
-      // This test will fail - no aria-describedby
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('aria-describedby', 'projects-description');
       
-      const description = screen.getByText(/projects/i);
+      const description = document.getElementById('projects-description');
+      expect(description).toBeInTheDocument();
       expect(description).toHaveAttribute('id', 'projects-description');
     });
 
-    // TODO: Add proper focus management for grid navigation (role="grid", aria-label)
     it('should have proper focus management for grid navigation', () => {
       const { container } = render(<ProjectsContainer projects={mockProjects} />);
       
-      // This test will fail - no tabindex or focus management
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('role', 'grid');
       expect(grid).toHaveAttribute('aria-label', 'Projects grid');
+      expect(grid).toHaveAttribute('tabindex', '0');
     });
   });
 });

@@ -103,12 +103,10 @@ describe('Section', () => {
       expect(heading.tagName.toLowerCase()).toBe('h2')
     })
 
-    // TODO: This test is currently failing - should have accessible region landmark
     it('should have accessible region landmark', () => {
       render(<Section {...defaultProps} />)
       
       // Section should be identifiable as a region landmark
-      // This test will fail - currently uses div without role
       const region = screen.getByRole('region', { name: 'Test Section' })
       expect(region).toBeInTheDocument()
     })

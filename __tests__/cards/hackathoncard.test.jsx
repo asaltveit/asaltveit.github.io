@@ -147,7 +147,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
       imageLink.onclick = mockClick;
       
       fireEvent.click(imageLink);
@@ -164,7 +164,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.queryByRole('link', { name: 'image link to Test Hackathon' });
+      const imageLink = screen.queryByRole('link', { name: 'image for Test Hackathon' });
       expect(imageLink).not.toBeInTheDocument();
       
       const image = screen.getByAltText('test hackathon screenshot');
@@ -181,7 +181,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
       const overlay = imageLink.querySelector('.group-hover\\:opacity-20');
       
       expect(overlay).toBeInTheDocument();
@@ -214,7 +214,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
       
       imageLink.focus();
       expect(imageLink).toHaveFocus();
@@ -223,7 +223,7 @@ describe('HackathonCard', () => {
       expect(imageLink).toHaveAttribute('href', 'https://hackathon.com');
     });
 
-    it('has proper aria-labels for accessibility', () => {
+    it('has proper aria-labels and security attributes for all links', () => {
       render(
         <HackathonCard 
           {...defaultProps} 
@@ -234,10 +234,17 @@ describe('HackathonCard', () => {
       );
       
       const titleLink = screen.getByRole('link', { name: 'link to Test Hackathon' });
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
       
+      // Check aria-labels
       expect(titleLink).toHaveAttribute('aria-label', 'link to Test Hackathon');
-      expect(imageLink).toHaveAttribute('aria-label', 'image link to Test Hackathon');
+      expect(imageLink).toHaveAttribute('aria-label', 'image for Test Hackathon');
+      
+      // Check security attributes
+      expect(titleLink).toHaveAttribute('target', '_blank');
+      expect(titleLink).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(imageLink).toHaveAttribute('target', '_blank');
+      expect(imageLink).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('displays all metadata items together', () => {
@@ -329,6 +336,20 @@ describe('HackathonCard', () => {
       // lucide-react automatically adds aria-hidden="true" to icons
       const usersIcon = container.querySelector('svg.lucide-users');
       expect(usersIcon).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should have proper alt text on images', () => {
+      render(
+        <HackathonCard 
+          {...defaultProps} 
+          image="/test-image.png"
+          imageTitle="test hackathon"
+        />
+      );
+      
+      const image = screen.getByAltText('test hackathon screenshot');
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute('alt', 'test hackathon screenshot');
     });
   });
 });

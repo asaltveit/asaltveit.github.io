@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 // Custom Components
 import Section from '@/components/containers/Section';
@@ -16,7 +19,7 @@ export default function Home() {
         <header className="text-white" >
           <NavBar links={navLinks} />
         </header>
-        <main>
+        <main id="main-content" tabIndex={-1}>
           <h1 className="text-white text-4xl mt-6 md:mt-10 md:text-6xl items-center text-center font-medium" >
             Anna Saltveit
           </h1>
@@ -26,9 +29,9 @@ export default function Home() {
                 <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
                   I&apos;m a web developer who enjoys creating useful and accessible products.
                 </div>
-                <div className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
+                <h3 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
                   Technical Skills
-                </div>
+                </h3>
                 <div className='mb-2'>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
                     Frontend:
@@ -98,6 +101,7 @@ export default function Home() {
             aria-label={`link to Github`}
             target="_blank"
             rel="noopener noreferrer"
+            onKeyDown={handleSpacebarKeyDown}
           >
             Github
           </Link>
@@ -107,6 +111,7 @@ export default function Home() {
             aria-label={`link to LinkedIn`}
             target="_blank"
             rel="noopener noreferrer"
+            onKeyDown={handleSpacebarKeyDown}
           >
             LinkedIn
           </Link>

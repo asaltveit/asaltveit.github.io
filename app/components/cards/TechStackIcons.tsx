@@ -1,7 +1,6 @@
 import { 
   Code2, 
   Database, 
-  Globe, 
   Layers, 
   Package, 
   Server, 

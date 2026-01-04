@@ -1,8 +1,11 @@
+'use client';
+
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import BaseCard from '@/components/cards/BaseCard';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 import { Trophy, Users, Clock } from 'lucide-react';
+import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 export interface HackathonProps {
   title: string;
@@ -23,24 +26,26 @@ export default function HackathonCard({
   items, 
   link, 
   image,
-  imageTitle = "hackathon image",
+  imageTitle,
   techStack = [],
   award,
   teamSize,
   duration
 }: HackathonProps) {
+  const defaultImageTitle = imageTitle || title;
   const imageContent = image ? (
     link ? (
       <Link 
         href={link} 
-        aria-label={`image link to ${title}`}
+        aria-label={`image for ${title}`}
         className="block w-full h-full relative group"
         target="_blank"
         rel="noopener noreferrer"
+        onKeyDown={handleSpacebarKeyDown}
       >
         <Image
           src={image}
-          alt={`${imageTitle} screenshot`}
+          alt={`${defaultImageTitle} screenshot`}
           width={800}
           height={450}
           className="w-full h-full object-cover"
@@ -50,7 +55,7 @@ export default function HackathonCard({
     ) : (
       <Image
         src={image}
-        alt={`${imageTitle} screenshot`}
+        alt={`${defaultImageTitle} screenshot`}
         width={800}
         height={450}
         className="w-full h-full object-cover"

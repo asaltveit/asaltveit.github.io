@@ -105,7 +105,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
       imageLink.onclick = mockClick;
       
       fireEvent.click(imageLink);
@@ -122,7 +122,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
       expect(imageLink).toBeInTheDocument();
       expect(imageLink).toHaveAttribute('href', 'https://project.com');
     });
@@ -136,10 +136,19 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
-      const overlay = imageLink.querySelector('.group-hover\\:opacity-20');
+      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
       
-      expect(overlay).toBeInTheDocument();
+      // Check for background overlay (opacity-40 on hover)
+      const backgroundOverlay = imageLink.querySelector('.group-hover\\:opacity-40');
+      expect(backgroundOverlay).toBeInTheDocument();
+      
+      // Check for border overlay (opacity-100 on hover)
+      const borderOverlay = imageLink.querySelector('.group-hover\\:opacity-100');
+      expect(borderOverlay).toBeInTheDocument();
+      
+      // Verify overlays are hidden by default (opacity-0)
+      expect(backgroundOverlay).toHaveClass('opacity-0');
+      expect(borderOverlay).toHaveClass('opacity-0');
     });
 
     it('supports keyboard navigation on title link', () => {
@@ -163,7 +172,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
       
       imageLink.focus();
       expect(imageLink).toHaveFocus();
@@ -172,7 +181,7 @@ describe('ProjectCard', () => {
       expect(imageLink).toHaveAttribute('href', 'https://project.com');
     });
 
-    it('has proper aria-labels for accessibility', () => {
+    it('has proper aria-labels and security attributes for all links', () => {
       render(
         <ProjectCard 
           {...defaultProps} 
@@ -182,30 +191,15 @@ describe('ProjectCard', () => {
       );
       
       const titleLink = screen.getByRole('link', { name: 'link to Test Project' });
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
       
+      // Check aria-labels
       expect(titleLink).toHaveAttribute('aria-label', 'link to Test Project');
-      expect(imageLink).toHaveAttribute('aria-label', 'image link to Test Project');
-    });
-
-    it('opens links in new tab with proper security attributes', () => {
-      render(<ProjectCard {...defaultProps} />);
+      expect(imageLink).toHaveAttribute('aria-label', 'image for Test Project');
       
-      const link = screen.getByRole('link', { name: 'link to Test Project' });
-      expect(link).toHaveAttribute('target', '_blank');
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    });
-
-    it('image link opens in new tab with proper security attributes', () => {
-      render(
-        <ProjectCard 
-          {...defaultProps} 
-          image="/test-image.png"
-          imageTitle="test project"
-        />
-      );
-      
-      const imageLink = screen.getByRole('link', { name: 'image link to Test Project' });
+      // Check security attributes
+      expect(titleLink).toHaveAttribute('target', '_blank');
+      expect(titleLink).toHaveAttribute('rel', 'noopener noreferrer');
       expect(imageLink).toHaveAttribute('target', '_blank');
       expect(imageLink).toHaveAttribute('rel', 'noopener noreferrer');
     });
@@ -222,6 +216,20 @@ describe('ProjectCard', () => {
       // lucide-react automatically adds aria-hidden="true" to icons
       expect(codeIcon).toBeInTheDocument();
       expect(codeIcon).toHaveAttribute('aria-hidden', 'true');
+    });
+
+    it('should have proper alt text on images', () => {
+      render(
+        <ProjectCard 
+          {...defaultProps} 
+          image="/test-image.png"
+          imageTitle="test project"
+        />
+      );
+      
+      const image = screen.getByAltText('test project screenshot');
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute('alt', 'test project screenshot');
     });
   });
 });

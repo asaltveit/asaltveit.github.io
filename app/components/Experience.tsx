@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 interface ExperienceProps {
     title: string;
@@ -11,12 +14,12 @@ interface ExperienceProps {
 export default function Experience ({ title, dates, items, linkLocation, linkName } : ExperienceProps) {
     return (
         <div className="grid items-start justify-items-start">
-            <h2 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+            <h3 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
                 {title}
-            </h2>
-            <div className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
+            </h3>
+            <time className="text-slate-500 dark:text-slate-400 text-lg md:text-xl pb-2">
                 {dates}
-            </div>
+            </time>
             {
                 linkLocation &&
                 <ul className='marker:text-green list-outside list-disc ml-6 text-slate-700 dark:text-white text-lg md:text-xl justify-items-start'>
@@ -25,9 +28,12 @@ export default function Experience ({ title, dates, items, linkLocation, linkNam
                         <Link 
                             href={linkLocation}
                             aria-label={`link to ${title}`}
-                            className='md:hover:underline md:hover:underline-offset-5 md:no-underline underline underline-offset-5'
+                            className='md:hover:underline md:hover:underline-offset-5 md:no-underline underline underline-offset-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 dark:focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-all'
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onKeyDown={handleSpacebarKeyDown}
                         >
-                            {linkName}
+                            {linkName || linkLocation}
                         </Link>
                     </li>
                 </ul>

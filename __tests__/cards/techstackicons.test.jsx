@@ -162,6 +162,27 @@ describe('TechStackIcons', () => {
       const icon = container.querySelector('svg');
       expect(icon).toHaveAttribute('aria-hidden', 'true');
     });
+
+    it('should have title attribute on tech stack items for tooltips', () => {
+      render(<TechStackIcons techStack={['React', 'TypeScript']} />);
+      
+      const reactItem = screen.getByText('React').closest('div');
+      const tsItem = screen.getByText('TypeScript').closest('div');
+      
+      expect(reactItem).toHaveAttribute('title', 'React');
+      expect(tsItem).toHaveAttribute('title', 'TypeScript');
+    });
+
+    it('should have proper structure for screen readers', () => {
+      const { container } = render(
+        <TechStackIcons techStack={['React', 'TypeScript', 'Node.js']} />
+      );
+      
+      // Container should be a div with flex layout
+      const containerDiv = container.firstChild;
+      expect(containerDiv).toBeInTheDocument();
+      expect(containerDiv).toHaveClass('flex', 'flex-wrap', 'gap-2');
+    });
   });
 });
 

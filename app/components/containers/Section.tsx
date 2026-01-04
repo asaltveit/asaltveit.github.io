@@ -1,4 +1,3 @@
-
 interface SectionProps {
     title: string;
     id: string;
@@ -7,12 +6,17 @@ interface SectionProps {
 
 export default function Section ({ title, id, children } : SectionProps) {
     const headingId = `${id}-heading`;
+
     return (
-        <section id={`${id}`} aria-labelledby={headingId} className="relative max-w-sm md:max-w-5xl min-w-0 mx-auto w-full break-words bg-white dark:bg-primary-blue mb-3 shadow-lg rounded-xl md:mt-16 mt-8">
+        <section id={`${id}`} aria-labelledby={headingId} role="region" aria-label={title} className="relative max-w-sm md:max-w-5xl min-w-0 mx-auto w-full break-words bg-white dark:bg-primary-blue mb-3 shadow-lg rounded-xl md:mt-16 mt-8">
             <div className="px-10 py-9 md:px-20 md:py-18">
                 <div className="flex flex-wrap"> 
                     <div className="w-full justify-center">
-                        <h2 id={headingId} className="text-slate-700 dark:text-white md:text-5xl text-2xl text-start font-bold mb-2 md:mb-12">
+                        <h2 
+                            id={headingId} 
+                            tabIndex={-1} 
+                            className="text-slate-700 dark:text-white md:text-5xl text-2xl text-start font-bold mb-2 md:mb-12 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 dark:focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                        >
                             {title}
                         </h2>
                         <div className="flex justify-start lg:pt-4 pt-8 pb-0">

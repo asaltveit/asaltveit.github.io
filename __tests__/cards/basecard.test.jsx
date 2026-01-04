@@ -113,12 +113,6 @@ describe('BaseCard', () => {
       expect(link).toHaveAttribute('href', 'https://example.com');
     });
 
-    it('has proper aria-label for accessibility', () => {
-      render(<BaseCard {...defaultProps} link="https://example.com" />);
-      
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
-      expect(link).toHaveAttribute('aria-label', 'link to Test Card');
-    });
 
     it('renders all list items correctly', () => {
       const items = ['First item', 'Second item', 'Third item', 'Fourth item'];
@@ -178,6 +172,25 @@ describe('BaseCard', () => {
       const timeElement = container.querySelector('time');
       expect(timeElement).toBeInTheDocument();
       expect(timeElement).toHaveTextContent('January 2024 - Present');
+    });
+
+    it('should have proper list structure', () => {
+      render(<BaseCard {...defaultProps} />);
+      
+      const list = screen.getByRole('list');
+      expect(list).toBeInTheDocument();
+      // List should be properly structured with listitems
+      const listItems = screen.getAllByRole('listitem');
+      expect(listItems.length).toBeGreaterThan(0);
+    });
+
+    it('should have accessible link with proper attributes when link is provided', () => {
+      render(<BaseCard {...defaultProps} link="https://example.com" />);
+      
+      const link = screen.getByRole('link', { name: 'link to Test Card' });
+      expect(link).toHaveAttribute('aria-label', 'link to Test Card');
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
   });
 });

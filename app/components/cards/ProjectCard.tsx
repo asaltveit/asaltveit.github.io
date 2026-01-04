@@ -1,8 +1,11 @@
+'use client';
+
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import BaseCard from '@/components/cards/BaseCard';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 import { Code2 } from 'lucide-react';
+import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 export interface ProjectProps {
   title: string;
@@ -20,25 +23,30 @@ export default function ProjectCard({
   items, 
   link, 
   image,
-  imageTitle = "project image",
+  imageTitle,
   techStack = []
 }: ProjectProps) {
+  const defaultImageTitle = imageTitle || title;
   const imageContent = image ? (
     <Link 
       href={link} 
-      aria-label={`image link to ${title}`}
-      className="block w-full h-full relative group"
+      aria-label={`image for ${title}`}
+      className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 rounded-t-lg"
       target="_blank"
       rel="noopener noreferrer"
+      onKeyDown={handleSpacebarKeyDown}
     >
-      <Image
-        src={image}
-        alt={`${imageTitle} screenshot`}
-        width={800}
-        height={450}
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 opacity-0 group-hover:opacity-20 group-focus:opacity-20 transition-opacity duration-300" />
+      <div className="w-full h-full overflow-hidden rounded-t-lg">
+        <Image
+          src={image}
+          alt={`${defaultImageTitle} screenshot`}
+          width={800}
+          height={450}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
+        />
+      </div>
+      <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg" />
+      <div className="absolute inset-0 border-4 border-indigo-500 dark:border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg" />
     </Link>
   ) : (
     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800">
