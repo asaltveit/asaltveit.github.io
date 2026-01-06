@@ -27,7 +27,7 @@ export default function Home() {
             <Section title="About Me" id="about" >
               <div className="grid">
                 <div className="text-slate-700 dark:text-white pb-6 md:pb-8 text-lg md:text-xl">
-                  I&apos;m a web developer who enjoys creating useful and accessible products.
+                  I&apos;m a web developer who enjoys creating attractive and accessible products.
                 </div>
                 <h3 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold grid mb-4">
                   Technical Skills
@@ -37,7 +37,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Vitest, Vue
+                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Jest, Vue
                   </span>
                 </div>
                 <div className='mb-2'>
@@ -45,15 +45,23 @@ export default function Home() {
                     Backend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Python, Supabase, Node.js, Express.js, Sequelize.js, PostgreSQL
+                    Python, Supabase, Node.js, PostgreSQL, Express.js, Sequelize.js
                   </span>
                 </div>
-                <div>
+                <div className='mb-2'>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
                     Tools:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Git, Github Actions, Vercel, Agile Development, npm, LaunchDarkly, Slack, Jira, Confluence, PagerDuty
+                    Github Actions, Git, Vercel, npm, LaunchDarkly, Slack, Jira, Agile Development
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-700 dark:text-white text-lg md:text-xl font-bold items-start pr-3">
+                    AI Tools:
+                  </span>
+                  <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
+                    Cursor AI, Anthropic, OpenAGI, n8n, fal, Black Forest (Flux), Kiro
                   </span>
                 </div>
               </div>

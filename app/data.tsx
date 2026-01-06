@@ -60,8 +60,19 @@ export const hackathons = [
             award: "1st Place",
             teamSize: 3,
             duration: "48 hours"
-        }
+        } OpenAGI Computer Use Launch & Hack Night
     */
+    {
+        title: "OpenAGI Computer Use Launch & Hack Night",
+        dates: "12/16/25",
+        items: [
+            "A computer use agent that clones a project from Github and sets it up for use on the user's computer.",
+        ],
+        link: "https://github.com/asaltveit/github-repo-setup-tool",
+        techStack: ["OpenAGI", "Python"],
+        teamSize: 1,
+        duration: "2 hours"
+    },
     {
         title: "ElevenLabs Worldwide Hackathon",
         dates: "12/11/25",

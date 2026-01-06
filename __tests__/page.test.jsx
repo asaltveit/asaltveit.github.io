@@ -97,30 +97,27 @@ describe('Page', () => {
     describe('About Me Content', () => {
         it('renders about me text', () => {
             render(<Page />)
-            expect(screen.getByText(/I'm a web developer who enjoys creating useful and accessible products/)).toBeInTheDocument()
+            expect(screen.getByText(/I'm a web developer who enjoys creating attractive and accessible products/)).toBeInTheDocument()
         })
 
         it('renders Technical Skills heading', () => {
             render(<Page />)
             expect(screen.getByText('Technical Skills')).toBeInTheDocument()
         })
-
+        // Not including easily-changeable text
         it('renders Frontend skills', () => {
             render(<Page />)
             expect(screen.getByText('Frontend:')).toBeInTheDocument()
-            expect(screen.getByText(/Next\.js, React, TypeScript/)).toBeInTheDocument()
         })
 
         it('renders Backend skills', () => {
             render(<Page />)
             expect(screen.getByText('Backend:')).toBeInTheDocument()
-            expect(screen.getByText(/Python, Supabase, Node\.js/)).toBeInTheDocument()
         })
 
         it('renders Tools', () => {
             render(<Page />)
             expect(screen.getByText('Tools:')).toBeInTheDocument()
-            expect(screen.getByText(/Git, Github Actions, Vercel/)).toBeInTheDocument()
         })
     })
 
