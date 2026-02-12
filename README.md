@@ -9,7 +9,7 @@ Access at [asaltveit.github.io](asaltveit.github.io)
   - Dark mode was created.
   - Tabbability was tested.
 - Mobile friendly:
-  - Part of learning TailwindCSS
+  - Part of learning TailwindCSS.
 - Hosting: .github.io
   - It's free and comes with a URL.
 
