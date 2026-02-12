@@ -1,5 +1,27 @@
 export const projects = [
     {
+        title:"The Mitsubishi Pilots Online Group Website",
+        dates:"2025 - 2026",
+        items:[
+            "Developed a modern, responsive website for The Mitsubishi Pilots Online Group.",
+            "Gathered requirements, designed, implemented, and integrated feedback from the community.",
+        ], 
+        link:"https://asaltveit.github.io/mu2-fanclub-website/",
+        techStack: ["Next.js", "TypeScript", "TailwindCSS"],
+        image: "/pilots-website-screenshot.png"
+    },
+    {
+        title:"ROTAS Squares Map",
+        dates:"2024 - 2025",
+        items:[
+            "Developed a clean, modular frontend using React.js and TailwindCSS, with an interactive map powered by Observable Plot.",
+            "Configured and integrated Supabase client with the frontend.",
+        ], 
+        link:"https://rotas-squares-map.vercel.app/",
+        techStack: ["React", "TailwindCSS", "Observable Plot", "Supabase", "JavaScript"],
+        image: "/map-screenshot-032725.png"
+    },
+    {
         title:"Create Biblio", 
         dates:"2024 - 2025", 
         items:[
@@ -12,21 +34,10 @@ export const projects = [
         image: "/create-biblio-screenshot-032825.png"
     },
     {
-        title:"ROTAS Squares Map",
-        dates:"2024 - 2025",
-        items:[
-            "Developed a clean, modular frontend using React.js and Material UI, with an interactive map powered by Observable Plot.",
-            "Configured and integrated Supabase client with the frontend, including Google OAuth for seamless user sign-in.",
-        ], 
-        link:"https://rotas-squares-map.vercel.app/",
-        techStack: ["React", "Material UI", "Observable Plot", "Supabase", "JavaScript"],
-        image: "/map-screenshot-032725.png"
-    },
-    {
         title:"This Website", 
         dates:"2025 - Present", 
         items:[
-            "Developed with React, Next.js, TypeScript, and TailwindCSS.",
+            "Developed with Next.js, React, TypeScript, and TailwindCSS.",
         ],
         link:"https://github.com/asaltveit/asaltveit.github.io",
         techStack: ["React", "Next.js", "TypeScript", "TailwindCSS"],
@@ -63,27 +74,39 @@ export const hackathons = [
         } OpenAGI Computer Use Launch & Hack Night
     */
     {
-        title: "OpenAGI Computer Use Launch & Hack Night",
-        dates: "12/16/25",
-        items: [
-            "A computer use agent that clones a project from Github and sets it up for use on the user's computer.",
-        ],
-        link: "https://github.com/asaltveit/github-repo-setup-tool",
-        techStack: ["OpenAGI", "Python"],
-        teamSize: 1,
-        duration: "2 hours"
-    },
-    {
         title: "ElevenLabs Worldwide Hackathon",
         dates: "12/11/25",
         items: [
             "Created SteadyTalk, an emotionally intelligent AI manager designed for practicing live performance conversations via video",
         ],
         link: "https://github.com/asaltveit/SteadyTalk",
-        techStack: ["n8n", "Tavus", "ElevenLabs", "fal", "Cursor AI"],
+        techStack: ["n8n", "Tavus", "ElevenLabs", "fal"],
         award: "Sponsor awards from n8n and Anam",
         teamSize: 2,
         duration: "4 hours"
+    },
+    {
+        title: "Navi AI x GDG DevFest: Aviation Hackathon",
+        dates: "November 2025",
+        items: [
+            "Created a product that alerts pilots if they've read back instructions from ATC controllers incorrectly.",
+        ],
+        techStack: ["Otter.ai"],
+        award: "9th Place",
+        teamSize: 3,
+        duration: "12 hours",
+    },
+    {
+        title: "WeaveHacks 3: Self-Improving Agents Hackathon with Weights & Biases",
+        dates: "1/31-2/1/26",
+        items: [
+            "An AI-powered research and mapping app that turns natural-language questions into live map updates.",
+            "The project supports self-healing agents and workflows."
+        ],
+        link: "https://github.com/asaltveit/map-searcher",
+        techStack: ["Letta", "Pipecat", "W&B Weave", "Redis", "Nest.js", "Next.js", "MapLibre"],
+        teamSize: 3,
+        duration: "24 hours",
     },
     {
         title: "Hack FLUX: Beyond One",
@@ -98,16 +121,16 @@ export const hackathons = [
         duration: "24 hours",
     },
     {
-        title: "Navi AI x GDG DevFest: Aviation Hackathon",
-        dates: "November 2025",
+        title: "OpenAGI Computer Use Launch & Hack Night",
+        dates: "12/16/25",
         items: [
-            "Created a product that alerts pilots if they've read back instructions from ATC controllers incorrectly.",
+            "A computer use agent that clones a project from Github and sets it up for use on the user's computer.",
         ],
-        techStack: ["Otter.ai"],
-        award: "9th Place",
-        teamSize: 3,
-        duration: "12 hours",
-    }
+        link: "https://github.com/asaltveit/github-repo-setup-tool",
+        techStack: ["OpenAGI", "Python"],
+        teamSize: 1,
+        duration: "2 hours"
+    },
 ];
 
 export const navLinks = [

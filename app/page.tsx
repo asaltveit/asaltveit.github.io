@@ -37,7 +37,7 @@ export default function Home() {
                     Frontend:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Jest, Vue
+                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Jest, Vite
                   </span>
                 </div>
                 <div className='mb-2'>
@@ -61,7 +61,7 @@ export default function Home() {
                     AI Tools:
                   </span>
                   <span className="text-slate-700 dark:text-white text-lg md:text-xl items-end">
-                    Cursor AI, Anthropic, OpenAGI, n8n, fal, Black Forest (Flux), Kiro
+                     Letta, n8n, Pipecat, W&B Weave, OpenAGI, fal, Black Forest (Flux), Cursor AI, Claude Code, Kiro
                   </span>
                 </div>
               </div>
