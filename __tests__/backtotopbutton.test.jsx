@@ -212,12 +212,10 @@ describe('BackToTopButton', () => {
       'fixed',
       'bottom-8',
       'right-8',
-      'bg-white',
-      'dark:bg-blue-600',
+      'bg-blue-600',
       'hover:ring-4',
-      'hover:ring-blue-300',
-      'dark:hover:bg-blue-700',
-      'dark:text-white',
+      'hover:bg-blue-700',
+      'text-white',
       'p-4',
       'rounded-full',
       'shadow-2xl',
@@ -227,8 +225,7 @@ describe('BackToTopButton', () => {
       'hover:shadow-blue-500/50',
       'focus:outline-none',
       'focus:ring-4',
-      'focus:ring-blue-300',
-      'dark:focus:bg-blue-700',
+      'focus:ring-blue-700',
       'z-50'
     )
   })
@@ -269,7 +266,7 @@ describe('BackToTopButton', () => {
       const button = screen.getByRole('button', { name: /back to top/i })
       button.focus()
       expect(button).toHaveFocus()
-      // Button has focus:ring-4 focus:ring-blue-300 classes for visible focus indicator
+      // Button has focus:ring-4 focus:ring-blue-700 classes for visible focus indicator
     })
 
     it('should announce button appearance to screen readers', async () => {
@@ -339,8 +336,8 @@ describe('BackToTopButton', () => {
       const button = screen.getByRole('button', { name: /back to top/i })
       expect(button).toBeInTheDocument()
       
-      // Button has classes: bg-white dark:bg-blue-600
-      // Icon has: text-blue-600 dark:text-white
+      // Button has classes: bg-blue-600 text-white
+      // Icon has: text-white
       // These should provide sufficient contrast, but automated testing
       // would require checking computed styles against background
     })

@@ -22,7 +22,7 @@ export default function BaseCard({
   footerContent 
 }: BaseCardProps) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-slate-200 dark:border-slate-700 flex flex-col">
+    <div className="bg-slate-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-slate-700 flex flex-col">
       {/* Image or placeholder section */}
       {children && (
         <div className="w-full aspect-video overflow-hidden flex-shrink-0">
@@ -37,7 +37,7 @@ export default function BaseCard({
             <Link 
               href={link} 
               aria-label={`link to ${title}`}
-              className="group inline-flex items-center gap-2 text-slate-700 dark:text-white text-xl md:text-2xl font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+              className="group inline-flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:text-indigo-400 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
               onKeyDown={handleSpacebarKeyDown}
@@ -46,17 +46,17 @@ export default function BaseCard({
               <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
           ) : (
-            <h2 className="text-slate-700 dark:text-white text-xl md:text-2xl font-bold">
+            <h2 className="text-white text-xl md:text-2xl font-bold">
               {title}
             </h2>
           )}
         </div>
         
-        <time className="text-slate-500 dark:text-slate-400 text-base md:text-lg mb-4">
+        <time className="text-slate-400 text-base md:text-lg mb-4">
           {dates}
         </time>
         
-        <ul className="list-outside list-disc ml-6 text-slate-700 dark:text-slate-200 text-base md:text-lg space-y-1.5 mb-4">
+        <ul className="list-outside list-disc ml-6 text-slate-200 text-base md:text-lg space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (
             <li key={`${i}`}>{item}</li>
           ))}
@@ -64,7 +64,7 @@ export default function BaseCard({
         
         {/* Footer content: tech stack, etc. */}
         {footerContent && (
-          <div className="mt-auto pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="mt-auto pt-4 border-t border-slate-700">
             {footerContent}
           </div>
         )}

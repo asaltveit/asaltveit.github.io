@@ -65,7 +65,7 @@ describe('Section', () => {
     const { container } = render(<Section {...defaultProps} />)
     
     const section = container.querySelector('#test-section')
-    expect(section).toHaveClass('relative', 'max-w-sm', 'md:max-w-5xl', 'min-w-0', 'mx-auto', 'w-full', 'break-words', 'bg-white', 'dark:bg-primary-blue', 'mb-3', 'shadow-lg', 'rounded-xl', 'md:mt-16', 'mt-8')
+    expect(section).toHaveClass('relative', 'max-w-sm', 'md:max-w-5xl', 'min-w-0', 'mx-auto', 'w-full', 'break-words', 'bg-primary-blue', 'mb-3', 'shadow-lg', 'rounded-xl', 'md:mt-16', 'mt-8')
   })
 
   describe('Accessibility', () => {
@@ -159,7 +159,7 @@ describe('Section', () => {
       const title = screen.getByText('Test Section')
       expect(title).toBeInTheDocument()
       
-      // Title has classes: text-slate-700 dark:text-white
+      // Title has classes: text-white
       // These should provide sufficient contrast, but automated testing
       // would require checking computed styles against background
     })

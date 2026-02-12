@@ -31,7 +31,7 @@ export default function ProjectCard({
     <Link 
       href={link} 
       aria-label={`image for ${title}`}
-      className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:ring-offset-2 dark:focus:ring-offset-slate-800 rounded-t-lg"
+      className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-800 rounded-t-lg"
       target="_blank"
       rel="noopener noreferrer"
       onKeyDown={handleSpacebarKeyDown}
@@ -45,12 +45,12 @@ export default function ProjectCard({
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
         />
       </div>
-      <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg" />
-      <div className="absolute inset-0 border-4 border-indigo-500 dark:border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg" />
+      <div className="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg" />
+      <div className="absolute inset-0 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg" />
     </Link>
   ) : (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800">
-      <Code2 className="w-16 h-16 text-indigo-600 dark:text-indigo-300 opacity-50" />
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-800 via-purple-800 to-pink-800">
+      <Code2 className="w-16 h-16 text-indigo-300 opacity-50" />
     </div>
   );
 

@@ -50,7 +50,7 @@ export default function HackathonCard({
           height={450}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-indigo-600 dark:bg-indigo-400 opacity-0 group-hover:opacity-20 group-focus:opacity-20 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-20 group-focus:opacity-20 transition-opacity duration-300" />
       </Link>
     ) : (
       <Image
@@ -62,15 +62,15 @@ export default function HackathonCard({
       />
     )
   ) : (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-200 via-orange-200 to-red-200 dark:from-yellow-800 dark:via-orange-800 dark:to-red-800">
-      <Trophy className="w-16 h-16 text-yellow-600 dark:text-yellow-300 opacity-50" />
+    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-800 via-orange-800 to-red-800">
+      <Trophy className="w-16 h-16 text-yellow-300 opacity-50" />
     </div>
   );
 
   const metadataItems = [];
   if (duration) {
     metadataItems.push(
-      <div key="duration" className="flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
+      <div key="duration" className="flex items-center gap-1.5 text-sm text-slate-400">
         <Clock className="w-4 h-4" />
         <span>{duration}</span>
       </div>
@@ -78,7 +78,7 @@ export default function HackathonCard({
   }
   if (teamSize) {
     metadataItems.push(
-      <div key="team" className="flex items-center gap-1.5 text-sm text-slate-600 dark:text-slate-400">
+      <div key="team" className="flex items-center gap-1.5 text-sm text-slate-400">
         <Users className="w-4 h-4" />
         <span>{teamSize} {teamSize === 1 ? 'person' : 'people'}</span>
       </div>
@@ -90,7 +90,7 @@ export default function HackathonCard({
       {(award || metadataItems.length > 0) && (
         <div className="flex flex-wrap items-center gap-3">
           {award && (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-100 dark:bg-yellow-900/30 rounded-md text-yellow-800 dark:text-yellow-300 text-sm font-semibold">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-900/30 rounded-md text-yellow-300 text-sm font-semibold">
               <Trophy className="w-4 h-4" />
               <span>{award}</span>
             </div>
