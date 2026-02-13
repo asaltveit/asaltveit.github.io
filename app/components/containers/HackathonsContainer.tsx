@@ -124,7 +124,7 @@ export default function HackathonsContainer({ hackathons = [] }: HackathonsConta
                 aria-label="Hackathons grid"
                 aria-describedby="hackathons-description"
                 onKeyDown={handleGridKeyDown}
-                tabIndex={0}
+                tabIndex={-1}
             >
                 {hackathons.map(({ 
                     title, 

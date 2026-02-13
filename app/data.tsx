@@ -79,6 +79,7 @@ export const hackathons = [
         items: [
             "Created SteadyTalk, an emotionally intelligent AI manager designed for practicing live performance conversations via video",
         ],
+        image: "/angry_boss.webp",
         link: "https://github.com/asaltveit/SteadyTalk",
         techStack: ["n8n", "Tavus", "ElevenLabs", "fal"],
         award: "Sponsor awards from n8n and Anam",
@@ -103,6 +104,7 @@ export const hackathons = [
             "An AI-powered research and mapping app that turns natural-language questions into live map updates.",
             "The project supports self-healing agents and workflows."
         ],
+        image: "/map-searcher-screenshot.png",
         link: "https://github.com/asaltveit/map-searcher",
         techStack: ["Letta", "Pipecat", "W&B Weave", "Redis", "Nest.js", "Next.js", "MapLibre"],
         teamSize: 3,
@@ -115,6 +117,7 @@ export const hackathons = [
             "Created a flipbook-style animation using a user's prompt and uploaded drawing.",
             "Used Flux to generate images, and Anthropic to generate the step-by-step image prompts."
         ],
+        image: "/Flipbook-screenshot-3-pages-cropped.png",
         link: "https://drive.google.com/file/d/1p_v-1c9PbVzYC6lSmS57wo0fypRrbId9/view",
         techStack: ["fal", "Black Forest (Flux)", "Anthropic", "React"],
         teamSize: 1,

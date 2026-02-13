@@ -113,8 +113,11 @@ export default function ProjectsContainer({ projects = [] }: ProjectContainerPro
         e.preventDefault();
         const hackathonsGrid = document.getElementById('hackathons-grid');
         if (hackathonsGrid) {
-            hackathonsGrid.focus();
             hackathonsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const firstFocusable = hackathonsGrid.querySelector<HTMLElement>('a[href], button, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
         }
     };
 
@@ -137,7 +140,7 @@ export default function ProjectsContainer({ projects = [] }: ProjectContainerPro
                 aria-label="Projects grid"
                 aria-describedby="projects-description"
                 onKeyDown={handleGridKeyDown}
-                tabIndex={0}
+                tabIndex={-1}
             >
                 {projects.map(({ title, dates, items, link, techStack = [], image, imageTitle }, index) => (
                     <div

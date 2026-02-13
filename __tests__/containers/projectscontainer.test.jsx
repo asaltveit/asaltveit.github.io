@@ -148,7 +148,6 @@ describe('ProjectsContainer', () => {
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('role', 'grid');
       expect(grid).toHaveAttribute('aria-label', 'Projects grid');
-      expect(grid).toHaveAttribute('tabindex', '0');
     });
   });
 });

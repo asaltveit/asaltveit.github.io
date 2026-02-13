@@ -184,7 +184,7 @@ describe('HackathonsContainer', () => {
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('role', 'grid');
       expect(grid).toHaveAttribute('aria-label', 'Hackathons grid');
-      expect(grid).toHaveAttribute('tabindex', '0');
+      expect(grid).toHaveAttribute('tabindex', '-1');
     });
   });
 });

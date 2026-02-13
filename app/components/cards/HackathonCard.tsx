@@ -38,19 +38,22 @@ export default function HackathonCard({
       <Link 
         href={link} 
         aria-label={`image for ${title}`}
-        className="block w-full h-full relative group"
+        className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-800 rounded-t-lg"
         target="_blank"
         rel="noopener noreferrer"
         onKeyDown={handleSpacebarKeyDown}
       >
-        <Image
-          src={image}
-          alt={`${defaultImageTitle} screenshot`}
-          width={800}
-          height={450}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-20 group-focus:opacity-20 transition-opacity duration-300" />
+        <div className="w-full h-full overflow-hidden rounded-t-lg relative z-0">
+          <Image
+            src={image}
+            alt={`${defaultImageTitle} screenshot`}
+            width={800}
+            height={450}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
+          />
+        </div>
+        <div className="absolute inset-0 z-10 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
+        <div className="absolute inset-0 z-10 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
       </Link>
     ) : (
       <Image
@@ -108,6 +111,7 @@ export default function HackathonCard({
       dates={dates}
       items={items}
       link={link}
+      noLinkNote={!link ? 'No project link available' : undefined}
       footerContent={footerContent}
     >
       {imageContent}

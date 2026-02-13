@@ -36,7 +36,7 @@ export default function ProjectCard({
       rel="noopener noreferrer"
       onKeyDown={handleSpacebarKeyDown}
     >
-      <div className="w-full h-full overflow-hidden rounded-t-lg">
+      <div className="w-full h-full overflow-hidden rounded-t-lg relative z-0">
         <Image
           src={image}
           alt={`${defaultImageTitle} screenshot`}
@@ -45,8 +45,8 @@ export default function ProjectCard({
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
         />
       </div>
-      <div className="absolute inset-0 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg" />
-      <div className="absolute inset-0 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg" />
+      <div className="absolute inset-0 z-10 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
+      <div className="absolute inset-0 z-10 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
     </Link>
   ) : (
     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-800 via-purple-800 to-pink-800">

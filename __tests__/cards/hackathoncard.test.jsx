@@ -182,7 +182,7 @@ describe('HackathonCard', () => {
       );
       
       const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
-      const overlay = imageLink.querySelector('.group-hover\\:opacity-20');
+      const overlay = imageLink.querySelector('.group-hover\\:opacity-40');
       
       expect(overlay).toBeInTheDocument();
     });

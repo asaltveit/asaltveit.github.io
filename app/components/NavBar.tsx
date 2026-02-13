@@ -13,13 +13,36 @@ interface NavBarProps {
     currentSectionId?: string
 }
 
+// Initial active section: same on server and first client render to avoid hydration mismatch.
+function getInitialActiveSectionId(links: Link[], currentSectionId?: string): string {
+    if (currentSectionId) return currentSectionId;
+    return links.length > 0 ? links[0].id : '';
+}
+
 export default function NavBar ({ links, currentSectionId } : NavBarProps) {
     const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [activeSectionId, setActiveSectionId] = useState(() =>
+        getInitialActiveSectionId(links, currentSectionId)
+    );
 
     useEffect(() => {
         linkRefs.current = linkRefs.current.slice(0, links.length);
     }, [links.length]);
+
+    // Sync active section from URL hash after mount (client-only) to avoid hydration mismatch.
+    useEffect(() => {
+        const fromHash = () => {
+            if (typeof window !== 'undefined' && window.location.hash) {
+                setActiveSectionId(window.location.hash.slice(1));
+            } else {
+                setActiveSectionId(getInitialActiveSectionId(links, currentSectionId));
+            }
+        };
+        fromHash();
+        window.addEventListener('hashchange', fromHash);
+        return () => window.removeEventListener('hashchange', fromHash);
+    }, [links, currentSectionId]);
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>, currentIndex: number) => {
         let nextIndex = currentIndex;
@@ -61,15 +84,6 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-    };
-
-    const getCurrentSectionId = () => {
-        if (currentSectionId) return currentSectionId;
-        if (typeof window !== 'undefined' && window.location.hash) {
-            return window.location.hash.slice(1);
-        }
-        // Default to first link for test compatibility
-        return links.length > 0 ? links[0].id : '';
     };
 
     const handleSkipClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -117,7 +131,7 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
                     <ul role="menu" aria-orientation="horizontal" className="flex flex-col font-medium mt-4 rounded-lg bg-gray-800 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:bg-transparent border-gray-700">
                         {
                             links.map((link: Link, index: number) => {
-                                const isActive = link.id === getCurrentSectionId();
+                                const isActive = link.id === activeSectionId;
                                 return (
                                     <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}>
                                         <a 

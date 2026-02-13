@@ -9,6 +9,8 @@ interface BaseCardProps {
   dates: string;
   items: string[];
   link?: string;
+  /** When there is no link, optional note to show so users know it's intentional (e.g. "No project link available") */
+  noLinkNote?: string;
   children?: React.ReactNode; // For image or other content
   footerContent?: React.ReactNode; // For tech stack or other footer elements
 }
@@ -18,6 +20,7 @@ export default function BaseCard({
   dates, 
   items, 
   link, 
+  noLinkNote,
   children,
   footerContent 
 }: BaseCardProps) {
@@ -46,9 +49,16 @@ export default function BaseCard({
               <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
             </Link>
           ) : (
-            <h2 className="text-white text-xl md:text-2xl font-bold">
-              {title}
-            </h2>
+            <div>
+              <h2 className="text-white text-xl md:text-2xl font-bold">
+                {title}
+              </h2>
+              {noLinkNote && (
+                <p className="text-slate-500 text-sm mt-1" aria-hidden="true">
+                  {noLinkNote}
+                </p>
+              )}
+            </div>
           )}
         </div>
         
