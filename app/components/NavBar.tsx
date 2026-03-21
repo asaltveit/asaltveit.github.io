@@ -105,50 +105,52 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
             >
                 Skip to main content
             </a>
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-4">
-                <div className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <div className="h-8" />
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap text-white"></span>
-                </div>
-                <button 
-                    data-collapse-toggle="navbar-solid-bg" 
-                    type="button" 
-                    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" 
-                    aria-controls="navbar-solid-bg" 
-                    aria-expanded={isMenuOpen}
-                    onClick={toggleMenu}
-                    aria-label="open main menu"
-                >
-                    <span className="sr-only">Open main menu</span>
-                    <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
-                </button>
-                <div 
-                    className={`${isMenuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`} 
-                    id="navbar-solid-bg"
-                >
-                    <ul role="menu" aria-orientation="horizontal" className="flex flex-col font-medium mt-4 rounded-lg bg-gray-800 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:bg-transparent border-gray-700">
-                        {
-                            links.map((link: Link, index: number) => {
-                                const isActive = link.id === activeSectionId;
-                                return (
-                                    <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}>
-                                        <a 
-                                            href={`#${link.id}`} 
-                                            aria-label={`link to ${link.title} section`}
-                                            aria-current={isActive ? 'page' : undefined}
-                                            className=" underline underline-offset-4 md:no-underline hover:underline hover:underline-offset-4"
-                                            ref={(el) => { linkRefs.current[index] = el; }}
-                                            onKeyDown={(e) => handleKeyDown(e, index)}
-                                        >
-                                            {link.title}
-                                        </a>
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
+            <div className="max-w-screen-xl mx-auto px-4 pt-2 pb-1 md:p-4">
+                <div className="flex items-center justify-end md:justify-between">
+                    <div className="hidden h-8 shrink-0 md:block" aria-hidden />
+                    <div className="relative flex flex-col items-end md:static md:flex-row md:items-center">
+                        <button 
+                            data-collapse-toggle="navbar-solid-bg" 
+                            type="button" 
+                            className="relative z-50 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm text-white md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" 
+                            aria-controls="navbar-solid-bg" 
+                            aria-expanded={isMenuOpen}
+                            onClick={toggleMenu}
+                            aria-label="open main menu"
+                        >
+                            <span className="sr-only">Open main menu</span>
+                            <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+                            </svg>
+                        </button>
+                        <div 
+                            className={`${isMenuOpen ? 'block' : 'hidden'} md:block absolute right-0 top-full z-40 mt-1 w-max max-w-[min(100vw-2rem,16rem)] rounded-lg border border-gray-700 bg-gray-800 px-4 pt-2 pb-3 shadow-lg md:static md:top-auto md:right-auto md:z-auto md:mt-0 md:max-w-none md:border-0 md:bg-transparent md:p-0 md:shadow-none`} 
+                            id="navbar-solid-bg"
+                        >
+                            <ul role="menu" aria-orientation="horizontal" className="flex flex-col gap-0 font-medium md:flex-row md:space-x-8 rtl:space-x-reverse">
+                                {
+                                    links.map((link: Link, index: number) => {
+                                        const isActive = link.id === activeSectionId;
+                                        return (
+                                            <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}>
+                                                <a 
+                                                    href={`#${link.id}`} 
+                                                    aria-label={`link to ${link.title} section`}
+                                                    aria-current={isActive ? 'page' : undefined}
+                                                    className="block rounded-md py-1.5 underline underline-offset-4 md:inline md:px-0 md:py-0 md:no-underline md:hover:underline md:hover:underline-offset-4"
+                                                    ref={(el) => { linkRefs.current[index] = el; }}
+                                                    onKeyDown={(e) => handleKeyDown(e, index)}
+                                                    onClick={() => setIsMenuOpen(false)}
+                                                >
+                                                    {link.title}
+                                                </a>
+                                            </li>
+                                        );
+                                    })
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

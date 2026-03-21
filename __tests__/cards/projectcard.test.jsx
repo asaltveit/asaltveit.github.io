@@ -77,7 +77,7 @@ describe('ProjectCard', () => {
   it('requires link prop', () => {
     render(<ProjectCard {...defaultProps} />);
     
-    const link = screen.getByRole('link', { name: 'link to Test Project' });
+    const link = screen.getByRole('link', { name: 'link to Test Project (opens in new tab)' });
     expect(link).toHaveAttribute('href', 'https://project.com');
   });
 
@@ -87,7 +87,7 @@ describe('ProjectCard', () => {
       
       render(<ProjectCard {...defaultProps} />);
       
-      const link = screen.getByRole('link', { name: 'link to Test Project' });
+      const link = screen.getByRole('link', { name: 'link to Test Project (opens in new tab)' });
       link.onclick = mockClick;
       
       fireEvent.click(link);
@@ -105,7 +105,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       imageLink.onclick = mockClick;
       
       fireEvent.click(imageLink);
@@ -122,7 +122,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       expect(imageLink).toBeInTheDocument();
       expect(imageLink).toHaveAttribute('href', 'https://project.com');
     });
@@ -136,7 +136,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       
       // Check for background overlay (opacity-40 on hover)
       const backgroundOverlay = imageLink.querySelector('.group-hover\\:opacity-40');
@@ -154,7 +154,7 @@ describe('ProjectCard', () => {
     it('supports keyboard navigation on title link', () => {
       render(<ProjectCard {...defaultProps} />);
       
-      const link = screen.getByRole('link', { name: 'link to Test Project' });
+      const link = screen.getByRole('link', { name: 'link to Test Project (opens in new tab)' });
       
       link.focus();
       expect(link).toHaveFocus();
@@ -172,7 +172,7 @@ describe('ProjectCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       
       imageLink.focus();
       expect(imageLink).toHaveFocus();
@@ -190,12 +190,12 @@ describe('ProjectCard', () => {
         />
       );
       
-      const titleLink = screen.getByRole('link', { name: 'link to Test Project' });
-      const imageLink = screen.getByRole('link', { name: 'image for Test Project' });
+      const titleLink = screen.getByRole('link', { name: 'link to Test Project (opens in new tab)' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       
       // Check aria-labels
-      expect(titleLink).toHaveAttribute('aria-label', 'link to Test Project');
-      expect(imageLink).toHaveAttribute('aria-label', 'image for Test Project');
+      expect(titleLink).toHaveAttribute('aria-label', 'link to Test Project (opens in new tab)');
+      expect(imageLink).toHaveAttribute('aria-label', 'View Test Project (opens in new tab)');
       
       // Check security attributes
       expect(titleLink).toHaveAttribute('target', '_blank');

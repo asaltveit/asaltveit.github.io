@@ -3,6 +3,7 @@
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import BaseCard from '@/components/cards/BaseCard';
+import { CardImageExternalLinkIndicator } from '@/components/cards/externalLinkIndicators';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 import { Code2 } from 'lucide-react';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
@@ -30,7 +31,7 @@ export default function ProjectCard({
   const imageContent = image ? (
     <Link 
       href={link} 
-      aria-label={`image for ${title}`}
+      aria-label={`View ${title} (opens in new tab)`}
       className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-800 rounded-t-lg"
       target="_blank"
       rel="noopener noreferrer"
@@ -47,6 +48,7 @@ export default function ProjectCard({
       </div>
       <div className="absolute inset-0 z-10 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
       <div className="absolute inset-0 z-10 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
+      <CardImageExternalLinkIndicator />
     </Link>
   ) : (
     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-800 via-purple-800 to-pink-800">

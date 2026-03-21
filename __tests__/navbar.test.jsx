@@ -104,6 +104,19 @@ describe('NavBar', () => {
       expect(experienceLink).toHaveAttribute('href', '#experience');
     });
 
+    it('closes mobile menu and sets aria-expanded false when a navigation link is clicked', () => {
+      render(<NavBar links={mockLinks} />);
+
+      const menuButton = screen.getByRole('button', { name: /open main menu/i });
+      fireEvent.click(menuButton);
+      expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+      const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
+      fireEvent.click(projectsLink);
+
+      expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    });
+
     it('supports keyboard navigation on links', () => {
       render(<NavBar links={mockLinks} />);
       
@@ -129,54 +142,45 @@ describe('NavBar', () => {
       expect(firstLink).toHaveFocus();
       
       fireEvent.keyDown(firstLink, { key: 'Tab', code: 'Tab' });
-      // Tab navigation should work
       expect(firstLink).toBeInTheDocument();
       expect(secondLink).toBeInTheDocument();
     });
   });
 
   describe('Accessibility', () => {
-    // TODO: Add mobile menu button with proper ARIA attributes (aria-controls, aria-expanded)
     it('should have mobile menu button for small screens', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - mobile menu button is commented out
       const menuButton = screen.getByRole('button', { name: /open main menu/i });
       expect(menuButton).toBeInTheDocument();
       expect(menuButton).toHaveAttribute('aria-controls', 'navbar-solid-bg');
       expect(menuButton).toHaveAttribute('aria-expanded', 'false');
     });
 
-    // TODO: Add skip to main content link at the beginning of navigation
     it('should have skip to main content link', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no skip link
       const skipLink = screen.getByRole('link', { name: /skip to main content/i });
       expect(skipLink).toBeInTheDocument();
       expect(skipLink).toHaveAttribute('href', '#main-content');
     });
 
-    // TODO: Ensure proper focus management when menu is toggled
     it('should manage focus when mobile menu is toggled', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no focus management for mobile menu
       const menuButton = screen.getByRole('button', { name: /open main menu/i });
       fireEvent.click(menuButton);
       
+      expect(menuButton).toHaveAttribute('aria-expanded', 'true');
       const menu = screen.getByRole('menu');
       const firstMenuItem = screen.getAllByRole('menuitem')[0].querySelector('a');
       expect(firstMenuItem).toHaveFocus();
     });
 
-    // TODO: Add aria-current="page" to active navigation link
     it('should indicate current page with aria-current', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no aria-current support
       const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
-      // When on experience page, should have aria-current="page"
       expect(experienceLink).toHaveAttribute('aria-current', 'page');
     });
 
@@ -190,11 +194,9 @@ describe('NavBar', () => {
       expect(nav).toHaveAttribute('role', 'navigation');
     });
 
-    // TODO: Ensure menu items are keyboard accessible with arrow keys
     it('should support arrow key navigation between menu items', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - no arrow key navigation
       const menuItems = screen.getAllByRole('menuitem');
       const firstLink = menuItems[0].querySelector('a');
       const secondLink = menuItems[1].querySelector('a');
@@ -222,11 +224,9 @@ describe('NavBar', () => {
       expect(menu).toHaveAttribute('aria-orientation', 'horizontal');
     });
 
-    // TODO: Ensure menu button has proper aria-label and screen reader text
     it('should have accessible menu button with screen reader text', () => {
       render(<NavBar links={mockLinks} />);
       
-      // This test will fail - menu button is commented out
       const menuButton = screen.getByRole('button');
       const srOnly = menuButton.querySelector('.sr-only');
       expect(srOnly).toBeInTheDocument();

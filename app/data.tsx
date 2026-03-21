@@ -74,6 +74,20 @@ export const hackathons = [
         } OpenAGI Computer Use Launch & Hack Night
     */
     {
+        title: "Open Metaverse Hackathon",
+        dates: "3/7/26",
+        items: [
+            "Created a tool that transforms text descriptions into 3D models of individual trees or biomes of multiple plant and tree types.",
+            "The trees are procedurally generated using fractals and L-systems in order to keep file and texture sizes small."
+        ],
+        image: "/rp1-trees-website-screenshot.png",
+        link: "https://github.com/asaltveit/rp1-trees",
+        techStack: ["RP1 MCP", "Claude"],
+        award: "2nd Place in the Remote Track",
+        teamSize: 1,
+        duration: "25 hours"
+    },
+    {
         title: "ElevenLabs Worldwide Hackathon",
         dates: "12/11/25",
         items: [
@@ -123,7 +137,7 @@ export const hackathons = [
         teamSize: 1,
         duration: "24 hours",
     },
-    {
+    /*{
         title: "OpenAGI Computer Use Launch & Hack Night",
         dates: "12/16/25",
         items: [
@@ -133,7 +147,7 @@ export const hackathons = [
         techStack: ["OpenAGI", "Python"],
         teamSize: 1,
         duration: "2 hours"
-    },
+    },*/
 ];
 
 export const navLinks = [

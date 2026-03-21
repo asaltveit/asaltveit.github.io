@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
+import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 interface BaseCardProps {
@@ -39,14 +40,14 @@ export default function BaseCard({
           {link ? (
             <Link 
               href={link} 
-              aria-label={`link to ${title}`}
+              aria-label={`link to ${title} (opens in new tab)`}
               className="group inline-flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:text-indigo-400 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
               onKeyDown={handleSpacebarKeyDown}
             >
               {title}
-              <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
             </Link>
           ) : (
             <div>

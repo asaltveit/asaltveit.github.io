@@ -128,7 +128,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const link = screen.getByRole('link', { name: 'link to Test Hackathon' });
+      const link = screen.getByRole('link', { name: 'link to Test Hackathon (opens in new tab)' });
       link.onclick = mockClick;
       
       fireEvent.click(link);
@@ -147,7 +147,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       imageLink.onclick = mockClick;
       
       fireEvent.click(imageLink);
@@ -164,7 +164,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.queryByRole('link', { name: 'image for Test Hackathon' });
+      const imageLink = screen.queryByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       expect(imageLink).not.toBeInTheDocument();
       
       const image = screen.getByAltText('test hackathon screenshot');
@@ -181,7 +181,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       const overlay = imageLink.querySelector('.group-hover\\:opacity-40');
       
       expect(overlay).toBeInTheDocument();
@@ -195,7 +195,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const link = screen.getByRole('link', { name: 'link to Test Hackathon' });
+      const link = screen.getByRole('link', { name: 'link to Test Hackathon (opens in new tab)' });
       
       link.focus();
       expect(link).toHaveFocus();
@@ -214,7 +214,7 @@ describe('HackathonCard', () => {
         />
       );
       
-      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       
       imageLink.focus();
       expect(imageLink).toHaveFocus();
@@ -233,12 +233,12 @@ describe('HackathonCard', () => {
         />
       );
       
-      const titleLink = screen.getByRole('link', { name: 'link to Test Hackathon' });
-      const imageLink = screen.getByRole('link', { name: 'image for Test Hackathon' });
+      const titleLink = screen.getByRole('link', { name: 'link to Test Hackathon (opens in new tab)' });
+      const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       
       // Check aria-labels
-      expect(titleLink).toHaveAttribute('aria-label', 'link to Test Hackathon');
-      expect(imageLink).toHaveAttribute('aria-label', 'image for Test Hackathon');
+      expect(titleLink).toHaveAttribute('aria-label', 'link to Test Hackathon (opens in new tab)');
+      expect(imageLink).toHaveAttribute('aria-label', 'View Test Hackathon (opens in new tab)');
       
       // Check security attributes
       expect(titleLink).toHaveAttribute('target', '_blank');

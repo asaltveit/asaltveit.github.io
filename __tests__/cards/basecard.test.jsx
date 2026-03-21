@@ -36,7 +36,7 @@ describe('BaseCard', () => {
   it('renders link when provided', () => {
     render(<BaseCard {...defaultProps} link="https://example.com" />);
     
-    const link = screen.getByRole('link', { name: 'link to Test Card' });
+    const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', 'https://example.com');
     expect(link).toHaveAttribute('target', '_blank');
@@ -80,7 +80,7 @@ describe('BaseCard', () => {
         />
       );
       
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
+      const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
       link.onclick = mockClick;
       
       fireEvent.click(link);
@@ -90,7 +90,7 @@ describe('BaseCard', () => {
     it('shows external link icon on hover', () => {
       render(<BaseCard {...defaultProps} link="https://example.com" />);
       
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
+      const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
       const icon = link.querySelector('svg');
       
       expect(icon).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('BaseCard', () => {
     it('supports keyboard navigation on link', () => {
       render(<BaseCard {...defaultProps} link="https://example.com" />);
       
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
+      const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
       
       // Focus the link
       link.focus();
@@ -148,7 +148,7 @@ describe('BaseCard', () => {
         />
       );
       
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
+      const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
       const externalIcon = link.querySelector('svg');
       
       expect(externalIcon).toBeInTheDocument();
@@ -187,8 +187,8 @@ describe('BaseCard', () => {
     it('should have accessible link with proper attributes when link is provided', () => {
       render(<BaseCard {...defaultProps} link="https://example.com" />);
       
-      const link = screen.getByRole('link', { name: 'link to Test Card' });
-      expect(link).toHaveAttribute('aria-label', 'link to Test Card');
+      const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
+      expect(link).toHaveAttribute('aria-label', 'link to Test Card (opens in new tab)');
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });

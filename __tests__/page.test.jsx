@@ -177,17 +177,17 @@ describe('Page', () => {
             })
             it('has correct href', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github' })
+                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('href', 'https://github.com/asaltveit')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github' })
+                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github' })
+                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
@@ -199,17 +199,17 @@ describe('Page', () => {
             })
             it('has correct href', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn' })
+                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/anna-saltveit-4a70b2184/')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn' })
+                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn' })
+                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
@@ -242,10 +242,10 @@ describe('Page', () => {
 
         it('has accessible footer links', () => {
             render(<Page />)
-            const githubLink = screen.getByRole('link', { name: 'link to Github' })
-            const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn' })
-            expect(githubLink).toHaveAttribute('aria-label', 'link to Github')
-            expect(linkedinLink).toHaveAttribute('aria-label', 'link to LinkedIn')
+            const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+            const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+            expect(githubLink).toHaveAttribute('aria-label', 'link to Github (opens in new tab)')
+            expect(linkedinLink).toHaveAttribute('aria-label', 'link to LinkedIn (opens in new tab)')
         })
     })
 })
