@@ -138,15 +138,12 @@ describe('ProjectCard', () => {
       
       const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       
-      // Check for background overlay (opacity-40 on hover)
       const backgroundOverlay = imageLink.querySelector('.group-hover\\:opacity-40');
       expect(backgroundOverlay).toBeInTheDocument();
       
-      // Check for border overlay (opacity-100 on hover)
       const borderOverlay = imageLink.querySelector('.group-hover\\:opacity-100');
       expect(borderOverlay).toBeInTheDocument();
       
-      // Verify overlays are hidden by default (opacity-0)
       expect(backgroundOverlay).toHaveClass('opacity-0');
       expect(borderOverlay).toHaveClass('opacity-0');
     });
@@ -193,11 +190,9 @@ describe('ProjectCard', () => {
       const titleLink = screen.getByRole('link', { name: 'link to Test Project (opens in new tab)' });
       const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
       
-      // Check aria-labels
       expect(titleLink).toHaveAttribute('aria-label', 'link to Test Project (opens in new tab)');
       expect(imageLink).toHaveAttribute('aria-label', 'View Test Project (opens in new tab)');
       
-      // Check security attributes
       expect(titleLink).toHaveAttribute('target', '_blank');
       expect(titleLink).toHaveAttribute('rel', 'noopener noreferrer');
       expect(imageLink).toHaveAttribute('target', '_blank');
@@ -209,11 +204,8 @@ describe('ProjectCard', () => {
     it('should mark placeholder code icon as decorative', () => {
       const { container } = render(<ProjectCard {...defaultProps} />);
       
-      // Code2 icon from lucide-react
       const codeIcon = container.querySelector('svg.lucide-code-2') || 
                       container.querySelector('svg[class*="code"]');
-      // Placeholder icon is purely decorative
-      // lucide-react automatically adds aria-hidden="true" to icons
       expect(codeIcon).toBeInTheDocument();
       expect(codeIcon).toHaveAttribute('aria-hidden', 'true');
     });

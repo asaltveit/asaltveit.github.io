@@ -120,13 +120,9 @@ describe('ProjectsContainer', () => {
   });
 
   describe('Accessibility', () => {
-    // Note: Section and heading are provided by the Section component wrapper,
-    // not by ProjectsContainer itself. The container only provides the grid.
-
     it('should have skip link for keyboard navigation', () => {
       render(<ProjectsContainer projects={mockProjects} />);
       
-      // Skip link should skip to hackathons (next section)
       const skipLink = screen.getByRole('link', { name: /skip to hackathons content/i });
       expect(skipLink).toBeInTheDocument();
     });

@@ -100,7 +100,6 @@ describe('NavBar', () => {
       expect(experienceLink).toBeInTheDocument();
       
       fireEvent.click(experienceLink);
-      // Link should be clickable
       expect(experienceLink).toHaveAttribute('href', '#experience');
     });
 
@@ -122,11 +121,9 @@ describe('NavBar', () => {
       
       const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
       
-      // Focus the link
       experienceLink.focus();
       expect(experienceLink).toHaveFocus();
       
-      // Press Enter to activate
       fireEvent.keyDown(experienceLink, { key: 'Enter', code: 'Enter' });
       expect(experienceLink).toHaveAttribute('href', '#experience');
     });
@@ -189,8 +186,6 @@ describe('NavBar', () => {
       
       const nav = container.querySelector('nav[aria-label="main navigation"]');
       expect(nav).toBeInTheDocument();
-      // Navigation should be properly identified as a landmark
-      // Note: nav elements have implicit role="navigation", but explicit is clearer
       expect(nav).toHaveAttribute('role', 'navigation');
     });
 
@@ -236,12 +231,9 @@ describe('NavBar', () => {
     it('should have proper navigation structure without heading', () => {
       const { container } = render(<NavBar links={mockLinks} />);
       
-      // NavBar does not require a heading - navigation is identified by the nav element
       const nav = container.querySelector('nav');
       expect(nav).toBeInTheDocument();
       expect(nav).toHaveAttribute('aria-label', 'main navigation');
-      
-      // Verify no heading is present (heading is not required for navigation)
       const heading = container.querySelector('h1, h2, h3');
       expect(heading).not.toBeInTheDocument();
     });

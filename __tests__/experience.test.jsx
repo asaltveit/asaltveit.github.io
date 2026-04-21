@@ -92,9 +92,7 @@ describe('Experience', () => {
     const lists = screen.getAllByRole('list');
     const listItems = screen.queryAllByRole('listitem');
     
-    // Should still have at least one list element
     expect(lists.length).toBeGreaterThan(0);
-    // Items list should be empty
     const itemsList = lists.find(list => {
       const items = within(list).queryAllByRole('listitem');
       return items.length === 0;
@@ -178,7 +176,6 @@ describe('Experience', () => {
       const link = screen.getByRole('link', { name: 'link to Test Experience' });
       link.focus();
       
-      // Focus indicator should be visible
       const computedStyle = window.getComputedStyle(link);
       const outline = computedStyle.outline || computedStyle.outlineWidth;
       expect(outline).not.toBe('none');
@@ -195,28 +192,23 @@ describe('Experience', () => {
         />
       );
       
+      // handleSpacebarKeyDown on the link (same pattern as other external links)
       const link = screen.getByRole('link', { name: 'link to Test Experience' });
       
       link.focus();
       expect(link).toHaveFocus();
       
-      // Space bar should activate the link
-      // Links don't support space bar by default - need custom keyboard handler
-      // For better accessibility, space should activate links like buttons do
       const mockClick = jest.fn();
       link.onclick = mockClick;
       
       fireEvent.keyDown(link, { key: ' ', code: 'Space' });
       
-      // Native links only respond to Enter key, not space bar
-      // To pass, component needs onKeyDown handler that prevents default scroll and clicks link
       expect(mockClick).toHaveBeenCalled();
     });
 
     it('should use semantic heading for title', () => {
       render(<Experience {...defaultProps} />);
       
-      // Title should be a heading element for semantic structure
       const heading = screen.getByRole('heading', { name: 'Test Experience' });
       expect(heading).toBeInTheDocument();
     });
@@ -224,8 +216,6 @@ describe('Experience', () => {
     it('should use time element for dates', () => {
       const { container } = render(<Experience {...defaultProps} />);
       
-      // Dates should use <time> element for semantic meaning
-
       const timeElement = container.querySelector('time');
       expect(timeElement).toBeInTheDocument();
       expect(timeElement).toHaveTextContent('January 2024 - Present');
@@ -234,7 +224,6 @@ describe('Experience', () => {
     it('should have proper heading hierarchy', () => {
       render(<Experience {...defaultProps} />);
       
-      // Title should be an h2 or h3 (depending on page structure)
       const heading = screen.getByRole('heading', { name: 'Test Experience' });
       expect(['h2', 'h3']).toContain(heading.tagName.toLowerCase());
     });
@@ -249,14 +238,11 @@ describe('Experience', () => {
       );
       
       const link = screen.getByRole('link', { name: 'link to Test Experience' });
-      // Link has aria-label for accessibility
       expect(link).toHaveAttribute('aria-label', 'link to Test Experience');
-      // Link displays the linkName text
       expect(link).toHaveTextContent('Example Company');
     });
 
     it('should handle missing linkName gracefully with fallback to linkLocation', () => {
-      // When linkLocation is provided but linkName is missing, should use linkLocation as fallback
       render(
         <Experience 
           {...defaultProps} 
@@ -267,25 +253,6 @@ describe('Experience', () => {
       const link = screen.getByRole('link', { name: 'link to Test Experience' });
       expect(link).toBeInTheDocument();
       expect(link).toHaveAttribute('href', 'https://example.com');
-      // Link text should fallback to linkLocation when linkName is not provided
-      expect(link).toHaveTextContent('https://example.com');
-    });
-
-    it('should use title as final fallback when linkName is missing', () => {
-      // When linkLocation is provided but linkName is missing, 
-      // linkLocation is used as fallback (since it exists when link renders)
-      // Title would only be used if linkLocation somehow doesn't exist,
-      // but since link only renders when linkLocation exists, linkLocation will be the fallback
-      render(
-        <Experience 
-          {...defaultProps} 
-          linkLocation="https://example.com"
-        />
-      );
-      
-      const link = screen.getByRole('link', { name: 'link to Test Experience' });
-      expect(link).toBeInTheDocument();
-      // Since linkLocation exists, it will be used as the fallback text
       expect(link).toHaveTextContent('https://example.com');
     });
 
@@ -293,12 +260,7 @@ describe('Experience', () => {
       render(<Experience {...defaultProps} />);
       
       const lists = screen.getAllByRole('list');
-      // Lists should have accessible names/labels when appropriate
       lists.forEach(list => {
-        // If list has a specific purpose, it should have an accessible name
-        const hasAriaLabel = list.hasAttribute('aria-label');
-        const hasAriaLabelledBy = list.hasAttribute('aria-labelledby');
-        // For now, we'll just check that lists exist
         expect(list).toBeInTheDocument();
       });
     });

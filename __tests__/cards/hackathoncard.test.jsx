@@ -236,11 +236,9 @@ describe('HackathonCard', () => {
       const titleLink = screen.getByRole('link', { name: 'link to Test Hackathon (opens in new tab)' });
       const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
       
-      // Check aria-labels
       expect(titleLink).toHaveAttribute('aria-label', 'link to Test Hackathon (opens in new tab)');
       expect(imageLink).toHaveAttribute('aria-label', 'View Test Hackathon (opens in new tab)');
       
-      // Check security attributes
       expect(titleLink).toHaveAttribute('target', '_blank');
       expect(titleLink).toHaveAttribute('rel', 'noopener noreferrer');
       expect(imageLink).toHaveAttribute('target', '_blank');
@@ -264,6 +262,7 @@ describe('HackathonCard', () => {
   });
 
   describe('Accessibility', () => {
+    // Lucide icons in metadata rows are decorative (visible text carries meaning)
     it('should mark decorative icons (Trophy, Clock, Users) with aria-hidden', () => {
       const { container } = render(
         <HackathonCard 
@@ -274,12 +273,8 @@ describe('HackathonCard', () => {
         />
       );
       
-      // All decorative icons should be hidden from screen readers
-      // lucide-react automatically adds aria-hidden="true" to icons
       const icons = container.querySelectorAll('svg');
       icons.forEach(icon => {
-        // Icons that are decorative (not providing additional info beyond text) should be hidden
-        // Trophy, Clock, Users icons are decorative since text is present
         if (icon.closest('[class*="flex items-center gap"]')) {
           expect(icon).toHaveAttribute('aria-hidden', 'true');
         }
@@ -290,8 +285,6 @@ describe('HackathonCard', () => {
       const { container } = render(<HackathonCard {...defaultProps} />);
       
       const trophyIcon = container.querySelector('svg.lucide-trophy');
-      // Placeholder icon is purely decorative
-      // lucide-react automatically adds aria-hidden="true" to icons
       expect(trophyIcon).toHaveAttribute('aria-hidden', 'true');
     });
 
@@ -304,8 +297,6 @@ describe('HackathonCard', () => {
       );
       
       const trophyIcons = container.querySelectorAll('svg.lucide-trophy');
-      // Find the trophy icon in the award badge (not the placeholder)
-      // lucide-react automatically adds aria-hidden="true" to icons
       const awardTrophyIcon = Array.from(trophyIcons).find(icon => 
         icon.closest('[class*="bg-yellow-100"]') || icon.closest('[class*="bg-yellow-900"]')
       );
@@ -320,7 +311,6 @@ describe('HackathonCard', () => {
         />
       );
       
-      // lucide-react automatically adds aria-hidden="true" to icons
       const clockIcon = container.querySelector('svg.lucide-clock');
       expect(clockIcon).toHaveAttribute('aria-hidden', 'true');
     });
@@ -333,7 +323,6 @@ describe('HackathonCard', () => {
         />
       );
       
-      // lucide-react automatically adds aria-hidden="true" to icons
       const usersIcon = container.querySelector('svg.lucide-users');
       expect(usersIcon).toHaveAttribute('aria-hidden', 'true');
     });

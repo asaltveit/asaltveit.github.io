@@ -45,7 +45,6 @@ describe('TechStackIcons', () => {
     expect(pythonItem).toBeInTheDocument();
     expect(postgresItem).toBeInTheDocument();
     
-    // Check that icons (SVG elements) are present
     const icons = document.querySelectorAll('svg');
     expect(icons.length).toBeGreaterThan(0);
   });
@@ -122,7 +121,6 @@ describe('TechStackIcons', () => {
         expect(screen.getByText(tech)).toBeInTheDocument();
       });
       
-      // All items should have icons
       const icons = document.querySelectorAll('svg');
       expect(icons.length).toBe(knownTechs.length);
     });
@@ -143,8 +141,6 @@ describe('TechStackIcons', () => {
         <TechStackIcons techStack={['React', 'TypeScript', 'Node.js']} />
       );
       
-      // All icons are decorative since the tech name is already in text
-      // lucide-react automatically adds aria-hidden="true" to icons
       const icons = container.querySelectorAll('svg');
       icons.forEach(icon => {
         expect(icon).toHaveAttribute('aria-hidden', 'true');
@@ -156,9 +152,6 @@ describe('TechStackIcons', () => {
         <TechStackIcons techStack={['React']} />
       );
       
-      // Since icons are decorative, they should be hidden
-      // The text "React" is sufficient for screen readers
-      // lucide-react automatically adds aria-hidden="true" to icons
       const icon = container.querySelector('svg');
       expect(icon).toHaveAttribute('aria-hidden', 'true');
     });
@@ -178,7 +171,6 @@ describe('TechStackIcons', () => {
         <TechStackIcons techStack={['React', 'TypeScript', 'Node.js']} />
       );
       
-      // Container should be a div with flex layout
       const containerDiv = container.firstChild;
       expect(containerDiv).toBeInTheDocument();
       expect(containerDiv).toHaveClass('flex', 'flex-wrap', 'gap-2');

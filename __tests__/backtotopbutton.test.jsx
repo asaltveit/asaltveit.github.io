@@ -2,7 +2,6 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import BackToTopButton from '@/components/BackToTopButton'
 
-// Mock window.scrollTo
 const mockScrollTo = jest.fn()
 Object.defineProperty(window, 'scrollTo', {
   value: mockScrollTo,
@@ -12,7 +11,6 @@ Object.defineProperty(window, 'scrollTo', {
 describe('BackToTopButton', () => {
   beforeEach(() => {
     mockScrollTo.mockClear()
-    // Reset window.pageYOffset
     Object.defineProperty(window, 'pageYOffset', {
       writable: true,
       configurable: true,
@@ -42,7 +40,6 @@ describe('BackToTopButton', () => {
 
     render(<BackToTopButton />)
     
-    // Trigger scroll event to update visibility
     fireEvent.scroll(window)
     
     await waitFor(() => {
@@ -53,10 +50,8 @@ describe('BackToTopButton', () => {
   it('shows button when scrolling past 300px threshold', async () => {
     render(<BackToTopButton />)
     
-    // Initially not visible
     expect(screen.queryByRole('button', { name: /back to top/i })).not.toBeInTheDocument()
     
-    // Simulate scroll past threshold
     Object.defineProperty(window, 'pageYOffset', {
       writable: true,
       configurable: true,
@@ -71,7 +66,6 @@ describe('BackToTopButton', () => {
   })
 
   it('hides button when scrolling back to top', async () => {
-    // Start with button visible
     Object.defineProperty(window, 'pageYOffset', {
       writable: true,
       configurable: true,
@@ -86,7 +80,6 @@ describe('BackToTopButton', () => {
       expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
     })
     
-    // Scroll back to top
     Object.defineProperty(window, 'pageYOffset', {
       writable: true,
       configurable: true,
@@ -141,8 +134,6 @@ describe('BackToTopButton', () => {
     
     const button = screen.getByRole('button', { name: /back to top/i })
     button.focus()
-    // Enter key on a focused button triggers click event in browsers
-    // Simulate this by triggering click after keyDown
     fireEvent.keyDown(button, { key: 'Enter', code: 'Enter' })
     fireEvent.click(button)
     
@@ -169,8 +160,6 @@ describe('BackToTopButton', () => {
     
     const button = screen.getByRole('button', { name: /back to top/i })
     button.focus()
-    // Space key on a focused button triggers click event in browsers
-    // Simulate this by triggering click after keyDown
     fireEvent.keyDown(button, { key: ' ', code: 'Space' })
     fireEvent.click(button)
     
@@ -266,26 +255,22 @@ describe('BackToTopButton', () => {
       const button = screen.getByRole('button', { name: /back to top/i })
       button.focus()
       expect(button).toHaveFocus()
-      // Button has focus:ring-4 focus:ring-blue-700 classes for visible focus indicator
+      expect(button).toHaveClass('focus:ring-4', 'focus:ring-blue-700')
     })
 
     it('should announce button appearance to screen readers', async () => {
       const { container } = render(<BackToTopButton />)
       
-      // Initially not visible
       expect(screen.queryByRole('button', { name: /back to top/i })).not.toBeInTheDocument()
       
-      // Check that live region exists (query by aria-live attribute)
       const liveRegion = container.querySelector('[aria-live="polite"]')
       expect(liveRegion).toBeInTheDocument()
       expect(liveRegion).toHaveAttribute('aria-live', 'polite')
       expect(liveRegion).toHaveAttribute('aria-atomic', 'true')
       expect(liveRegion).toHaveClass('sr-only')
       
-      // Initially live region should be empty
       expect(liveRegion).toBeEmptyDOMElement()
       
-      // Scroll to make button appear
       Object.defineProperty(window, 'pageYOffset', {
         writable: true,
         configurable: true,
@@ -298,7 +283,6 @@ describe('BackToTopButton', () => {
         expect(screen.getByRole('button', { name: /back to top/i })).toBeInTheDocument()
       })
       
-      // Live region should contain the announcement text
       await waitFor(() => {
         expect(liveRegion).toHaveTextContent('Back to top button available')
       })
@@ -318,9 +302,6 @@ describe('BackToTopButton', () => {
       
       fireEvent.click(button)
       
-      // After scrolling to top, focus should be managed appropriately
-      // Focus should either remain on button or move to top of page
-      // Currently button may disappear after scroll, so focus management is important
       expect(document.activeElement).toBe(button)
     })
 
@@ -335,11 +316,7 @@ describe('BackToTopButton', () => {
       
       const button = screen.getByRole('button', { name: /back to top/i })
       expect(button).toBeInTheDocument()
-      
-      // Button has classes: bg-blue-600 text-white
-      // Icon has: text-white
-      // These should provide sufficient contrast, but automated testing
-      // would require checking computed styles against background
+      // Contrast: assert classes only; use axe or visual review for WCAG ratios
     })
   })
 })

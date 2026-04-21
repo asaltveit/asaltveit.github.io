@@ -63,13 +63,20 @@ export default function Home() {
                     AI Tools:
                   </span>
                   <span className="text-white text-lg md:text-xl items-end">
-                     Letta, n8n, Pipecat, W&B Weave, OpenAGI, fal, Black Forest (Flux), Cursor AI, Claude Code, Kiro
+                     Letta, n8n, W&B Weave, Pipecat, OpenAGI, fal, Black Forest (Flux), Cursor AI, Claude Code, Kiro
                   </span>
                 </div>
               </div>
             </Section>
             <Section title="Experience" id="experience" >
               <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+              <Experience title="Real Estate Investment Group, Software Engineer" dates="2026 - Present" items={[
+                  "Took ownership of an incomplete scraping system, rebuilding and extending it using Python and Playwright to reliably extract real estate data from multiple sources.",
+                  "Designing data processing pipelines to clean, normalize, and structuring inconsistent inputs into usable datasets for downstream analysis in spreadsheet workflows.",
+                  "Working directly with stakeholders to define requirements and iterate on product direction.",
+                  "Designing systems to handle inconsistent real-world data and evolving business logic."
+                  ]} 							       
+                />
                 <Experience title="Less Fluorescent, Software Developer" dates="2025 - 2025" items={[
                   "Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.",
                   "Built responsive web and mobile prototypes using JavaScript, HTML, CSS.",

@@ -64,7 +64,7 @@ describe('Page', () => {
             render(<Page />)
             const experienceSection = document.getElementById('experience')
             expect(experienceSection).toBeInTheDocument()
-            // Check that section title exists within the section (not in nav)
+            // Section title should live inside the section, not only in the nav
             if (experienceSection) {
                 const { getByText } = within(experienceSection)
                 expect(getByText('Experience')).toBeInTheDocument()
@@ -75,7 +75,7 @@ describe('Page', () => {
             render(<Page />)
             const projectsSection = document.getElementById('projects')
             expect(projectsSection).toBeInTheDocument()
-            // Check that section title exists within the section (not in nav)
+            // Section title should live inside the section, not only in the nav
             if (projectsSection) {
                 const { getByText } = within(projectsSection)
                 expect(getByText('Projects')).toBeInTheDocument()
@@ -86,7 +86,7 @@ describe('Page', () => {
             render(<Page />)
             const hackathonsSection = document.getElementById('hackathons')
             expect(hackathonsSection).toBeInTheDocument()
-            // Check that section title exists within the section (not in nav)
+            // Section title should live inside the section, not only in the nav
             if (hackathonsSection) {
                 const { getByText } = within(hackathonsSection)
                 expect(getByText('Hackathons')).toBeInTheDocument()
@@ -104,7 +104,7 @@ describe('Page', () => {
             render(<Page />)
             expect(screen.getByText('Technical Skills')).toBeInTheDocument()
         })
-        // Not including easily-changeable text
+        // Long skill strings are brittle; we only assert section labels here
         it('renders Frontend skills', () => {
             render(<Page />)
             expect(screen.getByText('Frontend:')).toBeInTheDocument()
@@ -142,15 +142,13 @@ describe('Page', () => {
     describe('Projects and Hackathons', () => {
         it('renders ProjectsContainer', () => {
             render(<Page />)
-            // ProjectsContainer should render project cards
-            // Check for at least one project title from data
+            // At least one project title from app data
             expect(screen.getByText('Create Biblio')).toBeInTheDocument()
         })
 
         it('renders HackathonsContainer', () => {
             render(<Page />)
-            // HackathonsContainer should render hackathon cards
-            // Check for at least one hackathon title from data
+            // At least one hackathon title from app data
             expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
         })
     })
@@ -158,13 +156,9 @@ describe('Page', () => {
     describe('BackToTopButton', () => {
         it('renders BackToTopButton component', () => {
             render(<Page />)
-            // BackToTopButton is rendered but may not be visible initially (only shows after scrolling)
-            // The component is present in the component tree even if it returns null
-            // We can verify it's not throwing errors by checking the page renders successfully
             const main = screen.getByRole('main')
             expect(main).toBeInTheDocument()
-            // Note: The button only appears when scroll position > 300px
-            // To test visibility, we'd need to mock window.pageYOffset
+            // BackToTop visibility and scroll behavior: see backtotopbutton.test.jsx (uses pageYOffset)
         })
     })
 
@@ -225,12 +219,9 @@ describe('Page', () => {
 
         it('has proper heading hierarchy', () => {
             render(<Page />)
-            // Check that the main visible h1 heading exists with correct content
             const mainH1 = screen.getByRole('heading', { name: 'Anna Saltveit', level: 1 })
             expect(mainH1).toBeInTheDocument()
             expect(mainH1).toHaveTextContent('Anna Saltveit')
-            
-            // Verify it's the main page heading (not sr-only)
             expect(mainH1).not.toHaveClass('sr-only')
         })
 

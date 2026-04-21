@@ -94,7 +94,6 @@ describe('BaseCard', () => {
       const icon = link.querySelector('svg');
       
       expect(icon).toBeInTheDocument();
-      // Icon should have opacity transition class
       expect(icon).toHaveClass('opacity-0');
     });
 
@@ -103,13 +102,10 @@ describe('BaseCard', () => {
       
       const link = screen.getByRole('link', { name: 'link to Test Card (opens in new tab)' });
       
-      // Focus the link
       link.focus();
       expect(link).toHaveFocus();
       
-      // Press Enter to activate
       fireEvent.keyDown(link, { key: 'Enter', code: 'Enter' });
-      // Link should be clickable via keyboard
       expect(link).toHaveAttribute('href', 'https://example.com');
     });
 
@@ -152,15 +148,13 @@ describe('BaseCard', () => {
       const externalIcon = link.querySelector('svg');
       
       expect(externalIcon).toBeInTheDocument();
-      // The icon is decorative since the link text already conveys the information
-      // lucide-react automatically adds aria-hidden="true" to icons
+      // Decorative: link name includes “opens in new tab”; explicit aria-hidden on ExternalLink
       expect(externalIcon).toHaveAttribute('aria-hidden', 'true');
     });
 
     it('should use semantic heading for title when not a link', () => {
       render(<BaseCard {...defaultProps} />);
       
-      // Title should be a heading element for semantic structure
       const heading = screen.getByRole('heading', { name: 'Test Card' });
       expect(heading).toBeInTheDocument();
     });
@@ -168,7 +162,6 @@ describe('BaseCard', () => {
     it('should use time element for dates', () => {
       const { container } = render(<BaseCard {...defaultProps} />);
       
-      // Dates should use <time> element for semantic meaning
       const timeElement = container.querySelector('time');
       expect(timeElement).toBeInTheDocument();
       expect(timeElement).toHaveTextContent('January 2024 - Present');
@@ -179,7 +172,6 @@ describe('BaseCard', () => {
       
       const list = screen.getByRole('list');
       expect(list).toBeInTheDocument();
-      // List should be properly structured with listitems
       const listItems = screen.getAllByRole('listitem');
       expect(listItems.length).toBeGreaterThan(0);
     });

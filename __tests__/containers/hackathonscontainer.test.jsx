@@ -164,9 +164,6 @@ describe('HackathonsContainer', () => {
   });
 
   describe('Accessibility', () => {
-    // Note: Section and heading are provided by the Section component wrapper,
-    // not by HackathonsContainer itself. The container only provides the grid.
-
     it('should have aria-describedby linking to description', () => {
       const { container } = render(<HackathonsContainer hackathons={mockHackathons} />);
       
