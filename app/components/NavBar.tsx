@@ -82,6 +82,18 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
         }
     }, [isMenuOpen]);
 
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const onDocumentKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                setIsMenuOpen(false);
+            }
+        };
+        document.addEventListener('keydown', onDocumentKeyDown);
+        return () => document.removeEventListener('keydown', onDocumentKeyDown);
+    }, [isMenuOpen]);
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -99,7 +111,7 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
         <nav aria-label="main navigation" role="navigation">
             <a 
                 href="#main-content" 
-                className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-2 focus:bg-white focus:text-black"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-2 focus:bg-accent focus:text-surface"
                 aria-label="skip to main content"
                 onClick={handleSkipClick}
             >
@@ -112,19 +124,19 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
                         <button 
                             data-collapse-toggle="navbar-solid-bg" 
                             type="button" 
-                            className="relative z-50 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm text-white md:hidden hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600" 
+                            className="relative z-50 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm text-text-primary md:hidden hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-accent"
                             aria-controls="navbar-solid-bg" 
                             aria-expanded={isMenuOpen}
                             onClick={toggleMenu}
-                            aria-label="open main menu"
+                            aria-label={isMenuOpen ? 'Close main menu' : 'Open main menu'}
                         >
-                            <span className="sr-only">Open main menu</span>
+                            <span className="sr-only">{isMenuOpen ? 'Close main menu' : 'Open main menu'}</span>
                             <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
                             </svg>
                         </button>
                         <div 
-                            className={`${isMenuOpen ? 'block' : 'hidden'} md:block absolute right-0 top-full z-40 mt-1 w-max max-w-[min(100vw-2rem,16rem)] rounded-lg border border-gray-700 bg-gray-800 px-4 pt-2 pb-3 shadow-lg md:static md:top-auto md:right-auto md:z-auto md:mt-0 md:max-w-none md:border-0 md:bg-transparent md:p-0 md:shadow-none`} 
+                            className={`${isMenuOpen ? 'block' : 'hidden'} md:block absolute right-0 top-full z-40 mt-1 w-max max-w-[min(100vw-2rem,16rem)] rounded-lg border border-border bg-surface px-4 pt-2 pb-3 shadow-lg md:static md:top-auto md:right-auto md:z-auto md:mt-0 md:max-w-none md:border-0 md:bg-transparent md:p-0 md:shadow-none`}
                             id="navbar-solid-bg"
                         >
                             <ul role="menu" aria-orientation="horizontal" className="flex flex-col gap-0 font-medium md:flex-row md:space-x-8 rtl:space-x-reverse">

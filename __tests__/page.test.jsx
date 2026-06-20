@@ -46,6 +46,7 @@ describe('Page', () => {
 
         it('renders all navigation links', () => {
             render(<Page />)
+            expect(screen.getByRole('link', { name: 'link to About section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Experience section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Projects section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Hackathons section' })).toBeInTheDocument()
@@ -53,11 +54,14 @@ describe('Page', () => {
     })
 
     describe('Sections', () => {
-        it('renders About Me section', () => {
+        it('renders About section', () => {
             render(<Page />)
             const aboutSection = document.getElementById('about')
             expect(aboutSection).toBeInTheDocument()
-            expect(screen.getByText('About Me')).toBeInTheDocument()
+            if (aboutSection) {
+                const { getByText } = within(aboutSection)
+                expect(getByText('About')).toBeInTheDocument()
+            }
         })
 
         it('renders Experience section', () => {
@@ -94,36 +98,34 @@ describe('Page', () => {
         })
     })
 
-    describe('About Me Content', () => {
-        it('renders about me text', () => {
+    describe('About content', () => {
+        it('renders hero tagline', () => {
             render(<Page />)
-            expect(screen.getByText(/I'm a web developer who enjoys creating attractive and accessible products/)).toBeInTheDocument()
+            expect(
+                screen.getByText(/Frontend developer and designer — I build responsive, accessible interfaces/i)
+            ).toBeInTheDocument()
         })
 
-        it('renders Technical Skills heading', () => {
+        it('renders focus areas heading', () => {
             render(<Page />)
-            expect(screen.getByText('Technical Skills')).toBeInTheDocument()
-        })
-        // Long skill strings are brittle; we only assert section labels here
-        it('renders Frontend skills', () => {
-            render(<Page />)
-            expect(screen.getByText('Frontend:')).toBeInTheDocument()
+            expect(screen.getByText('What I focus on')).toBeInTheDocument()
         })
 
-        it('renders Backend skills', () => {
+        it('renders stack heading', () => {
             render(<Page />)
-            expect(screen.getByText('Backend:')).toBeInTheDocument()
+            expect(screen.getByText('Stack I ship with')).toBeInTheDocument()
         })
 
-        it('renders Tools', () => {
+        it('renders also-comfortable heading', () => {
             render(<Page />)
-            expect(screen.getByText('Tools:')).toBeInTheDocument()
+            expect(screen.getByText('Also comfortable with')).toBeInTheDocument()
         })
     })
 
     describe('Experience Components', () => {
         it('renders all experience entries', () => {
             render(<Page />)
+            expect(screen.getByText('Real Estate Investment Group, Software Engineer')).toBeInTheDocument()
             expect(screen.getByText('Less Fluorescent, Software Developer')).toBeInTheDocument()
             expect(screen.getByText('Included Health, Web Developer')).toBeInTheDocument()
             expect(screen.getByText('Code for PDX, Frontend Developer')).toBeInTheDocument()
@@ -132,6 +134,7 @@ describe('Page', () => {
 
         it('renders experience dates', () => {
             render(<Page />)
+            expect(screen.getByText('2026 - Present')).toBeInTheDocument()
             expect(screen.getByText('2025 - 2025')).toBeInTheDocument()
             expect(screen.getByText('2021 - 2024')).toBeInTheDocument()
             expect(screen.getByText('2020 - 2020')).toBeInTheDocument()

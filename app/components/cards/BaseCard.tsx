@@ -26,7 +26,7 @@ export default function BaseCard({
   footerContent 
 }: BaseCardProps) {
   return (
-    <div className="bg-slate-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-slate-700 flex flex-col">
+    <div className="bg-surface rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-border flex flex-col">
       {/* Image or placeholder section */}
       {children && (
         <div className="w-full aspect-video overflow-hidden flex-shrink-0">
@@ -41,7 +41,7 @@ export default function BaseCard({
             <Link 
               href={link} 
               aria-label={`link to ${title} (opens in new tab)`}
-              className="group inline-flex items-center gap-2 text-white text-xl md:text-2xl font-bold hover:text-indigo-400 transition-colors"
+              className="group inline-flex items-center gap-2 text-text-primary text-xl md:text-2xl font-bold hover:text-accent transition-colors"
               target="_blank"
               rel="noopener noreferrer"
               onKeyDown={handleSpacebarKeyDown}
@@ -51,11 +51,11 @@ export default function BaseCard({
             </Link>
           ) : (
             <div>
-              <h2 className="text-white text-xl md:text-2xl font-bold">
+              <h2 className="text-text-primary text-xl md:text-2xl font-bold">
                 {title}
               </h2>
               {noLinkNote && (
-                <p className="text-slate-500 text-sm mt-1" aria-hidden="true">
+                <p className="text-text-secondary text-sm mt-1" aria-hidden="true">
                   {noLinkNote}
                 </p>
               )}
@@ -63,11 +63,11 @@ export default function BaseCard({
           )}
         </div>
         
-        <time className="text-slate-400 text-base md:text-lg mb-4">
+        <time className="text-text-secondary text-base md:text-lg mb-4">
           {dates}
         </time>
-        
-        <ul className="list-outside list-disc ml-6 text-slate-200 text-base md:text-lg space-y-1.5 mb-4">
+
+        <ul className="list-outside list-disc ml-6 text-text-primary text-base md:text-lg space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (
             <li key={`${i}`}>{item}</li>
           ))}
@@ -75,7 +75,7 @@ export default function BaseCard({
         
         {/* Footer content: tech stack, etc. */}
         {footerContent && (
-          <div className="mt-auto pt-4 border-t border-slate-700">
+          <div className="mt-auto pt-4 border-t border-border">
             {footerContent}
           </div>
         )}

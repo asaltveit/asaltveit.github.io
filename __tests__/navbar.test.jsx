@@ -11,14 +11,16 @@ beforeEach(() => {
 
 describe('NavBar', () => {
   const mockLinks = [
+    { title: "About", id: "about" },
     { title: "Experience", id: "experience" },
     { title: "Projects", id: "projects" },
-    { title: "Hackathons", id: "hackathons" }
+    { title: "Hackathons", id: "hackathons" },
   ];
 
   it('renders navigation with all links', () => {
     render(<NavBar links={mockLinks} />);
-    
+
+    expect(screen.getByText('About')).toBeInTheDocument();
     expect(screen.getByText('Experience')).toBeInTheDocument();
     expect(screen.getByText('Projects')).toBeInTheDocument();
     expect(screen.getByText('Hackathons')).toBeInTheDocument();
@@ -26,7 +28,10 @@ describe('NavBar', () => {
 
   it('renders links with correct href attributes', () => {
     render(<NavBar links={mockLinks} />);
-    
+
+    const aboutLink = screen.getByRole('link', { name: /link to About section/i });
+    expect(aboutLink).toHaveAttribute('href', '#about');
+
     const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
     expect(experienceLink).toHaveAttribute('href', '#experience');
     
@@ -52,24 +57,28 @@ describe('NavBar', () => {
     expect(menu).toBeInTheDocument();
     
     const menuItems = screen.getAllByRole('menuitem');
-    expect(menuItems).toHaveLength(3);
+    expect(menuItems).toHaveLength(4);
   });
 
   it('renders menu items with aria-labels', () => {
     render(<NavBar links={mockLinks} />);
     
     const menuItems = screen.getAllByRole('menuitem');
-    expect(menuItems[0]).toHaveAttribute('aria-label', 'includes link to Experience section');
-    expect(menuItems[1]).toHaveAttribute('aria-label', 'includes link to Projects section');
-    expect(menuItems[2]).toHaveAttribute('aria-label', 'includes link to Hackathons section');
+    expect(menuItems[0]).toHaveAttribute('aria-label', 'includes link to About section');
+    expect(menuItems[1]).toHaveAttribute('aria-label', 'includes link to Experience section');
+    expect(menuItems[2]).toHaveAttribute('aria-label', 'includes link to Projects section');
+    expect(menuItems[3]).toHaveAttribute('aria-label', 'includes link to Hackathons section');
   });
 
   it('renders links with aria-labels', () => {
     render(<NavBar links={mockLinks} />);
     
+    const aboutLink = screen.getByRole('link', { name: /link to About section/i });
+    expect(aboutLink).toHaveAttribute('aria-label', 'link to About section');
+
     const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
     expect(experienceLink).toHaveAttribute('aria-label', 'link to Experience section');
-    
+
     const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
     expect(projectsLink).toHaveAttribute('aria-label', 'link to Projects section');
   });
@@ -176,9 +185,9 @@ describe('NavBar', () => {
 
     it('should indicate current page with aria-current', () => {
       render(<NavBar links={mockLinks} />);
-      
-      const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
-      expect(experienceLink).toHaveAttribute('aria-current', 'page');
+
+      const aboutLink = screen.getByRole('link', { name: /link to About section/i });
+      expect(aboutLink).toHaveAttribute('aria-current', 'page');
     });
 
     it('should have properly labeled navigation landmark', () => {

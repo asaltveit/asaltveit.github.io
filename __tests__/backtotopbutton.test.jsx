@@ -201,20 +201,20 @@ describe('BackToTopButton', () => {
       'fixed',
       'bottom-8',
       'right-8',
-      'bg-blue-600',
+      'bg-accent',
       'hover:ring-4',
-      'hover:bg-blue-700',
-      'text-white',
+      'hover:bg-accent-hover',
+      'text-surface',
       'p-4',
       'rounded-full',
       'shadow-2xl',
       'transition-all',
       'duration-300',
       'hover:scale-110',
-      'hover:shadow-blue-500/50',
+      'hover:shadow-accent/50',
       'focus:outline-none',
       'focus:ring-4',
-      'focus:ring-blue-700',
+      'focus:ring-accent-hover',
       'z-50'
     )
   })
@@ -255,7 +255,7 @@ describe('BackToTopButton', () => {
       const button = screen.getByRole('button', { name: /back to top/i })
       button.focus()
       expect(button).toHaveFocus()
-      expect(button).toHaveClass('focus:ring-4', 'focus:ring-blue-700')
+      expect(button).toHaveClass('focus:ring-4', 'focus:ring-accent-hover')
     })
 
     it('should announce button appearance to screen readers', async () => {

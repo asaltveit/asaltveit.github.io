@@ -71,7 +71,7 @@ export default function TechStackIcons({ techStack }: TechStackIconsProps) {
         return (
           <div
             key={tech}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 rounded-md text-slate-300 text-sm font-medium"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-surface-hover rounded-md text-text-primary text-sm font-medium"
             title={tech}
           >
             {icon}

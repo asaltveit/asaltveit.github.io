@@ -298,7 +298,7 @@ describe('HackathonCard', () => {
       
       const trophyIcons = container.querySelectorAll('svg.lucide-trophy');
       const awardTrophyIcon = Array.from(trophyIcons).find(icon => 
-        icon.closest('[class*="bg-yellow-100"]') || icon.closest('[class*="bg-yellow-900"]')
+        icon.closest('[class*="bg-success"]')
       );
       expect(awardTrophyIcon).toHaveAttribute('aria-hidden', 'true');
     });

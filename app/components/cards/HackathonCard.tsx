@@ -39,7 +39,7 @@ export default function HackathonCard({
       <Link 
         href={link} 
         aria-label={`View ${title} (opens in new tab)`}
-        className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-800 rounded-t-lg"
+        className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface rounded-t-lg"
         target="_blank"
         rel="noopener noreferrer"
         onKeyDown={handleSpacebarKeyDown}
@@ -53,8 +53,8 @@ export default function HackathonCard({
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
           />
         </div>
-        <div className="absolute inset-0 z-10 bg-indigo-400 opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
-        <div className="absolute inset-0 z-10 border-4 border-indigo-400 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
+        <div className="absolute inset-0 z-10 bg-accent opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
+        <div className="absolute inset-0 z-10 border-4 border-accent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
         <CardImageExternalLinkIndicator />
       </Link>
     ) : (
@@ -67,15 +67,15 @@ export default function HackathonCard({
       />
     )
   ) : (
-    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-800 via-orange-800 to-red-800">
-      <Trophy className="w-16 h-16 text-yellow-300 opacity-50" />
+    <div className="w-full h-full flex items-center justify-center bg-success">
+      <Trophy className="w-16 h-16 text-surface opacity-70" />
     </div>
   );
 
   const metadataItems = [];
   if (duration) {
     metadataItems.push(
-      <div key="duration" className="flex items-center gap-1.5 text-sm text-slate-400">
+      <div key="duration" className="flex items-center gap-1.5 text-sm text-text-secondary">
         <Clock className="w-4 h-4" />
         <span>{duration}</span>
       </div>
@@ -83,7 +83,7 @@ export default function HackathonCard({
   }
   if (teamSize) {
     metadataItems.push(
-      <div key="team" className="flex items-center gap-1.5 text-sm text-slate-400">
+      <div key="team" className="flex items-center gap-1.5 text-sm text-text-secondary">
         <Users className="w-4 h-4" />
         <span>{teamSize} {teamSize === 1 ? 'person' : 'people'}</span>
       </div>
@@ -95,7 +95,7 @@ export default function HackathonCard({
       {(award || metadataItems.length > 0) && (
         <div className="flex flex-wrap items-center gap-3">
           {award && (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-900/30 rounded-md text-yellow-300 text-sm font-semibold">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success/15 rounded-md text-success text-sm font-semibold">
               <Trophy className="w-4 h-4" />
               <span>{award}</span>
             </div>

@@ -14,21 +14,21 @@ interface ExperienceProps {
 export default function Experience ({ title, dates, items, linkLocation, linkName } : ExperienceProps) {
     return (
         <div className="grid items-start justify-items-start">
-            <h3 className="text-white text-xl md:text-2xl font-bold">
+            <h3 className="text-text-primary text-h1 md:text-2xl font-bold">
                 {title}
             </h3>
-            <time className="text-slate-400 text-lg md:text-xl pb-2">
+            <time className="text-text-secondary text-lg md:text-xl pb-2">
                 {dates}
             </time>
             {
                 linkLocation &&
-                <ul className='marker:text-green list-outside list-disc ml-6 text-white text-lg md:text-xl justify-items-start'>
+                <ul className='marker:text-success list-outside list-disc ml-6 text-text-secondary text-body md:text-xl justify-items-start'>
                     <li >
                         <span className='mr-2' > Located at: </span>
                         <Link 
                             href={linkLocation}
                             aria-label={`link to ${title}`}
-                            className='md:hover:underline md:hover:underline-offset-5 md:no-underline underline underline-offset-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 transition-all'
+                            className='md:hover:underline md:hover:underline-offset-5 md:no-underline underline underline-offset-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 transition-all'
                             target="_blank"
                             rel="noopener noreferrer"
                             onKeyDown={handleSpacebarKeyDown}
@@ -39,7 +39,7 @@ export default function Experience ({ title, dates, items, linkLocation, linkNam
                 </ul>
             }
             
-            <ul className='marker:text-green list-outside list-disc ml-6 text-white text-lg md:text-xl justify-items-start'>
+            <ul className='marker:text-success list-outside list-disc ml-6 text-text-primary text-body md:text-xl justify-items-start'>
                 {
                     items.map((item: string, i: number) => <li key={`${i}`}> {item} </li>)
                 }

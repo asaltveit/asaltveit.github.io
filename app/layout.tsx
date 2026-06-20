@@ -13,10 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anna Saltveit",
-  description: "Anna Saltveit's portfolio website",
-  keywords: ['Next.js', 'React', 'TypeScript', 'Front-end Development', 'web developer', 'TailwindCSS', 'San Francisco', 'JavaScript', 'Python', 'PostgreSQL'],
-  creator: 'Anna Saltveit',
+  title: "Anna Saltveit · Frontend developer & designer",
+  description:
+    "Frontend developer and designer building responsive, accessible interfaces with React, Next.js, and TypeScript. Based in San Francisco.",
+  keywords: [
+    "frontend developer",
+    "UI developer",
+    "design systems",
+    "accessibility",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "San Francisco",
+    "web design",
+  ],
+  creator: "Anna Saltveit",
 };
 
 export default function RootLayout({
@@ -27,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         {children}
       </body>
