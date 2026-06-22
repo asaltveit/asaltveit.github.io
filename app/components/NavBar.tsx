@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface Link {
     title: string,
@@ -118,8 +119,8 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
                 Skip to main content
             </a>
             <div className="max-w-screen-xl mx-auto px-4 pt-2 pb-1 md:p-4">
-                <div className="flex items-center justify-end md:justify-between">
-                    <div className="hidden h-8 shrink-0 md:block" aria-hidden />
+                <div className="flex items-center justify-between">
+                    <ThemeToggle />
                     <div className="relative flex flex-col items-end md:static md:flex-row md:items-center">
                         <button 
                             data-collapse-toggle="navbar-solid-bg" 

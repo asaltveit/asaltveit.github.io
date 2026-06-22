@@ -156,7 +156,7 @@ export default function ProjectsContainer({
           <div
             id="projects-grid"
             ref={gridRef}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
             role="grid"
             aria-label="Selected projects"
             aria-describedby="projects-description"
@@ -200,7 +200,7 @@ export default function ProjectsContainer({
                 More work including tooling and this site — expand to view.
               </span>
             </summary>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 pt-2 border-t border-border">
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pt-2 border-t border-border">
               {otherProjects.map(({ title, dates, items, link, techStack = [], image, imageTitle }) => (
                 <div key={title}>
                   <ProjectCard

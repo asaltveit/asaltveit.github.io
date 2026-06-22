@@ -25,8 +25,9 @@ export default function BaseCard({
   children,
   footerContent 
 }: BaseCardProps) {
+  const description_words = ["Problem: ", "Solution: ", "Impact: "];
   return (
-    <div className="bg-surface rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-border flex flex-col">
+    <div className="bg-surface rounded-lg shadow-md hover:shadow-lg hover:bg-surface-hover transition-all duration-300 overflow-hidden border border-border flex flex-col">
       {/* Image or placeholder section */}
       {children && (
         <div className="w-full aspect-video overflow-hidden flex-shrink-0">
@@ -35,7 +36,7 @@ export default function BaseCard({
       )}
       
       {/* Content section */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 lg:p-8 flex flex-col flex-grow">
         <div className="mb-3">
           {link ? (
             <Link 
@@ -67,13 +68,13 @@ export default function BaseCard({
           {dates}
         </time>
 
-        <ul className="list-outside list-disc ml-6 text-text-primary text-base md:text-lg space-y-1.5 mb-4">
+        <div className="ml-6 text-text-primary text-base md:text-lg space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (
-            <li key={`${i}`}>{item}</li>
+            <div key={`${i}`}><label> { description_words[i] }</label>{item}</div>
           ))}
-        </ul>
+        </div>
         
-        {/* Footer content: tech stack, etc. */}
+        {/* Footer content: tech stack, etc. list-outside list-disc*/}
         {footerContent && (
           <div className="mt-auto pt-4 border-t border-border">
             {footerContent}

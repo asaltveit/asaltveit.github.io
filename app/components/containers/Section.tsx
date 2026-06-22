@@ -19,7 +19,7 @@ export default function Section ({ title, id, children } : SectionProps) {
                         >
                             {title}
                         </h2>
-                        <div className="flex justify-start lg:pt-4 pt-8 pb-0">
+                        <div className="flex justify-start pt-8 pb-0">
                             {children}
                         </div>
                     </div>

@@ -8,7 +8,7 @@ export const TEXT_LINK_EXTERNAL_ICON_CLASS =
 export function CardImageExternalLinkIndicator() {
   return (
     <div
-      className="absolute bottom-2.5 right-2.5 z-20 pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
+      className="absolute bottom-2.5 right-2.5 z-20 pointer-events-none opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100 hover:text-accent-hover focus:text-accent-hover"
       aria-hidden
     >
       <span className="flex rounded-sm bg-black/70 px-1 py-1 shadow-sm backdrop-blur-[1px]">
