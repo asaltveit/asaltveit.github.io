@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
+import { ACCENT_EXTERNAL_LINK_CLASS } from '@/components/linkStyles';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
-const linkClassName =
-  'group flex items-center text-accent gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4';
+const linkClassName = ACCENT_EXTERNAL_LINK_CLASS;
 
 export default function HeroSocialLinks() {
   return (

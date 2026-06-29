@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import '../mocks/matchMediaFalse.mock'
 import TechStackIcons from '@/components/cards/TechStackIcons'
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');

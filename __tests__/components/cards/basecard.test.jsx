@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
-import '../mocks/matchMediaFalse.mock'
 import BaseCard from '@/components/cards/BaseCard'
 
 // Mock Next.js Link component

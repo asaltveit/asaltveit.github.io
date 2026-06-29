@@ -1,6 +1,5 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import './mocks/matchMediaFalse.mock'
 import BackToTopButton from '@/components/BackToTopButton'
 
 const mockScrollTo = jest.fn()

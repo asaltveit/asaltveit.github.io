@@ -51,7 +51,7 @@ export default function CardImage({
       width={800}
       height={450}
       sizes={CARD_IMAGE_SIZES}
-      className="w-full h-full object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 group-focus:scale-110 motion-reduce:group-hover:scale-100 motion-reduce:group-focus:scale-100"
+      className="w-full h-full object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
     />
   );
 
@@ -68,8 +68,8 @@ export default function CardImage({
         <div className="w-full h-full overflow-hidden rounded-t-lg relative z-0">
           {imageElement}
         </div>
-        <div className="absolute inset-0 z-10 bg-accent opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 motion-reduce:transition-none rounded-t-lg pointer-events-none" />
-        <div className="absolute inset-0 z-10 border-4 border-accent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 motion-reduce:transition-none rounded-t-lg pointer-events-none" />
+        <div className="absolute inset-0 z-10 bg-accent opacity-0 group-hover:opacity-40 group-focus-visible:opacity-40 transition-opacity duration-300 motion-reduce:transition-none rounded-t-lg pointer-events-none" />
+        <div className="absolute inset-0 z-10 border-4 border-accent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 motion-reduce:transition-none rounded-t-lg pointer-events-none" />
         <CardImageExternalLinkIndicator />
       </Link>
     );

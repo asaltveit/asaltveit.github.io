@@ -1,5 +1,5 @@
 import Section from '@/components/containers/Section';
-import NavBar from '@/components/NavBar';
+import ScrollAwareHeader from '@/components/ScrollAwareHeader';
 import Experience from '@/components/Experience';
 import HeroSocialLinks from '@/components/HeroSocialLinks';
 import SkillsSection from '@/components/containers/SkillsSection';
@@ -7,17 +7,22 @@ import DeferredBackToTop from '@/components/lazy/DeferredBackToTop';
 import DeferredProjectsSection from '@/components/lazy/DeferredProjectsSection';
 import DeferredHackathonsSection from '@/components/lazy/DeferredHackathonsSection';
 import { navLinks, experienceEntries } from '@/data';
+import { ACCENT_EXTERNAL_LINK_CLASS } from '@/components/linkStyles';
+import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
 import Link from 'next/link';
+import { ExternalLink } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="bg-bg grid min-h-screen px-4 pb-20 pt-0 gap-8 md:gap-16 md:px-10">
-      <header className="text-text-primary">
-        <NavBar links={navLinks} />
-      </header>
+    <div className="bg-bg min-h-screen px-4 pb-20 pt-0 md:px-10">
+      <ScrollAwareHeader links={navLinks} />
       <main id="main-content" tabIndex={-1} className="min-w-0 max-w-[68.75rem] mx-auto w-full">
-        <section id="about" className="scroll-mt-16 py-16 md:py-28 lg:py-32 space-y-6">
-          <h1 className="text-hero text-text-primary leading-tight font-sans">
+        <section id="about" aria-labelledby="about-heading" className="scroll-mt-16 py-16 md:py-28 lg:py-32 space-y-6">
+          <h1
+            id="about-heading"
+            tabIndex={-1}
+            className="text-hero text-text-primary leading-tight font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          >
             Anna Saltveit
           </h1>
           <p className="text-h2 text-text-secondary max-w-[65ch] leading-snug">
@@ -25,7 +30,7 @@ export default function Home() {
           </p>
           <HeroSocialLinks />
         </section>
-        <div className="flex flex-col gap-space-4 items-start">
+        <div className="flex flex-col gap-4 items-start">
           <Section title="Featured Projects" id="projects">
             <div className="grid grid-cols-1 space-y-6 md:space-y-10">
               <DeferredProjectsSection />
@@ -54,11 +59,13 @@ export default function Home() {
           © {new Date().getFullYear()} Anna Saltveit ·{' '}
           <Link
             href="https://github.com/asaltveit"
-            className="text-accent hover:text-accent-hover underline underline-offset-4"
+            className={ACCENT_EXTERNAL_LINK_CLASS}
+            aria-label="link to Github (opens in new tab)"
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub
+            Github
+            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
           </Link>
         </p>
       </footer>

@@ -3,8 +3,8 @@
 :root {
   /* RAW COLOR PALETTE */
   --color-blue-50: #F1F5F9;
-  --color-blue-500: #0284C7;
-  --color-blue-600: #0369A1;
+  --color-blue-500: #0369A1;
+  --color-blue-600: #075985;
 
   --color-slate-50: #f8fafc;
   --color-slate-60: #CBD5E1;
@@ -12,13 +12,7 @@
   --color-slate-900: #0f172a;
 
   --color-white: #FFFFFF;
-  --color-teal-500: #0F766E;
-
-  /* SPACING */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-4: 1rem;
-  --space-8: 2rem;
+  --color-teal-500: #0c675f;
 
   /* TYPE SCALE */
   --text-hero: clamp(2.75rem, 6vw, 5rem);
@@ -31,10 +25,6 @@
   --leading-snug: 1.3;
   --leading-normal: 1.6;
   --leading-relaxed: 1.75;
-
-  /* MOTION */
-  --duration-fast: 150ms;
-  --duration-normal: 200ms;
 }
 
 .dark {
@@ -65,6 +55,7 @@
   --color-accent-hover: var(--color-blue-600);
 
   --color-success: var(--color-teal-500);
+  --color-success-muted: color-mix(in srgb, var(--color-teal-500) 18%, var(--color-white));
 
   --text-hero: var(--text-hero);
   --text-h1: var(--text-h1);
@@ -75,11 +66,6 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --space-1: var(--space-1);
-  --space-2: var(--space-2);
-  --space-4: var(--space-4);
-  --space-8: var(--space-8);
-
   --leading-tight: var(--leading-tight);
   --leading-snug: var(--leading-snug);
   --leading-normal: var(--leading-normal);
@@ -87,7 +73,7 @@
 }
 
 body {
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* Make non-clickable text elements show default arrow cursor */
@@ -98,6 +84,10 @@ p, span, div, h1, h2, h3, h4, h5, h6, li, ul, ol {
 /* Ensure clickable elements and all their children show pointer (hand) cursor */
 a, button {
   cursor: pointer;
+}
+
+a *, button * {
+  cursor: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {

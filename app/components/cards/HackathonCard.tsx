@@ -54,7 +54,7 @@ export default function HackathonCard({
       {(award || metadataItems.length > 0) && (
         <div className="flex flex-wrap items-center gap-3">
           {award && (
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success/15 rounded-md text-success text-sm font-semibold">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success-muted rounded-md text-success text-sm font-semibold">
               <Trophy className="w-4 h-4" aria-hidden />
               <span>{award}</span>
             </div>

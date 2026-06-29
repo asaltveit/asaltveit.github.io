@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, within, waitFor } from '@testing-library/react'
-import './mocks/matchMediaFalse.mock'
+import axe from 'axe-core'
 import Page from '../app/page'
 
 // Mock Next.js Link component
@@ -163,24 +163,24 @@ describe('Page', () => {
             it('renders in footer', () => {
                 render(<Page />)
                 const footer = screen.getByRole('contentinfo')
-                expect(within(footer).getByRole('link', { name: 'GitHub' })).toBeInTheDocument()
+                expect(within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })).toBeInTheDocument()
             })
             it('has correct href', () => {
                 render(<Page />)
                 const footer = screen.getByRole('contentinfo')
-                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('href', 'https://github.com/asaltveit')
             })
             it('opens in new tab', () => {
                 render(<Page />)
                 const footer = screen.getByRole('contentinfo')
-                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
                 const footer = screen.getByRole('contentinfo')
-                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
@@ -232,10 +232,28 @@ describe('Page', () => {
 
         it('has accessible hero social links', () => {
             render(<Page />)
-            const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
-            const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+            const aboutSection = document.getElementById('about')
+            expect(aboutSection).toBeInTheDocument()
+            const githubLink = within(aboutSection).getByRole('link', { name: 'link to Github (opens in new tab)' })
+            const linkedinLink = within(aboutSection).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
             expect(githubLink).toHaveAttribute('aria-label', 'link to Github (opens in new tab)')
             expect(linkedinLink).toHaveAttribute('aria-label', 'link to LinkedIn (opens in new tab)')
+        })
+
+        it('has no axe accessibility violations', async () => {
+            const { container } = render(<Page />)
+
+            await waitFor(() => {
+                expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            })
+
+            const results = await axe.run(container, {
+                rules: {
+                    // jsdom cannot render canvas for contrast checks
+                    'color-contrast': { enabled: false },
+                },
+            })
+            expect(results.violations).toEqual([])
         })
     })
 })

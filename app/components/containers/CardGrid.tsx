@@ -119,6 +119,11 @@ export default function CardGrid({
     return null;
   }
 
+  const rows: ReactNode[][] = [];
+  for (let i = 0; i < cellCount; i += columns) {
+    rows.push(childArray.slice(i, i + columns));
+  }
+
   return (
     <div
       id={id}
@@ -130,16 +135,23 @@ export default function CardGrid({
       onKeyDown={handleGridKeyDown}
       tabIndex={-1}
     >
-      {childArray.map((child, index) => (
-        <div
-          key={index}
-          ref={(el) => {
-            cellRefs.current[index] = el;
-          }}
-          role="gridcell"
-          tabIndex={-1}
-        >
-          {child}
+      {rows.map((rowChildren, rowIndex) => (
+        <div key={rowIndex} role="row" className="contents">
+          {rowChildren.map((child, colIndex) => {
+            const index = rowIndex * columns + colIndex;
+            return (
+              <div
+                key={index}
+                ref={(el) => {
+                  cellRefs.current[index] = el;
+                }}
+                role="gridcell"
+                tabIndex={-1}
+              >
+                {child}
+              </div>
+            );
+          })}
         </div>
       ))}
     </div>

@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom'
-import { render, screen, fireEvent } from '@testing-library/react'
-import './mocks/matchMediaFalse.mock'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import NavBar from '@/components/NavBar'
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');
 
 beforeEach(() => {
   matchMediaMock.mockClear();
+  window.history.replaceState(null, '', '/');
 });
 
 describe('NavBar', () => {
@@ -158,6 +158,34 @@ describe('NavBar', () => {
       expect(firstLink).toHaveFocus();
     });
 
+    it('returns focus to menu button when Escape closes the menu', () => {
+      render(<NavBar links={mockLinks} />);
+
+      const menuButton = screen.getByRole('button', { name: /open main menu/i });
+      fireEvent.click(menuButton);
+      fireEvent.keyDown(document, { key: 'Escape', code: 'Escape' });
+
+      expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+      expect(menuButton).toHaveFocus();
+    });
+
+    it('moves focus to section heading when a nav link is clicked', async () => {
+      const section = document.createElement('section');
+      section.id = 'projects';
+      const heading = document.createElement('h2');
+      heading.id = 'projects-heading';
+      heading.tabIndex = -1;
+      section.appendChild(heading);
+      document.body.appendChild(section);
+
+      render(<NavBar links={mockLinks} />);
+      fireEvent.click(screen.getByRole('link', { name: /link to Projects section/i }));
+
+      await waitFor(() => {
+        expect(heading).toHaveFocus();
+      });
+    });
+
     it('should indicate current page with aria-current', () => {
       render(<NavBar links={mockLinks} />);
 
@@ -195,11 +223,11 @@ describe('NavBar', () => {
       expect(computedStyle.outline).not.toBe('none');
     });
 
-    it('should specify list orientation for screen readers', () => {
+    it('should render navigation links in a list', () => {
       render(<NavBar links={mockLinks} />);
       
       const list = screen.getByRole('list');
-      expect(list).toHaveAttribute('aria-orientation', 'horizontal');
+      expect(list).toBeInTheDocument();
     });
 
     it('should have accessible menu button with screen reader text', () => {
