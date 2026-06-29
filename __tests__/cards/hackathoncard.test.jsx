@@ -46,7 +46,7 @@ describe('HackathonCard', () => {
     expect(trophyIcon).toBeInTheDocument();
   });
 
-  it('renders image when provided', () => {
+  it('renders image when provided without link', () => {
     render(
       <HackathonCard 
         {...defaultProps} 
@@ -58,6 +58,23 @@ describe('HackathonCard', () => {
     const image = screen.getByAltText('test hackathon screenshot');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', '/test-image.png');
+  });
+
+  it('renders linked image with decorative alt when link is provided', () => {
+    render(
+      <HackathonCard 
+        {...defaultProps}
+        link="https://hackathon.com"
+        image="/test-image.png"
+        imageTitle="test hackathon"
+      />
+    );
+
+    const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
+    const image = imageLink.querySelector('img');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', '/test-image.png');
+    expect(image).toHaveAttribute('alt', '');
   });
 
   it('renders tech stack icons when provided', () => {
@@ -327,7 +344,7 @@ describe('HackathonCard', () => {
       expect(usersIcon).toHaveAttribute('aria-hidden', 'true');
     });
 
-    it('should have proper alt text on images', () => {
+    it('should have proper alt text on unlinked images', () => {
       render(
         <HackathonCard 
           {...defaultProps} 

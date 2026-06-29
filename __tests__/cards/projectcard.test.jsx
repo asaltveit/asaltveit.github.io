@@ -56,9 +56,11 @@ describe('ProjectCard', () => {
       />
     );
     
-    const image = screen.getByAltText('test project screenshot');
+    const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
+    const image = imageLink.querySelector('img');
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute('src', '/test-image.png');
+    expect(image).toHaveAttribute('alt', '');
   });
 
   it('renders tech stack icons when provided', () => {
@@ -210,7 +212,7 @@ describe('ProjectCard', () => {
       expect(codeIcon).toHaveAttribute('aria-hidden', 'true');
     });
 
-    it('should have proper alt text on images', () => {
+    it('should use decorative alt on linked images', () => {
       render(
         <ProjectCard 
           {...defaultProps} 
@@ -219,9 +221,10 @@ describe('ProjectCard', () => {
         />
       );
       
-      const image = screen.getByAltText('test project screenshot');
+      const imageLink = screen.getByRole('link', { name: 'View Test Project (opens in new tab)' });
+      const image = imageLink.querySelector('img');
       expect(image).toBeInTheDocument();
-      expect(image).toHaveAttribute('alt', 'test project screenshot');
+      expect(image).toHaveAttribute('alt', '');
     });
   });
 });

@@ -146,7 +146,7 @@ describe('BaseCard', () => {
     it('should use semantic heading for title when not a link', () => {
       render(<BaseCard {...defaultProps} />);
       
-      const heading = screen.getByRole('heading', { name: 'Test Card' });
+      const heading = screen.getByRole('heading', { name: 'Test Card', level: 3 });
       expect(heading).toBeInTheDocument();
     });
 

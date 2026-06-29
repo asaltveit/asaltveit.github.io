@@ -51,19 +51,16 @@ describe('ProjectsContainer', () => {
   ]
 
   const featured = [mockProjects[0], mockProjects[1]]
-  const other = [mockProjects[2]]
 
-  it('renders all projects when split between featured and other', () => {
-    render(<ProjectsContainer featuredProjects={featured} otherProjects={other} />)
+  it('renders featured projects', () => {
+    render(<ProjectsContainer featuredProjects={featured} />)
 
     expect(screen.getByText('Project 1')).toBeInTheDocument()
     expect(screen.getByText('Project 2')).toBeInTheDocument()
-    expect(screen.getByText('Project 3')).toBeInTheDocument()
-    expect(screen.getByText(/Other projects \(1\)/)).toBeInTheDocument()
   })
 
   it('renders project cards with correct content', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} otherProjects={[]} />)
+    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} />)
 
     expect(screen.getByText('Project 1')).toBeInTheDocument()
     expect(screen.getByText('2024 - 2025')).toBeInTheDocument()
@@ -72,21 +69,13 @@ describe('ProjectsContainer', () => {
   })
 
   it('renders no featured grid when featured is empty', () => {
-    const { container } = render(<ProjectsContainer featuredProjects={[]} otherProjects={other} />)
+    const { container } = render(<ProjectsContainer featuredProjects={[]} />)
 
     expect(container.querySelector('#projects-grid')).not.toBeInTheDocument()
-    expect(screen.getByText('Project 3')).toBeInTheDocument()
-  })
-
-  it('renders empty state when both lists are empty', () => {
-    const { container } = render(<ProjectsContainer featuredProjects={[]} otherProjects={[]} />)
-
-    expect(container.querySelector('#projects-grid')).not.toBeInTheDocument()
-    expect(screen.queryByText(/Other projects/)).not.toBeInTheDocument()
   })
 
   it('applies correct grid classes to featured grid', () => {
-    const { container } = render(<ProjectsContainer featuredProjects={featured} otherProjects={[]} />)
+    const { container } = render(<ProjectsContainer featuredProjects={featured} />)
 
     const grid = container.querySelector('#projects-grid')
     expect(grid).toBeInTheDocument()
@@ -98,22 +87,26 @@ describe('ProjectsContainer', () => {
   })
 
   it('renders projects with images when provided', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} otherProjects={[]} />)
+    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} />)
 
-    const image = screen.getByAltText('Project 1 screenshot screenshot')
+    const imageLink = screen.getByRole('link', { name: 'View Project 1 (opens in new tab)' })
+    const image = imageLink.querySelector('img')
     expect(image).toBeInTheDocument()
     expect(image).toHaveAttribute('src', '/project1.png')
+    expect(image).toHaveAttribute('alt', '')
   })
 
-  it('uses default imageTitle when not provided', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[1]]} otherProjects={[]} />)
+  it('uses decorative alt on linked project images', () => {
+    render(<ProjectsContainer featuredProjects={[mockProjects[1]]} />)
 
-    const image = screen.getByAltText('Project 2 screenshot')
+    const imageLink = screen.getByRole('link', { name: 'View Project 2 (opens in new tab)' })
+    const image = imageLink.querySelector('img')
     expect(image).toBeInTheDocument()
+    expect(image).toHaveAttribute('alt', '')
   })
 
   it('renders all project links correct', () => {
-    render(<ProjectsContainer featuredProjects={featured} otherProjects={other} />)
+    render(<ProjectsContainer featuredProjects={featured} />)
 
     const project1Link = screen.getByRole('link', { name: /link to Project 1/i })
     expect(project1Link).toHaveAttribute('href', 'https://example.com/project1')
@@ -121,14 +114,14 @@ describe('ProjectsContainer', () => {
 
   describe('Accessibility', () => {
     it('should have skip link for keyboard navigation', () => {
-      render(<ProjectsContainer featuredProjects={featured} otherProjects={[]} />)
+      render(<ProjectsContainer featuredProjects={featured} />)
 
       const skipLink = screen.getByRole('link', { name: /skip to hackathons content/i })
       expect(skipLink).toBeInTheDocument()
     })
 
     it('should have aria-describedby linking to description', () => {
-      const { container } = render(<ProjectsContainer featuredProjects={featured} otherProjects={[]} />)
+      const { container } = render(<ProjectsContainer featuredProjects={featured} />)
 
       const grid = container.querySelector('#projects-grid')
       expect(grid).toHaveAttribute('aria-describedby', 'projects-description')
@@ -139,7 +132,7 @@ describe('ProjectsContainer', () => {
     })
 
     it('should have proper focus management for grid navigation', () => {
-      const { container } = render(<ProjectsContainer featuredProjects={featured} otherProjects={[]} />)
+      const { container } = render(<ProjectsContainer featuredProjects={featured} />)
 
       const grid = container.querySelector('#projects-grid')
       expect(grid).toHaveAttribute('role', 'grid')

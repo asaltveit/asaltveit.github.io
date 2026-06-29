@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import './mocks/matchMediaFalse.mock'
 import BackToTopButton from '@/components/BackToTopButton'
 
 const mockScrollTo = jest.fn()
@@ -211,10 +212,11 @@ describe('BackToTopButton', () => {
       'transition-all',
       'duration-300',
       'hover:scale-110',
+      'motion-reduce:hover:scale-100',
       'hover:shadow-accent/50',
       'focus:outline-none',
-      'focus:ring-4',
-      'focus:ring-accent-hover',
+      'focus-visible:ring-4',
+      'focus-visible:ring-accent-hover',
       'z-50'
     )
   })
@@ -255,7 +257,7 @@ describe('BackToTopButton', () => {
       const button = screen.getByRole('button', { name: /back to top/i })
       button.focus()
       expect(button).toHaveFocus()
-      expect(button).toHaveClass('focus:ring-4', 'focus:ring-accent-hover')
+      expect(button).toHaveClass('focus-visible:ring-4', 'focus-visible:ring-accent-hover')
     })
 
     it('should announce button appearance to screen readers', async () => {

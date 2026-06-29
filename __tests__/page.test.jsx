@@ -53,9 +53,10 @@ describe('Page', () => {
         it('renders all navigation links', () => {
             render(<Page />)
             expect(screen.getByRole('link', { name: 'link to About section' })).toBeInTheDocument()
-            expect(screen.getByRole('link', { name: 'link to Experience section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Projects section' })).toBeInTheDocument()
+            expect(screen.getByRole('link', { name: 'link to Experience section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Hackathons section' })).toBeInTheDocument()
+            expect(screen.getByRole('link', { name: 'link to Skills section' })).toBeInTheDocument()
         })
     })
 
@@ -63,7 +64,10 @@ describe('Page', () => {
         it('renders About section', () => {
             render(<Page />)
             const aboutSection = document.getElementById('about')
-            expect(aboutSection).toBeNull()
+            expect(aboutSection).toBeInTheDocument()
+            if (aboutSection) {
+                expect(within(aboutSection).getByRole('heading', { name: 'Anna Saltveit', level: 1 })).toBeInTheDocument()
+            }
         })
 
         it('renders Experience section', () => {
@@ -156,24 +160,27 @@ describe('Page', () => {
 
     describe('Footer Links', () => {
         describe('Github', () => {
-            it('renders', () => {
+            it('renders in footer', () => {
                 render(<Page />)
-                const github = screen.getByText('Github')
-                expect(github).toBeInTheDocument()
+                const footer = screen.getByRole('contentinfo')
+                expect(within(footer).getByRole('link', { name: 'GitHub' })).toBeInTheDocument()
             })
             it('has correct href', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
                 expect(githubLink).toHaveAttribute('href', 'https://github.com/asaltveit')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
                 expect(githubLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'GitHub' })
                 expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
@@ -223,7 +230,7 @@ describe('Page', () => {
             expect(nav).toBeInTheDocument()
         })
 
-        it('has accessible footer links', () => {
+        it('has accessible hero social links', () => {
             render(<Page />)
             const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
             const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })

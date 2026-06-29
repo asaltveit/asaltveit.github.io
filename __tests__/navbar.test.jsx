@@ -12,34 +12,30 @@ beforeEach(() => {
 describe('NavBar', () => {
   const mockLinks = [
     { title: "About", id: "about" },
-    { title: "Experience", id: "experience" },
     { title: "Projects", id: "projects" },
+    { title: "Experience", id: "experience" },
     { title: "Hackathons", id: "hackathons" },
+    { title: "Skills", id: "skills" },
   ];
 
   it('renders navigation with all links', () => {
     render(<NavBar links={mockLinks} />);
 
     expect(screen.getByText('About')).toBeInTheDocument();
-    expect(screen.getByText('Experience')).toBeInTheDocument();
     expect(screen.getByText('Projects')).toBeInTheDocument();
+    expect(screen.getByText('Experience')).toBeInTheDocument();
     expect(screen.getByText('Hackathons')).toBeInTheDocument();
+    expect(screen.getByText('Skills')).toBeInTheDocument();
   });
 
   it('renders links with correct href attributes', () => {
     render(<NavBar links={mockLinks} />);
 
-    const aboutLink = screen.getByRole('link', { name: /link to About section/i });
-    expect(aboutLink).toHaveAttribute('href', '#about');
-
-    const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
-    expect(experienceLink).toHaveAttribute('href', '#experience');
-    
-    const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
-    expect(projectsLink).toHaveAttribute('href', '#projects');
-    
-    const hackathonsLink = screen.getByRole('link', { name: /link to Hackathons section/i });
-    expect(hackathonsLink).toHaveAttribute('href', '#hackathons');
+    expect(screen.getByRole('link', { name: /link to About section/i })).toHaveAttribute('href', '#about');
+    expect(screen.getByRole('link', { name: /link to Projects section/i })).toHaveAttribute('href', '#projects');
+    expect(screen.getByRole('link', { name: /link to Experience section/i })).toHaveAttribute('href', '#experience');
+    expect(screen.getByRole('link', { name: /link to Hackathons section/i })).toHaveAttribute('href', '#hackathons');
+    expect(screen.getByRole('link', { name: /link to Skills section/i })).toHaveAttribute('href', '#skills');
   });
 
   it('renders navigation with aria-label', () => {
@@ -50,47 +46,31 @@ describe('NavBar', () => {
     expect(nav).toHaveAttribute('aria-label', 'main navigation');
   });
 
-  it('renders menu with proper role attributes', () => {
+  it('renders navigation links in a list', () => {
     render(<NavBar links={mockLinks} />);
     
-    const menu = screen.getByRole('menu');
-    expect(menu).toBeInTheDocument();
+    const list = screen.getByRole('list');
+    expect(list).toBeInTheDocument();
     
-    const menuItems = screen.getAllByRole('menuitem');
-    expect(menuItems).toHaveLength(4);
-  });
-
-  it('renders menu items with aria-labels', () => {
-    render(<NavBar links={mockLinks} />);
-    
-    const menuItems = screen.getAllByRole('menuitem');
-    expect(menuItems[0]).toHaveAttribute('aria-label', 'includes link to About section');
-    expect(menuItems[1]).toHaveAttribute('aria-label', 'includes link to Experience section');
-    expect(menuItems[2]).toHaveAttribute('aria-label', 'includes link to Projects section');
-    expect(menuItems[3]).toHaveAttribute('aria-label', 'includes link to Hackathons section');
+    const links = screen.getAllByRole('link', { name: /link to .* section/i });
+    expect(links).toHaveLength(5);
   });
 
   it('renders links with aria-labels', () => {
     render(<NavBar links={mockLinks} />);
     
-    const aboutLink = screen.getByRole('link', { name: /link to About section/i });
-    expect(aboutLink).toHaveAttribute('aria-label', 'link to About section');
-
-    const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
-    expect(experienceLink).toHaveAttribute('aria-label', 'link to Experience section');
-
-    const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
-    expect(projectsLink).toHaveAttribute('aria-label', 'link to Projects section');
+    expect(screen.getByRole('link', { name: /link to About section/i })).toHaveAttribute('aria-label', 'link to About section');
+    expect(screen.getByRole('link', { name: /link to Projects section/i })).toHaveAttribute('aria-label', 'link to Projects section');
   });
 
   it('handles empty links array', () => {
     render(<NavBar links={[]} />);
     
-    const menu = screen.getByRole('menu');
-    expect(menu).toBeInTheDocument();
+    const list = screen.getByRole('list');
+    expect(list).toBeInTheDocument();
     
-    const menuItems = screen.queryAllByRole('menuitem');
-    expect(menuItems).toHaveLength(0);
+    const navLinks = screen.queryAllByRole('link', { name: /link to .* section/i });
+    expect(navLinks).toHaveLength(0);
   });
 
   it('handles single link', () => {
@@ -106,8 +86,6 @@ describe('NavBar', () => {
       render(<NavBar links={mockLinks} />);
       
       const experienceLink = screen.getByRole('link', { name: /link to Experience section/i });
-      expect(experienceLink).toBeInTheDocument();
-      
       fireEvent.click(experienceLink);
       expect(experienceLink).toHaveAttribute('href', '#experience');
     });
@@ -137,19 +115,17 @@ describe('NavBar', () => {
       expect(experienceLink).toHaveAttribute('href', '#experience');
     });
 
-    it('supports Tab key navigation between menu items', () => {
+    it('supports Tab key navigation between links', () => {
       render(<NavBar links={mockLinks} />);
       
-      const menuItems = screen.getAllByRole('menuitem');
-      const firstLink = menuItems[0].querySelector('a');
-      const secondLink = menuItems[1].querySelector('a');
+      const aboutLink = screen.getByRole('link', { name: /link to About section/i });
+      const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
       
-      firstLink.focus();
-      expect(firstLink).toHaveFocus();
+      aboutLink.focus();
+      expect(aboutLink).toHaveFocus();
       
-      fireEvent.keyDown(firstLink, { key: 'Tab', code: 'Tab' });
-      expect(firstLink).toBeInTheDocument();
-      expect(secondLink).toBeInTheDocument();
+      fireEvent.keyDown(aboutLink, { key: 'Tab', code: 'Tab' });
+      expect(projectsLink).toBeInTheDocument();
     });
   });
 
@@ -178,9 +154,8 @@ describe('NavBar', () => {
       fireEvent.click(menuButton);
       
       expect(menuButton).toHaveAttribute('aria-expanded', 'true');
-      const menu = screen.getByRole('menu');
-      const firstMenuItem = screen.getAllByRole('menuitem')[0].querySelector('a');
-      expect(firstMenuItem).toHaveFocus();
+      const firstLink = screen.getByRole('link', { name: /link to About section/i });
+      expect(firstLink).toHaveFocus();
     });
 
     it('should indicate current page with aria-current', () => {
@@ -198,17 +173,16 @@ describe('NavBar', () => {
       expect(nav).toHaveAttribute('role', 'navigation');
     });
 
-    it('should support arrow key navigation between menu items', () => {
+    it('should support arrow key navigation between links', () => {
       render(<NavBar links={mockLinks} />);
       
-      const menuItems = screen.getAllByRole('menuitem');
-      const firstLink = menuItems[0].querySelector('a');
-      const secondLink = menuItems[1].querySelector('a');
+      const aboutLink = screen.getByRole('link', { name: /link to About section/i });
+      const projectsLink = screen.getByRole('link', { name: /link to Projects section/i });
       
-      firstLink.focus();
-      fireEvent.keyDown(firstLink, { key: 'ArrowRight', code: 'ArrowRight' });
+      aboutLink.focus();
+      fireEvent.keyDown(aboutLink, { key: 'ArrowRight', code: 'ArrowRight' });
       
-      expect(secondLink).toHaveFocus();
+      expect(projectsLink).toHaveFocus();
     });
 
     it('should have visible focus indicators', () => {
@@ -221,11 +195,11 @@ describe('NavBar', () => {
       expect(computedStyle.outline).not.toBe('none');
     });
 
-    it('should specify menu orientation for screen readers', () => {
+    it('should specify list orientation for screen readers', () => {
       render(<NavBar links={mockLinks} />);
       
-      const menu = screen.getByRole('menu');
-      expect(menu).toHaveAttribute('aria-orientation', 'horizontal');
+      const list = screen.getByRole('list');
+      expect(list).toHaveAttribute('aria-orientation', 'horizontal');
     });
 
     it('should have accessible menu button with screen reader text', () => {

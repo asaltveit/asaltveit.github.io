@@ -102,9 +102,11 @@ describe('HackathonsContainer', () => {
   it('renders hackathons with images when provided', () => {
     render(<HackathonsContainer hackathons={[mockHackathons[0]]} />);
     
-    const image = screen.getByAltText('Hackathon 1 screenshot screenshot');
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', '/hackathon1.png');
+    const imageLink = screen.getByRole('link', { name: 'View Hackathon 1 (opens in new tab)' })
+    const image = imageLink.querySelector('img')
+    expect(image).toBeInTheDocument()
+    expect(image).toHaveAttribute('src', '/hackathon1.png')
+    expect(image).toHaveAttribute('alt', '')
   });
 
   it('uses default imageTitle when not provided', () => {
@@ -114,8 +116,10 @@ describe('HackathonsContainer', () => {
     };
     render(<HackathonsContainer hackathons={[hackathonWithImageNoTitle]} />);
     
-    const image = screen.getByAltText('Hackathon 2 screenshot');
-    expect(image).toBeInTheDocument();
+    const imageLink = screen.getByRole('link', { name: 'View Hackathon 2 (opens in new tab)' })
+    const image = imageLink.querySelector('img')
+    expect(image).toBeInTheDocument()
+    expect(image).toHaveAttribute('alt', '')
   });
 
   it('renders hackathon metadata correctly', () => {
