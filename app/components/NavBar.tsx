@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
+import { scrollIntoViewWithMotion } from '@/utils/scroll';
 import ThemeToggle from '@/components/ThemeToggle';
 
 interface Link {
@@ -104,7 +105,7 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
         const mainContent = document.getElementById('main-content');
         if (mainContent) {
             mainContent.focus();
-            mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            scrollIntoViewWithMotion(mainContent, { block: 'start' });
         }
     };
 
@@ -125,7 +126,7 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
                         <button 
                             data-collapse-toggle="navbar-solid-bg" 
                             type="button" 
-                            className="relative z-50 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-sm text-text-primary md:hidden hover:bg-surface-hover focus:outline-none focus:ring-2 focus:ring-accent"
+                            className="relative z-50 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg text-sm text-text-primary md:hidden hover:bg-surface-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                             aria-controls="navbar-solid-bg" 
                             aria-expanded={isMenuOpen}
                             onClick={toggleMenu}
@@ -140,17 +141,17 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
                             className={`${isMenuOpen ? 'block' : 'hidden'} md:block absolute right-0 top-full z-40 mt-1 w-max max-w-[min(100vw-2rem,16rem)] rounded-lg border border-border bg-surface px-4 pt-2 pb-3 shadow-lg md:static md:top-auto md:right-auto md:z-auto md:mt-0 md:max-w-none md:border-0 md:bg-transparent md:p-0 md:shadow-none`}
                             id="navbar-solid-bg"
                         >
-                            <ul role="menu" aria-orientation="horizontal" className="flex flex-col gap-0 font-medium md:flex-row md:space-x-8 rtl:space-x-reverse">
+                            <ul aria-orientation="horizontal" className="flex flex-col gap-0 font-medium md:flex-row md:space-x-8 rtl:space-x-reverse">
                                 {
                                     links.map((link: Link, index: number) => {
                                         const isActive = link.id === activeSectionId;
                                         return (
-                                            <li key={`${link.id}`} role="menuitem" aria-label={`includes link to ${link.title} section`}>
+                                            <li key={`${link.id}`}>
                                                 <a 
                                                     href={`#${link.id}`} 
                                                     aria-label={`link to ${link.title} section`}
                                                     aria-current={isActive ? 'page' : undefined}
-                                                    className="block rounded-md py-1.5 underline underline-offset-4 md:inline md:px-0 md:py-0 md:no-underline md:hover:underline md:hover:underline-offset-4"
+                                                    className="block rounded-md py-2.5 underline underline-offset-4 md:inline md:px-0 md:py-0 md:no-underline md:hover:underline md:hover:underline-offset-4"
                                                     ref={(el) => { linkRefs.current[index] = el; }}
                                                     onKeyDown={(e) => handleKeyDown(e, index)}
                                                     onClick={() => setIsMenuOpen(false)}

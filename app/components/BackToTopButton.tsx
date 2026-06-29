@@ -2,7 +2,7 @@
 
 import { ArrowUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
+import { scrollToTopWithMotion } from '@/utils/scroll';
 
 export default function BackToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,10 +22,7 @@ export default function BackToTopButton() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    scrollToTopWithMotion();
   };
 
   return (
@@ -40,14 +37,13 @@ export default function BackToTopButton() {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-accent hover:ring-4 hover:bg-accent-hover text-surface p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 hover:shadow-accent/50 focus:outline-none focus:ring-4 focus:ring-accent-hover z-50"
+          className="fixed bottom-8 right-8 bg-accent hover:ring-4 hover:bg-accent-hover text-surface p-4 rounded-full shadow-2xl transition-all duration-300 motion-reduce:transition-none hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-accent/50 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-hover z-50"
           aria-label="Back to top"
           type="button"
         >
-          <ArrowUp size={24} className="text-surface" />
+          <ArrowUp size={24} className="text-surface" aria-hidden />
         </button>
       )}
     </>
   );
 }
-

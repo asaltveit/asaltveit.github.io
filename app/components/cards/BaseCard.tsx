@@ -22,7 +22,7 @@ export default function BaseCard({
 }: BaseCardProps) {
   const description_words = ["Problem: ", "Solution: ", "Impact: "];
   return (
-    <div className="bg-surface rounded-lg shadow-md hover:shadow-lg hover:bg-surface-hover transition-all duration-300 overflow-hidden border border-border flex flex-col">
+    <div className="bg-surface rounded-lg shadow-md hover:shadow-lg hover:bg-surface-hover transition-all duration-300 motion-reduce:transition-none overflow-hidden border border-border flex flex-col">
       {/* Image or placeholder section */}
       {children && (
         <div className="w-full aspect-video overflow-hidden flex-shrink-0">
@@ -37,11 +37,11 @@ export default function BaseCard({
             <CardTitleLink title={title} link={link} />
           ) : (
             <div>
-              <h2 className="text-text-primary text-xl md:text-2xl font-bold">
+              <h3 className="text-text-primary text-h2 font-bold">
                 {title}
-              </h2>
+              </h3>
               {noLinkNote && (
-                <p className="text-text-secondary text-sm mt-1" aria-hidden="true">
+                <p className="text-text-secondary text-small mt-1">
                   {noLinkNote}
                 </p>
               )}
@@ -49,13 +49,16 @@ export default function BaseCard({
           )}
         </div>
         
-        <time className="text-text-secondary text-base md:text-lg mb-4">
+        <time className="text-text-secondary text-small mb-4">
           {dates}
         </time>
 
-        <div className="text-text-primary text-base md:text-lg space-y-1.5 mb-4">
+        <div className="text-text-primary text-body leading-relaxed space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (
-            <div key={`${i}`}><label> { description_words[i] }</label>{item}</div>
+            <div key={`${i}`}>
+              <span className="font-semibold">{description_words[i]}</span>
+              {item}
+            </div>
           ))}
         </div>
         

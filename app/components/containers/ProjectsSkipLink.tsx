@@ -1,13 +1,14 @@
 'use client';
 
 import { MouseEvent } from 'react';
+import { scrollIntoViewWithMotion } from '@/utils/scroll';
 
 export default function ProjectsSkipLink() {
   const handleSkipClick = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const hackathonsGrid = document.getElementById('hackathons-grid');
     if (hackathonsGrid) {
-      hackathonsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      scrollIntoViewWithMotion(hackathonsGrid, { block: 'start' });
       const firstFocusable = hackathonsGrid.querySelector<HTMLElement>(
         'a[href], button, [tabindex]:not([tabindex="-1"])'
       );
