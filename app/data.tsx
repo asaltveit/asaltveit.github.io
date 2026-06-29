@@ -19,8 +19,8 @@ export const featuredProjects: ProjectProps[] = [
     dates: "2024 - 2025",
     items: [
       "A researcher wanted to view the timeline of where Sator Squares were found and create artifacts for presentations.",
-      "A clean, explorable map users can filter and inspect on desktop or phone, with a codebase that stayed easy to extend.",
-      "?",
+      "Built a clean, explorable map users can filter and inspect on desktop or phone, with a codebase that stayed easy to extend.",
+      "Researchers can explore Sator Square locations over time and export presentation-ready artifacts from the map.",
     ],
     link: "https://rotas-squares-map.vercel.app/",
     techStack: ["React", "TailwindCSS", "Observable Plot", "Supabase", "JavaScript"],
@@ -128,7 +128,75 @@ export const hackathons = [
 
 export const navLinks = [
   { title: "About", id: "about" },
-  { title: "Experience", id: "experience" },
   { title: "Projects", id: "projects" },
+  { title: "Experience", id: "experience" },
   { title: "Hackathons", id: "hackathons" },
+  { title: "Skills", id: "skills" },
+];
+
+export interface ExperienceEntry {
+  title: string;
+  dates: string;
+  items: string[];
+  linkLocation?: string;
+  linkName?: string;
+}
+
+export const experienceEntries: ExperienceEntry[] = [
+  {
+    title: "Real Estate Investment Group, Software Engineer",
+    dates: "2026 - Present",
+    items: [
+      "Took ownership of an incomplete scraping system, rebuilding and extending it using Python and Playwright to reliably extract real estate data from multiple sources.",
+      "Designing data processing pipelines to clean, normalize, and structure inconsistent inputs into usable datasets for downstream analysis in spreadsheet workflows.",
+      "Working directly with stakeholders to define requirements and iterate on product direction.",
+      "Designing systems to handle inconsistent real-world data and evolving business logic.",
+    ],
+  },
+  {
+    title: "Less Fluorescent, Software Developer",
+    dates: "2025 - 2025",
+    items: [
+      "Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.",
+      "Built responsive web and mobile prototypes using JavaScript, HTML, CSS.",
+      "Worked on early-stage architecture and component design for MVP validation.",
+    ],
+  },
+  {
+    title: "Included Health, Web Developer",
+    dates: "2021 - 2024",
+    items: [
+      "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
+      "Led the development of medium and large features from code design to release.",
+      "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
+    ],
+  },
+];
+
+export interface SkillGroup {
+  title: string;
+  items: string;
+}
+
+export const skillGroups: SkillGroup[] = [
+  {
+    title: "Product Engineering",
+    items: "TypeScript, React, Next.js, Tailwind CSS, Material UI, Zustand, Jest, Vite, HTML, CSS",
+  },
+  {
+    title: "AI and Agents",
+    items: "Letta, n8n, Weights & Biases Weave, Pipecat, Meshy, Cursor, Claude Code",
+  },
+  {
+    title: "Design",
+    items: "Blender, FreeCAD, Figma",
+  },
+  {
+    title: "Backend and data",
+    items: "Python, Node.js, Supabase, PostgreSQL, Express, Sequelize.js",
+  },
+  {
+    title: "Delivery",
+    items: "GitHub Actions, Git, Vercel, Slack, Jira, Agile workflows",
+  },
 ];

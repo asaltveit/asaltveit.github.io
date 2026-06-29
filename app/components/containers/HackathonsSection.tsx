@@ -19,7 +19,7 @@ export default function HackathonsSection(props: HackathonsSectionProps = {}) {
 
   return (
     <>
-      <p id="hackathons-description" className="absolute left-[-9999px]" aria-hidden="true">
+      <p id="hackathons-description" className="sr-only">
         Hackathons section
       </p>
       <CardGrid

@@ -2,10 +2,12 @@ import Section from '@/components/containers/Section';
 import NavBar from '@/components/NavBar';
 import Experience from '@/components/Experience';
 import HeroSocialLinks from '@/components/HeroSocialLinks';
+import SkillsSection from '@/components/containers/SkillsSection';
 import DeferredBackToTop from '@/components/lazy/DeferredBackToTop';
 import DeferredProjectsSection from '@/components/lazy/DeferredProjectsSection';
 import DeferredHackathonsSection from '@/components/lazy/DeferredHackathonsSection';
-import { navLinks } from '@/data';
+import { navLinks, experienceEntries } from '@/data';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -13,8 +15,8 @@ export default function Home() {
       <header className="text-text-primary">
         <NavBar links={navLinks} />
       </header>
-      <main id="main-content" tabIndex={-1} className="min-w-0 max-w-6xl mx-auto w-full">
-        <section className="py-[8rem] space-y-6">
+      <main id="main-content" tabIndex={-1} className="min-w-0 max-w-[68.75rem] mx-auto w-full">
+        <section id="about" className="scroll-mt-16 py-16 md:py-28 lg:py-32 space-y-6">
           <h1 className="text-hero text-text-primary leading-tight font-sans">
             Anna Saltveit
           </h1>
@@ -23,77 +25,43 @@ export default function Home() {
           </p>
           <HeroSocialLinks />
         </section>
-        <div className="flex flex-col gap-[4px] items-start">
+        <div className="flex flex-col gap-space-4 items-start">
           <Section title="Featured Projects" id="projects">
-            <div className="grid grid-cols-1 space-y-6 md:space-y-12">
+            <div className="grid grid-cols-1 space-y-6 md:space-y-10">
               <DeferredProjectsSection />
             </div>
           </Section>
           <Section title="Experience" id="experience">
             <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-              <Experience
-                title="Real Estate Investment Group, Software Engineer"
-                dates="2026 - Present"
-                items={[
-                  'Took ownership of an incomplete scraping system, rebuilding and extending it using Python and Playwright to reliably extract real estate data from multiple sources.',
-                  'Designing data processing pipelines to clean, normalize, and structure inconsistent inputs into usable datasets for downstream analysis in spreadsheet workflows.',
-                  'Working directly with stakeholders to define requirements and iterate on product direction.',
-                  'Designing systems to handle inconsistent real-world data and evolving business logic.',
-                ]}
-              />
-              <Experience
-                title="Less Fluorescent, Software Developer"
-                dates="2025 - 2025"
-                items={[
-                  'Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.',
-                  'Built responsive web and mobile prototypes using JavaScript, HTML, CSS.',
-                  'Worked on early-stage architecture and component design for MVP validation.',
-                ]}
-              />
-              <Experience
-                title="Included Health, Web Developer"
-                dates="2021 - 2024"
-                items={[
-                  'Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.',
-                  'Led the development of medium and large features from code design to release.',
-                  'Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.',
-                ]}
-              />
+              {experienceEntries.map((entry) => (
+                <Experience key={entry.title} {...entry} />
+              ))}
             </div>
           </Section>
           <Section title="Selected Hackathons" id="hackathons">
-            <div className="grid grid-cols-1 space-y-6 md:space-y-12">
+            <div className="grid grid-cols-1 space-y-6 md:space-y-10">
               <DeferredHackathonsSection />
             </div>
           </Section>
         </div>
         <Section title="Skills" id="skills">
-          <div className="grid max-w-prose">
-            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Product Engineering</h3>
-            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-              TypeScript, React, Next.js, Tailwind CSS, Material UI, Zustand, Jest, Vite, HTML, CSS
-            </p>
-            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">AI and Agents</h3>
-            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-              Letta, n8n, Weights & Biases Weave, Pipecat, Meshy, Cursor, Claude Code
-            </p>
-            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Design</h3>
-            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-              Blender, FreeCAD, Figma
-            </p>
-            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Backend and data</h3>
-            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-              Python, Node.js, Supabase, PostgreSQL, Express, Sequelize.js
-            </p>
-            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Delivery</h3>
-            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-              GitHub Actions, Git, Vercel, Slack, Jira, Agile workflows
-            </p>
-          </div>
+          <SkillsSection />
         </Section>
       </main>
 
-      <footer className="row-start-3 flex gap-[24px] text-text-primary flex-wrap items-center justify-center" />
+      <footer className="text-text-secondary text-small text-center py-6">
+        <p>
+          © {new Date().getFullYear()} Anna Saltveit ·{' '}
+          <Link
+            href="https://github.com/asaltveit"
+            className="text-accent hover:text-accent-hover underline underline-offset-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </Link>
+        </p>
+      </footer>
 
       <DeferredBackToTop />
     </div>
