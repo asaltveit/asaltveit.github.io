@@ -1,7 +1,7 @@
 import { StaticImageData } from 'next/image';
 import { Trophy, Users, Clock } from 'lucide-react';
 import BaseCard from '@/components/cards/BaseCard';
-import HackathonCardImage from '@/components/cards/HackathonCardImage';
+import CardImage from '@/components/cards/CardImage';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 
 export interface HackathonProps {
@@ -33,7 +33,7 @@ export default function HackathonCard({
   if (duration) {
     metadataItems.push(
       <div key="duration" className="flex items-center gap-1.5 text-sm text-text-secondary">
-        <Clock className="w-4 h-4" />
+        <Clock className="w-4 h-4" aria-hidden />
         <span>{duration}</span>
       </div>
     );
@@ -41,7 +41,7 @@ export default function HackathonCard({
   if (teamSize) {
     metadataItems.push(
       <div key="team" className="flex items-center gap-1.5 text-sm text-text-secondary">
-        <Users className="w-4 h-4" />
+        <Users className="w-4 h-4" aria-hidden />
         <span>
           {teamSize} {teamSize === 1 ? 'person' : 'people'}
         </span>
@@ -55,7 +55,7 @@ export default function HackathonCard({
         <div className="flex flex-wrap items-center gap-3">
           {award && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-success/15 rounded-md text-success text-sm font-semibold">
-              <Trophy className="w-4 h-4" />
+              <Trophy className="w-4 h-4" aria-hidden />
               <span>{award}</span>
             </div>
           )}
@@ -75,7 +75,7 @@ export default function HackathonCard({
       noLinkNote={!link ? 'No project link available' : undefined}
       footerContent={footerContent}
     >
-      <HackathonCardImage title={title} link={link} image={image} imageTitle={imageTitle} />
+      <CardImage title={title} link={link} image={image} imageTitle={imageTitle} variant="hackathon" />
     </BaseCard>
   );
 }

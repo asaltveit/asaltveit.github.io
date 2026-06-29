@@ -1,6 +1,6 @@
 import { StaticImageData } from 'next/image';
 import BaseCard from '@/components/cards/BaseCard';
-import ProjectCardImage from '@/components/cards/ProjectCardImage';
+import CardImage from '@/components/cards/CardImage';
 import TechStackIcons from '@/components/cards/TechStackIcons';
 
 export interface ProjectProps {
@@ -30,7 +30,7 @@ export default function ProjectCard({
       link={link}
       footerContent={<TechStackIcons techStack={techStack} />}
     >
-      <ProjectCardImage title={title} link={link} image={image} imageTitle={imageTitle} />
+      <CardImage title={title} link={link} image={image} imageTitle={imageTitle} variant="project" />
     </BaseCard>
   );
 }
