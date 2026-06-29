@@ -231,7 +231,7 @@ describe('NavBar', () => {
     it('should have accessible menu button with screen reader text', () => {
       render(<NavBar links={mockLinks} />);
       
-      const menuButton = screen.getByRole('button');
+      const menuButton = screen.getByRole('button', { name: /open main menu/i });
       const srOnly = menuButton.querySelector('.sr-only');
       expect(srOnly).toBeInTheDocument();
       expect(srOnly).toHaveTextContent('Open main menu');

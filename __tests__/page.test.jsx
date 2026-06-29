@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, within, waitFor } from '@testing-library/react'
 import './mocks/matchMediaFalse.mock'
 import Page from '../app/page'
 
@@ -7,6 +7,12 @@ import Page from '../app/page'
 jest.mock('next/link', () => {
   return ({ children, href, ...props }) => {
     return <a href={href} {...props}>{children}</a>
+  }
+})
+
+jest.mock('next/image', () => {
+  return ({ src, alt, ...props }) => {
+    return <img src={src} alt={alt} {...props} />
   }
 })
  
@@ -57,18 +63,13 @@ describe('Page', () => {
         it('renders About section', () => {
             render(<Page />)
             const aboutSection = document.getElementById('about')
-            expect(aboutSection).toBeInTheDocument()
-            if (aboutSection) {
-                const { getByText } = within(aboutSection)
-                expect(getByText('About')).toBeInTheDocument()
-            }
+            expect(aboutSection).toBeNull()
         })
 
         it('renders Experience section', () => {
             render(<Page />)
             const experienceSection = document.getElementById('experience')
             expect(experienceSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (experienceSection) {
                 const { getByText } = within(experienceSection)
                 expect(getByText('Experience')).toBeInTheDocument()
@@ -79,10 +80,9 @@ describe('Page', () => {
             render(<Page />)
             const projectsSection = document.getElementById('projects')
             expect(projectsSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (projectsSection) {
                 const { getByText } = within(projectsSection)
-                expect(getByText('Projects')).toBeInTheDocument()
+                expect(getByText('Featured Projects')).toBeInTheDocument()
             }
         })
 
@@ -90,35 +90,26 @@ describe('Page', () => {
             render(<Page />)
             const hackathonsSection = document.getElementById('hackathons')
             expect(hackathonsSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (hackathonsSection) {
                 const { getByText } = within(hackathonsSection)
-                expect(getByText('Hackathons')).toBeInTheDocument()
+                expect(getByText('Selected Hackathons')).toBeInTheDocument()
             }
         })
     })
 
-    describe('About content', () => {
+    describe('Hero content', () => {
         it('renders hero tagline', () => {
             render(<Page />)
             expect(
-                screen.getByText(/Frontend developer and designer — I build responsive, accessible interfaces/i)
+                screen.getByText(/Product engineer building AI-powered tools and interactive experiences/i)
             ).toBeInTheDocument()
         })
 
-        it('renders focus areas heading', () => {
+        it('renders skills headings', () => {
             render(<Page />)
-            expect(screen.getByText('What I focus on')).toBeInTheDocument()
-        })
-
-        it('renders stack heading', () => {
-            render(<Page />)
-            expect(screen.getByText('Stack I ship with')).toBeInTheDocument()
-        })
-
-        it('renders also-comfortable heading', () => {
-            render(<Page />)
-            expect(screen.getByText('Also comfortable with')).toBeInTheDocument()
+            expect(screen.getByText('Product Engineering')).toBeInTheDocument()
+            expect(screen.getByText('AI and Agents')).toBeInTheDocument()
+            expect(screen.getByText('Backend and data')).toBeInTheDocument()
         })
     })
 
@@ -128,8 +119,6 @@ describe('Page', () => {
             expect(screen.getByText('Real Estate Investment Group, Software Engineer')).toBeInTheDocument()
             expect(screen.getByText('Less Fluorescent, Software Developer')).toBeInTheDocument()
             expect(screen.getByText('Included Health, Web Developer')).toBeInTheDocument()
-            expect(screen.getByText('Code for PDX, Frontend Developer')).toBeInTheDocument()
-            expect(screen.getByText('Waitrainer, Intern')).toBeInTheDocument()
         })
 
         it('renders experience dates', () => {
@@ -137,22 +126,22 @@ describe('Page', () => {
             expect(screen.getByText('2026 - Present')).toBeInTheDocument()
             expect(screen.getByText('2025 - 2025')).toBeInTheDocument()
             expect(screen.getByText('2021 - 2024')).toBeInTheDocument()
-            expect(screen.getByText('2020 - 2020')).toBeInTheDocument()
-            expect(screen.getByText('2017 - 2017')).toBeInTheDocument()
         })
     })
 
     describe('Projects and Hackathons', () => {
-        it('renders ProjectsContainer', () => {
+        it('renders ProjectsContainer', async () => {
             render(<Page />)
-            // At least one project title from app data
-            expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            await waitFor(() => {
+                expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            })
         })
 
-        it('renders HackathonsContainer', () => {
+        it('renders HackathonsContainer', async () => {
             render(<Page />)
-            // At least one hackathon title from app data
-            expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
+            await waitFor(() => {
+                expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
+            })
         })
     })
 

@@ -12,7 +12,7 @@ export const featuredProjects: ProjectProps[] = [
     ],
     link: "https://asaltveit.github.io/mu2-fanclub-website/",
     techStack: ["Next.js", "TypeScript", "TailwindCSS"],
-    image: "/pilots-website-screenshot.png",
+    image: "/pilots-website-screenshot.webp",
   },
   {
     title: "ROTAS Squares Map",
@@ -24,7 +24,7 @@ export const featuredProjects: ProjectProps[] = [
     ],
     link: "https://rotas-squares-map.vercel.app/",
     techStack: ["React", "TailwindCSS", "Observable Plot", "Supabase", "JavaScript"],
-    image: "/map-screenshot-032725.png",
+    image: "/map-screenshot-032725.webp",
   },
     {
     title: "Create Biblio",
@@ -36,7 +36,7 @@ export const featuredProjects: ProjectProps[] = [
     ],
     link: "https://github.com/asaltveit/create-biblio",
     techStack: ["Python"],
-    image: "/create-biblio-screenshot-032825.png",
+    image: "/create-biblio-screenshot-032825.webp",
   },
 ];
 
@@ -52,7 +52,7 @@ export const otherProjects: ProjectProps[] = [
     ],
     link: "https://github.com/asaltveit/asaltveit.github.io",
     techStack: ["React", "Next.js", "TypeScript", "TailwindCSS"],
-    image: "/asaltveit.github.io-screenshot-040225.png",
+    image: "/asaltveit.github.io-screenshot-040225.webp",
   },
 ];
 
@@ -67,7 +67,7 @@ export const hackathons = [
       "Created a tool that transforms text descriptions into 3D models of individual trees or biomes of multiple plant and tree types.",
       "The trees are procedurally generated using fractals and L-systems in order to keep file and texture sizes small.",
     ],
-    image: "/rp1-trees-website-screenshot.png",
+    image: "/rp1-trees-website-screenshot.webp",
     link: "https://github.com/asaltveit/rp1-trees",
     techStack: ["RP1 MCP", "Claude"],
     award: "2nd Place in the Remote Track",

@@ -65,7 +65,7 @@ describe('Section', () => {
     const { container } = render(<Section {...defaultProps} />)
     
     const section = container.querySelector('#test-section')
-    expect(section).toHaveClass('relative', 'max-w-sm', 'md:max-w-5xl', 'min-w-0', 'mx-auto', 'w-full', 'break-words', 'bg-surface', 'mb-3', 'shadow-lg', 'rounded-xl', 'md:mt-16', 'mt-8')
+    expect(section).toHaveClass('relative', 'max-w-sm', 'md:max-w-6xl', 'min-w-0', 'mx-auto', 'w-full', 'break-words', 'bg-surface', 'mb-3', 'shadow-lg', 'rounded-xl', 'md:mt-16', 'mt-8')
   })
 
   describe('Accessibility', () => {

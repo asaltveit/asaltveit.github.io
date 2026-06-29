@@ -1,9 +1,4 @@
-'use client';
-
-import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
-import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
-import { handleSpacebarKeyDown } from '@/utils/keyboard';
+import CardTitleLink from '@/components/cards/CardTitleLink';
 
 interface BaseCardProps {
   title: string;
@@ -39,17 +34,7 @@ export default function BaseCard({
       <div className="p-6 lg:p-8 flex flex-col flex-grow">
         <div className="mb-3">
           {link ? (
-            <Link 
-              href={link} 
-              aria-label={`link to ${title} (opens in new tab)`}
-              className="group inline-flex items-center gap-2 text-text-primary text-xl md:text-2xl font-bold hover:text-accent transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              onKeyDown={handleSpacebarKeyDown}
-            >
-              {title}
-              <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
-            </Link>
+            <CardTitleLink title={title} link={link} />
           ) : (
             <div>
               <h2 className="text-text-primary text-xl md:text-2xl font-bold">
@@ -68,7 +53,7 @@ export default function BaseCard({
           {dates}
         </time>
 
-        <div className="ml-6 text-text-primary text-base md:text-lg space-y-1.5 mb-4">
+        <div className="text-text-primary text-base md:text-lg space-y-1.5 mb-4">
           {items.map((item: string, i: number) => (
             <div key={`${i}`}><label> { description_words[i] }</label>{item}</div>
           ))}

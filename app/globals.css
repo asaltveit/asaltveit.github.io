@@ -98,12 +98,11 @@ p, span, div, h1, h2, h3, h4, h5, h6, li, ul, ol {
 }
 
 /* Ensure clickable elements and all their children show pointer (hand) cursor */
-a, button,
-a *, button * {
+a, button {
   cursor: pointer;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/*@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -111,4 +110,4 @@ a *, button * {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
+}*/

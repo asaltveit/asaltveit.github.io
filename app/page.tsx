@@ -1,18 +1,11 @@
-'use client';
-
-import Link from 'next/link';
-import { ExternalLink } from 'lucide-react';
-import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
-import { handleSpacebarKeyDown } from '@/utils/keyboard';
-
-// Custom Components
 import Section from '@/components/containers/Section';
 import NavBar from '@/components/NavBar';
 import Experience from '@/components/Experience';
-import BackToTopButton from '@/components/BackToTopButton';
-import ProjectsContainer from '@/components/containers/ProjectsContainer';
-import HackathonsContainer from '@/components/containers/HackathonsContainer';
-import { featuredProjects, otherProjects, hackathons, navLinks } from '@/data';
+import HeroSocialLinks from '@/components/HeroSocialLinks';
+import DeferredBackToTop from '@/components/lazy/DeferredBackToTop';
+import DeferredProjectsSection from '@/components/lazy/DeferredProjectsSection';
+import DeferredHackathonsSection from '@/components/lazy/DeferredHackathonsSection';
+import { navLinks } from '@/data';
 
 export default function Home() {
   return (
@@ -21,41 +14,19 @@ export default function Home() {
         <NavBar links={navLinks} />
       </header>
       <main id="main-content" tabIndex={-1} className="min-w-0 max-w-6xl mx-auto w-full">
-        <h1 className="text-text-primary text-hero mt-6 md:mt-10 md:text-6xl text-center font-medium px-2">
-          Anna Saltveit
-        </h1>
-        <p className="text-text-primary text-center text-h1 md:text-xl max-w-2xl mx-auto mt-4 px-2 leading-relaxed">
-          Product engineer building AI-powered tools and interactive experiences. 
-          I specialize in turning ambiguous ideas into usable products, from frontend interfaces to data pipelines and intelligent workflows.
-        </p>
-        <p>
-          <Link
-            className="group flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
-            href="https://github.com/asaltveit"
-            aria-label="link to Github (opens in new tab)"
-            target="_blank"
-            rel="noopener noreferrer"
-            onKeyDown={handleSpacebarKeyDown}
-          >
-            Github
-            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
-          </Link>
-          <Link
-            className="group flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
-            href="https://www.linkedin.com/in/anna-saltveit-4a70b2184/"
-            aria-label="link to LinkedIn (opens in new tab)"
-            target="_blank"
-            rel="noopener noreferrer"
-            onKeyDown={handleSpacebarKeyDown}
-          >
-            LinkedIn
-            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
-          </Link>
-        </p>
+        <section className="py-[8rem] space-y-6">
+          <h1 className="text-hero text-text-primary leading-tight font-sans">
+            Anna Saltveit
+          </h1>
+          <p className="text-h2 text-text-secondary max-w-[65ch] leading-snug">
+            Product engineer building AI-powered tools and interactive experiences.
+          </p>
+          <HeroSocialLinks />
+        </section>
         <div className="flex flex-col gap-[4px] items-start">
           <Section title="Featured Projects" id="projects">
             <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-              <ProjectsContainer featuredProjects={featuredProjects} />
+              <DeferredProjectsSection />
             </div>
           </Section>
           <Section title="Experience" id="experience">
@@ -88,64 +59,43 @@ export default function Home() {
                   'Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.',
                 ]}
               />
-              {/*<Experience
-                title="Code for PDX, Frontend Developer"
-                dates="2020 - 2020"
-                items={[
-                  'Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.',
-                  'Contributed components in React and SCSS.',
-                ]}
-              />
-              <Experience
-                title="Waitrainer, Intern"
-                dates="2017 - 2017"
-                items={[
-                  'Worked with the full stack (PHP, MongoDB, Vue.js) in a waiter-training startup.',
-                  'Designed and implemented features such as live search menus and refactored webpages.',
-                ]}
-              />*/}
             </div>
           </Section>
           <Section title="Selected Hackathons" id="hackathons">
             <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-              <HackathonsContainer hackathons={hackathons} />
+              <DeferredHackathonsSection />
             </div>
           </Section>
         </div>
-          <Section title="Skills" id="skills">
-            <div className="grid max-w-prose">
-              <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">What I focus on</h3>
-              <ul className="list-outside list-disc ml-6 text-text-primary text-lg md:text-xl space-y-2 mb-6 md:mb-8 marker:text-success">
-                <li>Responsive layouts and component structure from mobile up</li>
-                <li>Accessibility — semantic HTML, focus-visible patterns, and meaningful labels</li>
-                <li>Visual polish in CSS (spacing, type, states) and pragmatic design systems</li>
-              </ul>
-              <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Stack I ship with</h3>
-              <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
-                React, Next.js, TypeScript, Tailwind CSS, Jest, HTML, and CSS — plus Material UI, Zustand,
-                Observable Plot, and Vite when the product calls for them.
-              </p>
-              <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Also comfortable with</h3>
-              <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-3">
-                Backend and data: Python, Node.js, Supabase, PostgreSQL, Express, Sequelize — enough to
-                integrate APIs and ship full features with backend teammates.
-              </p>
-              <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-3">
-                Delivery: GitHub Actions, Git, Vercel, npm, LaunchDarkly, Slack, Jira, and Agile workflows.
-              </p>
-              <p className="text-text-primary text-lg md:text-xl leading-relaxed">
-                Exploring AI-assisted development and agents (Letta, n8n, Weights & Biases Weave, Pipecat,
-                Cursor, Claude Code, and related tools) where they speed up research and prototyping.
-              </p>
-            </div>
-          </Section>
+        <Section title="Skills" id="skills">
+          <div className="grid max-w-prose">
+            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Product Engineering</h3>
+            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
+              TypeScript, React, Next.js, Tailwind CSS, Material UI, Zustand, Jest, Vite, HTML, CSS
+            </p>
+            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">AI and Agents</h3>
+            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
+              Letta, n8n, Weights & Biases Weave, Pipecat, Meshy, Cursor, Claude Code
+            </p>
+            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Design</h3>
+            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
+              Blender, FreeCAD, Figma
+            </p>
+            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Backend and data</h3>
+            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
+              Python, Node.js, Supabase, PostgreSQL, Express, Sequelize.js
+            </p>
+            <h3 className="text-text-primary text-xl md:text-2xl font-bold mb-3">Delivery</h3>
+            <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-6 md:mb-8">
+              GitHub Actions, Git, Vercel, Slack, Jira, Agile workflows
+            </p>
+          </div>
+        </Section>
       </main>
 
-      <footer className="row-start-3 flex gap-[24px] text-text-primary flex-wrap items-center justify-center">
+      <footer className="row-start-3 flex gap-[24px] text-text-primary flex-wrap items-center justify-center" />
 
-      </footer>
-
-      <BackToTopButton />
+      <DeferredBackToTop />
     </div>
   );
 }

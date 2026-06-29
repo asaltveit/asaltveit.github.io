@@ -114,11 +114,6 @@ describe('BaseCard', () => {
       const items = ['First item', 'Second item', 'Third item', 'Fourth item'];
       render(<BaseCard {...defaultProps} items={items} />);
       
-      const list = screen.getByRole('list');
-      const listItems = screen.getAllByRole('listitem');
-      
-      expect(list).toBeInTheDocument();
-      expect(listItems).toHaveLength(4);
       items.forEach(item => {
         expect(screen.getByText(item)).toBeInTheDocument();
       });
@@ -127,11 +122,7 @@ describe('BaseCard', () => {
     it('handles empty items array', () => {
       render(<BaseCard {...defaultProps} items={[]} />);
       
-      const list = screen.getByRole('list');
-      const listItems = screen.queryAllByRole('listitem');
-      
-      expect(list).toBeInTheDocument();
-      expect(listItems).toHaveLength(0);
+      expect(screen.queryByText('Item 1')).not.toBeInTheDocument();
     });
   });
 
@@ -167,13 +158,12 @@ describe('BaseCard', () => {
       expect(timeElement).toHaveTextContent('January 2024 - Present');
     });
 
-    it('should have proper list structure', () => {
+    it('should render description items', () => {
       render(<BaseCard {...defaultProps} />);
       
-      const list = screen.getByRole('list');
-      expect(list).toBeInTheDocument();
-      const listItems = screen.getAllByRole('listitem');
-      expect(listItems.length).toBeGreaterThan(0);
+      expect(screen.getByText('Item 1')).toBeInTheDocument();
+      expect(screen.getByText('Item 2')).toBeInTheDocument();
+      expect(screen.getByText('Item 3')).toBeInTheDocument();
     });
 
     it('should have accessible link with proper attributes when link is provided', () => {

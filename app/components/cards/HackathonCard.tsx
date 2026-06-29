@@ -1,12 +1,8 @@
-'use client';
-
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
-import BaseCard from '@/components/cards/BaseCard';
-import { CardImageExternalLinkIndicator } from '@/components/cards/externalLinkIndicators';
-import TechStackIcons from '@/components/cards/TechStackIcons';
+import { StaticImageData } from 'next/image';
 import { Trophy, Users, Clock } from 'lucide-react';
-import { handleSpacebarKeyDown } from '@/utils/keyboard';
+import BaseCard from '@/components/cards/BaseCard';
+import HackathonCardImage from '@/components/cards/HackathonCardImage';
+import TechStackIcons from '@/components/cards/TechStackIcons';
 
 export interface HackathonProps {
   title: string;
@@ -21,57 +17,18 @@ export interface HackathonProps {
   duration?: string;
 }
 
-export default function HackathonCard({ 
-  title, 
-  dates, 
-  items, 
-  link, 
+export default function HackathonCard({
+  title,
+  dates,
+  items,
+  link,
   image,
   imageTitle,
   techStack = [],
   award,
   teamSize,
-  duration
+  duration,
 }: HackathonProps) {
-  const defaultImageTitle = imageTitle || title;
-  const imageContent = image ? (
-    link ? (
-      <Link 
-        href={link} 
-        aria-label={`View ${title} (opens in new tab)`}
-        className="block w-full h-full relative group focus:outline-none focus:ring-4 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface rounded-t-lg"
-        target="_blank"
-        rel="noopener noreferrer"
-        onKeyDown={handleSpacebarKeyDown}
-      >
-        <div className="w-full h-full overflow-hidden rounded-t-lg relative z-0">
-          <Image
-            src={image}
-            alt={`${defaultImageTitle} screenshot`}
-            width={800}
-            height={450}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 group-focus:scale-110"
-          />
-        </div>
-        <div className="absolute inset-0 z-10 bg-accent opacity-0 group-hover:opacity-40 group-focus:opacity-40 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
-        <div className="absolute inset-0 z-10 border-4 border-accent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 rounded-t-lg pointer-events-none" />
-        <CardImageExternalLinkIndicator />
-      </Link>
-    ) : (
-      <Image
-        src={image}
-        alt={`${defaultImageTitle} screenshot`}
-        width={800}
-        height={450}
-        className="w-full h-full object-cover"
-      />
-    )
-  ) : (
-    <div className="w-full h-full flex items-center justify-center bg-success">
-      <Trophy className="w-16 h-16 text-surface opacity-70" />
-    </div>
-  );
-
   const metadataItems = [];
   if (duration) {
     metadataItems.push(
@@ -85,7 +42,9 @@ export default function HackathonCard({
     metadataItems.push(
       <div key="team" className="flex items-center gap-1.5 text-sm text-text-secondary">
         <Users className="w-4 h-4" />
-        <span>{teamSize} {teamSize === 1 ? 'person' : 'people'}</span>
+        <span>
+          {teamSize} {teamSize === 1 ? 'person' : 'people'}
+        </span>
       </div>
     );
   }
@@ -116,8 +75,7 @@ export default function HackathonCard({
       noLinkNote={!link ? 'No project link available' : undefined}
       footerContent={footerContent}
     >
-      {imageContent}
+      <HackathonCardImage title={title} link={link} image={image} imageTitle={imageTitle} />
     </BaseCard>
   );
 }
-
