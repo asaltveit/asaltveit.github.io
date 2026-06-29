@@ -17,12 +17,12 @@ export default function Experience({
 }: ExperienceProps) {
   return (
     <div className="grid items-start justify-items-start">
-      <h3 className="text-text-primary text-h1 md:text-2xl font-bold">{title}</h3>
-      <time className="text-text-secondary text-lg md:text-xl pb-2">{dates}</time>
+      <h3 className="text-text-primary text-h2 font-bold">{title}</h3>
+      <time className="text-text-secondary text-small pb-2">{dates}</time>
       {linkLocation && (
-        <ul className="marker:text-success list-outside list-disc ml-6 text-text-secondary text-body md:text-xl justify-items-start">
+        <ul className="marker:text-success list-outside list-disc ml-6 text-text-secondary text-body justify-items-start">
           <li>
-            <span className="mr-2"> Located at: </span>
+            <span className="mr-2">Located at:</span>
             <ExperienceLocationLink
               href={linkLocation}
               title={title}
@@ -32,9 +32,9 @@ export default function Experience({
         </ul>
       )}
 
-      <ul className="marker:text-success list-outside list-disc ml-6 text-text-primary text-body md:text-xl justify-items-start">
+      <ul className="marker:text-success list-outside list-disc ml-6 text-text-primary text-body leading-relaxed justify-items-start">
         {items.map((item: string, i: number) => (
-          <li key={`${i}`}> {item} </li>
+          <li key={`${i}`}>{item}</li>
         ))}
       </ul>
     </div>

@@ -3,11 +3,7 @@
 :root {
   /* RAW COLOR PALETTE */
   --color-blue-50: #F1F5F9;
-  /*--color-blue-50: #eff6ff;*/
-  --color-blue-100: #dbeafe;
-  /*--color-blue-500: #3b82f6;*/
   --color-blue-500: #0284C7;
-  /*--color-blue-600: #2563eb;*/
   --color-blue-600: #0369A1;
 
   --color-slate-50: #f8fafc;
@@ -35,6 +31,10 @@
   --leading-snug: 1.3;
   --leading-normal: 1.6;
   --leading-relaxed: 1.75;
+
+  /* MOTION */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
 }
 
 .dark {
@@ -54,7 +54,7 @@
 @theme inline {
   --color-bg: var(--color-slate-50);
   --color-surface: var(--color-white);
-  --color-surface-hover: var(--color-blue-50);;
+  --color-surface-hover: var(--color-blue-50);
 
   --color-text-primary: var(--color-slate-900);
   --color-text-secondary: var(--color-slate-600);
@@ -66,14 +66,12 @@
 
   --color-success: var(--color-teal-500);
 
-  /* TYPOGRAPHY SCALE */
   --text-hero: var(--text-hero);
   --text-h1: var(--text-h1);
   --text-h2: var(--text-h2);
   --text-body: var(--text-body);
   --text-small: var(--text-small);
 
-  /* FONTS */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
@@ -102,7 +100,7 @@ a, button {
   cursor: pointer;
 }
 
-/*@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -110,4 +108,4 @@ a, button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}*/
+}
