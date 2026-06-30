@@ -52,7 +52,7 @@ export const otherProjects: ProjectProps[] = [
     ],
     link: "https://github.com/asaltveit/asaltveit.github.io",
     techStack: ["React", "Next.js", "TypeScript", "TailwindCSS"],
-    image: "/asaltveit.github.io-screenshot-040225.webp",
+    //image: "/asaltveit.github.io-screenshot-040225.webp",
   },
 ];
 
@@ -64,7 +64,7 @@ export const hackathons = [
     title: "Hackathon: Humanizing The Prototype",
     dates: "6/27/26",
     items: [
-      "IELTS Speaking prep for English learners",
+      "There isn't affordable access to IELTS speaking assessment prep for English learners.",
       "AI video practice with a Tavus examiner, mock exams, and personalized study plans.",
     ],
     image: "/IELTS-speaking-practice.webp",
@@ -78,8 +78,8 @@ export const hackathons = [
     title: "Open Metaverse Hackathon",
     dates: "3/7/26",
     items: [
-      "Created a tool that transforms text descriptions into 3D models of individual trees or biomes of multiple plant and tree types.",
-      "The trees are procedurally generated using fractals and L-systems in order to keep file and texture sizes small.",
+      "Open Metaverse users will want shrubbery for decoration and the limits for 3d models are too tight for current generation methods.",
+      "Created a tool that transforms text descriptions into 3D models of individual trees or biomes of multiple plant and tree types. The trees are procedurally generated using fractals and L-systems in order to keep file and texture sizes small.",
     ],
     image: "/rp1-trees-website-screenshot.webp",
     link: "https://github.com/asaltveit/rp1-trees",
@@ -92,6 +92,7 @@ export const hackathons = [
     title: "ElevenLabs Worldwide Hackathon",
     dates: "12/11/25",
     items: [
+      "",
       "Created SteadyTalk, an emotionally intelligent AI manager designed for practicing live performance conversations via video.",
     ],
     image: "/angry_boss.webp",
@@ -105,6 +106,7 @@ export const hackathons = [
     title: "Navi AI x GDG DevFest: Aviation Hackathon",
     dates: "November 2025",
     items: [
+      "",
       "Created a product that alerts pilots if they've read back instructions from ATC controllers incorrectly.",
     ],
     techStack: ["Otter.ai"],
