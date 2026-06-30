@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import ProjectsContainer from '@/components/containers/ProjectsContainer'
+import ProjectsSection from '@/components/containers/ProjectsSection'
 
 // Mock Next.js Link and Image components
 jest.mock('next/link', () => {
@@ -21,7 +21,7 @@ beforeEach(() => {
   matchMediaMock.mockClear()
 })
 
-describe('ProjectsContainer', () => {
+describe('ProjectsSection', () => {
   const mockProjects = [
     {
       title: 'Project 1',
@@ -52,14 +52,14 @@ describe('ProjectsContainer', () => {
   const featured = [mockProjects[0], mockProjects[1]]
 
   it('renders featured projects', () => {
-    render(<ProjectsContainer featuredProjects={featured} />)
+    render(<ProjectsSection featuredProjects={featured} />)
 
     expect(screen.getByText('Project 1')).toBeInTheDocument()
     expect(screen.getByText('Project 2')).toBeInTheDocument()
   })
 
   it('renders project cards with correct content', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} />)
+    render(<ProjectsSection featuredProjects={[mockProjects[0]]} />)
 
     expect(screen.getByText('Project 1')).toBeInTheDocument()
     expect(screen.getByText('2024 - 2025')).toBeInTheDocument()
@@ -68,13 +68,13 @@ describe('ProjectsContainer', () => {
   })
 
   it('renders no featured grid when featured is empty', () => {
-    const { container } = render(<ProjectsContainer featuredProjects={[]} />)
+    const { container } = render(<ProjectsSection featuredProjects={[]} />)
 
     expect(container.querySelector('#projects-grid')).not.toBeInTheDocument()
   })
 
   it('applies correct grid classes to featured grid', () => {
-    const { container } = render(<ProjectsContainer featuredProjects={featured} />)
+    const { container } = render(<ProjectsSection featuredProjects={featured} />)
 
     const grid = container.querySelector('#projects-grid')
     expect(grid).toBeInTheDocument()
@@ -86,7 +86,7 @@ describe('ProjectsContainer', () => {
   })
 
   it('renders projects with images when provided', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[0]]} />)
+    render(<ProjectsSection featuredProjects={[mockProjects[0]]} />)
 
     const imageLink = screen.getByRole('link', { name: 'View Project 1 (opens in new tab)' })
     const image = imageLink.querySelector('img')
@@ -96,7 +96,7 @@ describe('ProjectsContainer', () => {
   })
 
   it('uses decorative alt on linked project images', () => {
-    render(<ProjectsContainer featuredProjects={[mockProjects[1]]} />)
+    render(<ProjectsSection featuredProjects={[mockProjects[1]]} />)
 
     const imageLink = screen.getByRole('link', { name: 'View Project 2 (opens in new tab)' })
     const image = imageLink.querySelector('img')
@@ -105,7 +105,7 @@ describe('ProjectsContainer', () => {
   })
 
   it('renders all project links correct', () => {
-    render(<ProjectsContainer featuredProjects={featured} />)
+    render(<ProjectsSection featuredProjects={featured} />)
 
     const project1Link = screen.getByRole('link', { name: /link to Project 1/i })
     expect(project1Link).toHaveAttribute('href', 'https://example.com/project1')
@@ -113,14 +113,14 @@ describe('ProjectsContainer', () => {
 
   describe('Accessibility', () => {
     it('should have skip link for keyboard navigation', () => {
-      render(<ProjectsContainer featuredProjects={featured} />)
+      render(<ProjectsSection featuredProjects={featured} />)
 
       const skipLink = screen.getByRole('link', { name: /skip to hackathons content/i })
       expect(skipLink).toBeInTheDocument()
     })
 
     it('should have aria-describedby linking to description', () => {
-      const { container } = render(<ProjectsContainer featuredProjects={featured} />)
+      const { container } = render(<ProjectsSection featuredProjects={featured} />)
 
       const grid = container.querySelector('#projects-grid')
       expect(grid).toHaveAttribute('aria-describedby', 'projects-description')
@@ -131,7 +131,7 @@ describe('ProjectsContainer', () => {
     })
 
     it('should have proper focus management for grid navigation', () => {
-      const { container } = render(<ProjectsContainer featuredProjects={featured} />)
+      const { container } = render(<ProjectsSection featuredProjects={featured} />)
 
       const grid = container.querySelector('#projects-grid')
       expect(grid).toHaveAttribute('role', 'grid')

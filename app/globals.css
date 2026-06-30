@@ -72,8 +72,39 @@
   --leading-relaxed: var(--leading-relaxed);
 }
 
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --color-slate-600: #334155;
+    --color-slate-60: #64748b;
+    --color-blue-500: #075985;
+    --color-blue-600: #0c4a6e;
+  }
+
+  .dark {
+    --color-slate-600: #f1f5f9;
+    --color-slate-60: #94a3b8;
+    --color-blue-500: #7dd3fc;
+    --color-blue-600: #bae6fd;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .compact-nav-bar {
+    background-color: var(--color-surface) !important;
+    backdrop-filter: none !important;
+  }
 }
 
 /* Make non-clickable text elements show default arrow cursor */

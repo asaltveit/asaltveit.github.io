@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import HackathonsContainer from '@/components/containers/HackathonsContainer'
+import HackathonsSection from '@/components/containers/HackathonsSection'
 
 // Mock Next.js Link and Image components
 jest.mock('next/link', () => {
@@ -21,7 +21,7 @@ beforeEach(() => {
   matchMediaMock.mockClear();
 });
 
-describe('HackathonsContainer', () => {
+describe('HackathonsSection', () => {
   const mockHackathons = [
     {
       title: 'Hackathon 1',
@@ -55,7 +55,7 @@ describe('HackathonsContainer', () => {
   ];
 
   it('renders all hackathons when provided', () => {
-    render(<HackathonsContainer hackathons={mockHackathons} />);
+    render(<HackathonsSection hackathons={mockHackathons} />);
     
     expect(screen.getByText('Hackathon 1')).toBeInTheDocument();
     expect(screen.getByText('Hackathon 2')).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('HackathonsContainer', () => {
   });
 
   it('renders hackathon cards with correct content', () => {
-    render(<HackathonsContainer hackathons={[mockHackathons[0]]} />);
+    render(<HackathonsSection hackathons={[mockHackathons[0]]} />);
     
     expect(screen.getByText('Hackathon 1')).toBeInTheDocument();
     expect(screen.getByText('12/11/25')).toBeInTheDocument();
@@ -75,19 +75,19 @@ describe('HackathonsContainer', () => {
   });
 
   it('returns null when hackathons array is empty', () => {
-    const { container } = render(<HackathonsContainer hackathons={[]} />);
+    const { container } = render(<HackathonsSection hackathons={[]} />);
     
     expect(container.firstChild).toBeNull();
   });
 
   it('returns null when hackathons prop is undefined', () => {
-    const { container } = render(<HackathonsContainer hackathons={undefined} />);
+    const { container } = render(<HackathonsSection hackathons={undefined} />);
     
     expect(container.firstChild).toBeNull();
   });
 
   it('applies correct grid classes when hackathons are provided', () => {
-    const { container } = render(<HackathonsContainer hackathons={mockHackathons} />);
+    const { container } = render(<HackathonsSection hackathons={mockHackathons} />);
     
     const grid = container.querySelector('.grid');
     expect(grid).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe('HackathonsContainer', () => {
   });
 
   it('renders hackathons with images when provided', () => {
-    render(<HackathonsContainer hackathons={[mockHackathons[0]]} />);
+    render(<HackathonsSection hackathons={[mockHackathons[0]]} />);
     
     const imageLink = screen.getByRole('link', { name: 'View Hackathon 1 (opens in new tab)' })
     const image = imageLink.querySelector('img')
@@ -113,7 +113,7 @@ describe('HackathonsContainer', () => {
       ...mockHackathons[1],
       image: '/hackathon2.png'
     };
-    render(<HackathonsContainer hackathons={[hackathonWithImageNoTitle]} />);
+    render(<HackathonsSection hackathons={[hackathonWithImageNoTitle]} />);
     
     const imageLink = screen.getByRole('link', { name: 'View Hackathon 2 (opens in new tab)' })
     const image = imageLink.querySelector('img')
@@ -122,7 +122,7 @@ describe('HackathonsContainer', () => {
   });
 
   it('renders hackathon metadata correctly', () => {
-    render(<HackathonsContainer hackathons={[mockHackathons[0]]} />);
+    render(<HackathonsSection hackathons={[mockHackathons[0]]} />);
     
     expect(screen.getByText('1st Place')).toBeInTheDocument();
     expect(screen.getByText('3 people')).toBeInTheDocument();
@@ -135,14 +135,14 @@ describe('HackathonsContainer', () => {
       teamSize: 1
     };
     
-    render(<HackathonsContainer hackathons={[singlePersonHackathon]} />);
+    render(<HackathonsSection hackathons={[singlePersonHackathon]} />);
     
     expect(screen.getByText('1 person')).toBeInTheDocument();
     expect(screen.queryByText('1 people')).not.toBeInTheDocument();
   });
 
   it('renders all hackathon links correctly', () => {
-    render(<HackathonsContainer hackathons={mockHackathons} />);
+    render(<HackathonsSection hackathons={mockHackathons} />);
     
     const links = screen.getAllByRole('link');
     expect(links.length).toBeGreaterThan(0);
@@ -159,7 +159,7 @@ describe('HackathonsContainer', () => {
       link: 'https://example.com'
     };
     
-    render(<HackathonsContainer hackathons={[minimalHackathon]} />);
+    render(<HackathonsSection hackathons={[minimalHackathon]} />);
     
     expect(screen.getByText('Minimal Hackathon')).toBeInTheDocument();
     expect(screen.getByText('2024')).toBeInTheDocument();
@@ -168,7 +168,7 @@ describe('HackathonsContainer', () => {
 
   describe('Accessibility', () => {
     it('should have aria-describedby linking to description', () => {
-      const { container } = render(<HackathonsContainer hackathons={mockHackathons} />);
+      const { container } = render(<HackathonsSection hackathons={mockHackathons} />);
       
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('aria-describedby', 'hackathons-description');
@@ -179,7 +179,7 @@ describe('HackathonsContainer', () => {
     });
 
     it('should have proper focus management for grid navigation', () => {
-      const { container } = render(<HackathonsContainer hackathons={mockHackathons} />);
+      const { container } = render(<HackathonsSection hackathons={mockHackathons} />);
       
       const grid = container.querySelector('.grid');
       expect(grid).toHaveAttribute('role', 'grid');

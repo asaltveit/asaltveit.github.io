@@ -8,30 +8,29 @@ describe('ThemeToggle', () => {
     localStorage.clear()
   })
 
-  it('renders with dark theme switch label in light mode', async () => {
+  it('renders with dark theme switch label in light mode', () => {
     render(<ThemeToggle />)
 
-    await waitFor(() => {
-      expect(
-        screen.getByRole('button', { name: 'Switch to dark theme' })
-      ).toBeInTheDocument()
-    })
+    expect(
+      screen.getByRole('button', { name: 'Switch to dark theme' })
+    ).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: 'Switch to dark theme' })
+    ).toHaveAttribute('aria-pressed', 'false')
   })
 
-  it('syncs to dark mode when html has dark class on mount', async () => {
+  it('syncs to dark mode when html has dark class on mount', () => {
     document.documentElement.classList.add('dark')
     render(<ThemeToggle />)
 
-    await waitFor(() => {
-      const button = screen.getByRole('button', { name: 'Switch to light theme' })
-      expect(button).toHaveAttribute('aria-pressed', 'true')
-    })
+    const button = screen.getByRole('button', { name: 'Switch to light theme' })
+    expect(button).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('toggles dark class, aria-pressed, and localStorage on click', async () => {
     render(<ThemeToggle />)
 
-    const button = await screen.findByRole('button', { name: 'Switch to dark theme' })
+    const button = screen.getByRole('button', { name: 'Switch to dark theme' })
     expect(button).toHaveAttribute('aria-pressed', 'false')
     expect(document.documentElement.classList.contains('dark')).toBe(false)
 
@@ -58,10 +57,10 @@ describe('ThemeToggle', () => {
     expect(localStorage.getItem('theme')).toBe('light')
   })
 
-  it('marks theme icons as decorative', async () => {
+  it('marks theme icons as decorative', () => {
     render(<ThemeToggle />)
 
-    await screen.findByRole('button', { name: 'Switch to dark theme' })
+    screen.getByRole('button', { name: 'Switch to dark theme' })
     const icon = document.querySelector('button svg')
     expect(icon).toHaveAttribute('aria-hidden', 'true')
   })

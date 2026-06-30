@@ -13,6 +13,7 @@ import {
   Mic,
   Image as ImageIcon
 } from 'lucide-react';
+import { cloneElement } from 'react';
 
 interface TechStackIconsProps {
   techStack: string[];
@@ -21,7 +22,7 @@ interface TechStackIconsProps {
 const ICON_MD_CLASS = 'w-5 h-5';
 
 // Map tech names to icons
-const techIconMap: Record<string, React.ReactNode> = {
+const techIconMap: Record<string, React.ReactElement<React.SVGProps<SVGSVGElement>>> = {
   // Frontend
   'React': <Code2 className={ICON_MD_CLASS} />,
   'Next.js': <Code2 className={ICON_MD_CLASS} />,
@@ -69,14 +70,16 @@ export default function TechStackIcons({ techStack }: TechStackIconsProps) {
                          tech.toLowerCase().includes('fal') ||
                          tech.toLowerCase().includes('flux') ||
                          tech.toLowerCase().includes('otter');
-        const icon = techIconMap[tech] || (isAITool ? <Brain className={ICON_MD_CLASS} /> : <Code2 className={ICON_MD_CLASS} />);
+        const icon =
+          techIconMap[tech] ??
+          (isAITool ? <Brain className={ICON_MD_CLASS} /> : <Code2 className={ICON_MD_CLASS} />);
         return (
           <div
             key={tech}
             className="flex items-center gap-1.5 px-2.5 py-1.5 bg-surface-hover rounded-md text-text-primary text-sm font-medium"
             title={tech}
           >
-            {icon}
+            {cloneElement(icon, { 'aria-hidden': true })}
             <span className="text-xs">{tech}</span>
           </div>
         );

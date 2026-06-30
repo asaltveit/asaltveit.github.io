@@ -134,14 +134,14 @@ describe('Page', () => {
     })
 
     describe('Projects and Hackathons', () => {
-        it('renders ProjectsContainer', async () => {
+        it('renders ProjectsSection', async () => {
             render(<Page />)
             await waitFor(() => {
                 expect(screen.getByText('Create Biblio')).toBeInTheDocument()
             })
         })
 
-        it('renders HackathonsContainer', async () => {
+        it('renders HackathonsSection', async () => {
             render(<Page />)
             await waitFor(() => {
                 expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()

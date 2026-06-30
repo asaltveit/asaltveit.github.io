@@ -42,7 +42,7 @@ export default function CompactNavBar() {
     <nav
       aria-label="main navigation"
       role="navigation"
-      className="h-12 bg-surface/80 backdrop-blur-md border-b border-border"
+      className="compact-nav-bar h-12 bg-surface/80 backdrop-blur-md border-b border-border"
     >
       <a
         href="#main-content"
