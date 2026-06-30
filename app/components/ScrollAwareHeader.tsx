@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import CompactNavBar from '@/components/CompactNavBar';
 import { useNavScrollState } from '@/utils/useNavScrollState';
@@ -18,11 +18,15 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
   const { variant } = useNavScrollState();
   const headerRef = useRef<HTMLElement>(null);
   const [fullNavHeight, setFullNavHeight] = useState(0);
+  const [animateSpacer, setAnimateSpacer] = useState(false);
   const isVisible = variant !== 'hidden';
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const header = headerRef.current;
-    if (!header || variant !== 'full') return;
+    if (!header || variant !== 'full') {
+      setFullNavHeight(0);
+      return;
+    }
 
     const updateHeight = () => {
       setFullNavHeight(header.offsetHeight);
@@ -36,6 +40,17 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
     observer.observe(header);
     return () => observer.disconnect();
   }, [variant]);
+
+  useEffect(() => {
+    setAnimateSpacer(true);
+  }, []);
+
+  const spacerHeight =
+    variant === 'full'
+      ? fullNavHeight > 0
+        ? fullNavHeight
+        : 'var(--full-nav-height)'
+      : 0;
 
   return (
     <>
@@ -55,8 +70,12 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
       </header>
       <div
         aria-hidden
-        className="motion-safe:transition-[height] motion-safe:duration-300 motion-safe:ease-in-out"
-        style={{ height: variant === 'full' ? fullNavHeight : 0 }}
+        className={
+          animateSpacer
+            ? 'motion-safe:transition-[height] motion-safe:duration-300 motion-safe:ease-in-out'
+            : undefined
+        }
+        style={{ height: spacerHeight }}
       />
     </>
   );

@@ -69,4 +69,12 @@ describe('ScrollAwareHeader', () => {
     const spacer = container.querySelector('header + div')
     expect(Number.parseFloat(spacer.style.height)).toBe(0)
   })
+
+  it('reserves full nav spacer height before measurement when variant is full', () => {
+    mockVariant('full')
+    const { container } = render(<ScrollAwareHeader links={mockLinks} />)
+
+    const spacer = container.querySelector('header + div')
+    expect(spacer.style.height).toBe('var(--full-nav-height)')
+  })
 })

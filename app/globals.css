@@ -25,6 +25,15 @@
   --leading-snug: 1.3;
   --leading-normal: 1.6;
   --leading-relaxed: 1.75;
+
+  /* Full NavBar spacer: pt-2 + pb-1 + 2.75rem toggle row (mobile); md:p-4 + toggle row (desktop) */
+  --full-nav-height: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --full-nav-height: 4.75rem;
+  }
 }
 
 .dark {
