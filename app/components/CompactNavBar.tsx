@@ -1,21 +1,45 @@
 'use client';
 
-import { ExternalLink } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
 import { scrollIntoViewWithMotion } from '@/utils/scroll';
+import { beginAutoScroll } from '@/utils/autoScrollLock';
 import { focusSectionHeading } from '@/utils/focusSection';
 import { NAV_LINK_CLASS } from '@/components/linkStyles';
-import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
 
-function DotSeparator() {
-  return (
-    <span className="text-text-secondary select-none px-1" aria-hidden>
-      ·
-    </span>
-  );
+interface NavLink {
+  title: string;
+  id: string;
 }
 
-export default function CompactNavBar() {
+interface CompactNavBarProps {
+  links: NavLink[];
+}
+
+function getInitialActiveSectionId(links: NavLink[]): string {
+  return links.length > 0 ? links[0].id : '';
+}
+
+export default function CompactNavBar({ links }: CompactNavBarProps) {
+  const [activeSectionId, setActiveSectionId] = useState(() =>
+    getInitialActiveSectionId(links)
+  );
+
+  useEffect(() => {
+    const fromHash = () => {
+      if (typeof window !== 'undefined' && window.location.hash) {
+        const sectionId = window.location.hash.slice(1);
+        setActiveSectionId(sectionId);
+        requestAnimationFrame(() => focusSectionHeading(sectionId));
+      } else {
+        setActiveSectionId(getInitialActiveSectionId(links));
+      }
+    };
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+    return () => window.removeEventListener('hashchange', fromHash);
+  }, [links]);
+
   const handleSkipClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const mainContent = document.getElementById('main-content');
@@ -25,16 +49,8 @@ export default function CompactNavBar() {
     }
   };
 
-  const handleAnnaClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const about = document.getElementById('about');
-    if (about) {
-      scrollIntoViewWithMotion(about, { block: 'start' });
-      focusSectionHeading('about');
-    }
-  };
-
   const handleSectionClick = (sectionId: string) => {
+    beginAutoScroll();
     requestAnimationFrame(() => focusSectionHeading(sectionId));
   };
 
@@ -42,7 +58,7 @@ export default function CompactNavBar() {
     <nav
       aria-label="main navigation"
       role="navigation"
-      className="compact-nav-bar h-12 bg-surface/80 backdrop-blur-md border-b border-border"
+      className="compact-nav-bar min-h-12 bg-surface/80 backdrop-blur-md border-b border-border"
     >
       <a
         href="#main-content"
@@ -52,38 +68,23 @@ export default function CompactNavBar() {
       >
         Skip to main content
       </a>
-      <div className="mx-auto flex h-full max-w-[68.75rem] items-center justify-center px-4 text-sm font-medium md:px-10">
-        <a
-          href="#about"
-          aria-label="link to About section"
-          className={NAV_LINK_CLASS}
-          onClick={handleAnnaClick}
-          onKeyDown={handleSpacebarKeyDown}
-        >
-          Anna
-        </a>
-        <DotSeparator />
-        <a
-          href="#projects"
-          aria-label="link to Projects section"
-          className={NAV_LINK_CLASS}
-          onKeyDown={handleSpacebarKeyDown}
-          onClick={() => handleSectionClick('projects')}
-        >
-          Projects
-        </a>
-        <DotSeparator />
-        <a
-          href="https://github.com/asaltveit"
-          aria-label="link to Github (opens in new tab)"
-          className={`group inline-flex items-center gap-1 ${NAV_LINK_CLASS}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onKeyDown={handleSpacebarKeyDown}
-        >
-          Github
-          <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
-        </a>
+      <div className="mx-auto flex min-h-12 max-w-[68.75rem] flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 py-2 text-sm font-medium md:px-10">
+        {links.map((link) => {
+          const isActive = link.id === activeSectionId;
+          return (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              aria-label={`link to ${link.title} section`}
+              aria-current={isActive ? 'page' : undefined}
+              className={NAV_LINK_CLASS}
+              onKeyDown={handleSpacebarKeyDown}
+              onClick={() => handleSectionClick(link.id)}
+            >
+              {link.title}
+            </a>
+          );
+        })}
       </div>
     </nav>
   );

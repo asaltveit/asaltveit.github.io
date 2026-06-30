@@ -8,7 +8,7 @@ export const NAV_LINK_CLASS = `${TEXT_LINK_INTERACTIVE_CLASS} underline underlin
 /** Links shown in accent (hero): underlined on mobile; underline on hover/focus from md up. */
 export const ACCENT_TEXT_LINK_CLASS = `${TEXT_LINK_INTERACTIVE_CLASS} text-accent underline underline-offset-4 md:no-underline`;
 
-/** Accent external links with icon (hero social links, footer GitHub). */
+/** Accent external links with icon (hero social links, footer). */
 export const ACCENT_EXTERNAL_LINK_CLASS = `group inline-flex items-center gap-2 ${ACCENT_TEXT_LINK_CLASS}`;
 
 /** Body/card links starting from inherited primary text color. */

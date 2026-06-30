@@ -186,24 +186,27 @@ describe('Page', () => {
             })
         })
         describe('LinkedIn', () => {
-            it('renders', () => {
+            it('renders in footer', () => {
                 render(<Page />)
-                const linkedin = screen.getByText('LinkedIn')
-                expect(linkedin).toBeInTheDocument()
+                const footer = screen.getByRole('contentinfo')
+                expect(within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })).toBeInTheDocument()
             })
             it('has correct href', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/anna-saltveit-4a70b2184/')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })

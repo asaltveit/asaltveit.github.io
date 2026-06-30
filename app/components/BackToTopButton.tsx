@@ -1,25 +1,58 @@
 "use client"
 
 import { ArrowUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { scrollToTopWithMotion } from '@/utils/scroll';
+import { TOP_THRESHOLD, useNavScrollState } from '@/utils/useNavScrollState';
+
+const EXIT_MS = 300;
 
 export default function BackToTopButton() {
-  const [isVisible, setIsVisible] = useState(false);
+  const { variant } = useNavScrollState();
+  const [isPastTop, setIsPastTop] = useState(false);
+  const [isRendered, setIsRendered] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const shouldShow = isPastTop && variant !== 'compact';
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+    const update = () => {
+      setIsPastTop(window.scrollY > TOP_THRESHOLD);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
   }, []);
+
+  useEffect(() => {
+    if (shouldShow) {
+      if (exitTimerRef.current) {
+        clearTimeout(exitTimerRef.current);
+        exitTimerRef.current = null;
+      }
+      setIsExiting(false);
+      setIsRendered(true);
+      return;
+    }
+
+    if (!isRendered) return;
+
+    setIsExiting(true);
+    exitTimerRef.current = setTimeout(() => {
+      setIsRendered(false);
+      setIsExiting(false);
+      exitTimerRef.current = null;
+    }, EXIT_MS);
+
+    return () => {
+      if (exitTimerRef.current) {
+        clearTimeout(exitTimerRef.current);
+        exitTimerRef.current = null;
+      }
+    };
+  }, [shouldShow, isRendered]);
 
   const scrollToTop = () => {
     scrollToTopWithMotion();
@@ -32,13 +65,22 @@ export default function BackToTopButton() {
         aria-atomic="true"
         className="sr-only"
       >
-        {isVisible && <span>Back to top button available</span>}
+        {shouldShow && <span>Back to top button available</span>}
       </div>
-      {isVisible && (
+      {isRendered && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-accent hover:ring-4 hover:bg-accent-hover text-surface p-4 rounded-full shadow-2xl transition-all duration-300 motion-reduce:transition-none hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-accent/50 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-hover z-50"
+          className={[
+            'fixed bottom-8 right-8 bg-accent hover:ring-4 hover:bg-accent-hover text-surface p-4 rounded-full shadow-2xl',
+            'transition-all duration-300 motion-reduce:transition-none',
+            'hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-accent/50',
+            'focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-hover z-50',
+            isExiting
+              ? 'pointer-events-none opacity-0 translate-y-2 scale-95 motion-reduce:translate-y-0 motion-reduce:scale-100'
+              : 'opacity-100 translate-y-0 scale-100',
+          ].join(' ')}
           aria-label="Back to top"
+          aria-hidden={isExiting}
           type="button"
         >
           <ArrowUp size={24} className="text-surface" aria-hidden />

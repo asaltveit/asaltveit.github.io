@@ -54,9 +54,22 @@ export default function Home() {
         </Section>
       </main>
 
-      <footer className="text-text-secondary text-small text-center py-6">
-        <p>
-          © {new Date().getFullYear()} Anna Saltveit ·{' '}
+      <footer className="text-text-secondary text-small py-6">
+        <p className="flex flex-wrap items-center justify-center gap-4">
+          <span className="inline-flex items-center gap-2">
+            © {new Date().getFullYear()} Anna Saltveit
+            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
+          </span>
+          <Link
+            href="https://www.linkedin.com/in/anna-saltveit-4a70b2184/"
+            className={ACCENT_EXTERNAL_LINK_CLASS}
+            aria-label="link to LinkedIn (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
+          </Link>
           <Link
             href="https://github.com/asaltveit"
             className={ACCENT_EXTERNAL_LINK_CLASS}

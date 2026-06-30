@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { handleSpacebarKeyDown } from '@/utils/keyboard';
 import { scrollIntoViewWithMotion } from '@/utils/scroll';
+import { beginAutoScroll } from '@/utils/autoScrollLock';
 import { focusSectionHeading } from '@/utils/focusSection';
 import ThemeToggle from '@/components/ThemeToggle';
 import { NAV_LINK_CLASS } from '@/components/linkStyles';
@@ -136,6 +137,7 @@ export default function NavBar ({ links, currentSectionId } : NavBarProps) {
     };
 
     const handleNavLinkClick = (sectionId: string) => {
+        beginAutoScroll();
         setIsMenuOpen(false);
         requestAnimationFrame(() => focusSectionHeading(sectionId));
     };

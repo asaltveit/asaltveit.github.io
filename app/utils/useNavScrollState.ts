@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { endAutoScroll, isAutoScrollActive, touchAutoScroll } from '@/utils/autoScrollLock';
 
 export type NavScrollVariant = 'full' | 'compact' | 'hidden';
 
-const TOP_THRESHOLD = 10;
+export const TOP_THRESHOLD = 10;
 
 export function useNavScrollState(): { variant: NavScrollVariant } {
   const [variant, setVariant] = useState<NavScrollVariant>('full');
@@ -15,10 +16,15 @@ export function useNavScrollState(): { variant: NavScrollVariant } {
     const update = () => {
       const currentScrollY = window.scrollY;
 
+      if (isAutoScrollActive()) {
+        touchAutoScroll();
+      }
+
       if (currentScrollY <= TOP_THRESHOLD) {
+        endAutoScroll();
         setVariant('full');
       } else if (currentScrollY < lastScrollY.current) {
-        setVariant('compact');
+        setVariant(isAutoScrollActive() ? 'hidden' : 'compact');
       } else if (currentScrollY > lastScrollY.current) {
         setVariant('hidden');
       }

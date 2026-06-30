@@ -74,14 +74,17 @@
 
 html {
   color-scheme: light;
+  background-color: var(--color-slate-50);
 }
 
 html.dark {
   color-scheme: dark;
+  background-color: var(--color-slate-50);
 }
 
 body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  background-color: inherit;
 }
 
 @media (prefers-contrast: more) {

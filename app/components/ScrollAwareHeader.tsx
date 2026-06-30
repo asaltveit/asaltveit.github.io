@@ -51,7 +51,7 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
         aria-hidden={!isVisible}
         inert={!isVisible}
       >
-        {variant === 'compact' ? <CompactNavBar /> : <NavBar links={links} />}
+        {variant === 'compact' ? <CompactNavBar links={links} /> : <NavBar links={links} />}
       </header>
       <div
         aria-hidden

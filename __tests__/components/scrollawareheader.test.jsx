@@ -37,8 +37,9 @@ describe('ScrollAwareHeader', () => {
     mockVariant('compact')
     render(<ScrollAwareHeader links={mockLinks} />)
 
-    expect(screen.getByRole('link', { name: 'link to About section' })).toHaveTextContent('Anna')
-    expect(screen.queryByRole('link', { name: 'link to Skills section' })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'link to About section' })).toHaveTextContent('About')
+    expect(screen.getByRole('link', { name: 'link to Skills section' })).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'link to Github (opens in new tab)' })).not.toBeInTheDocument()
   })
 
   it('hides header when variant is hidden', () => {

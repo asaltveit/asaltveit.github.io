@@ -32,8 +32,9 @@ export const metadata: Metadata = {
   creator: "Anna Saltveit",
 };
 
-// Runs before paint to set the theme class, avoiding a light/dark flash on load.
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`;
+// Matches --color-slate-50 in globals.css (light bg / dark bg tokens).
+const themeFlashGuardStyle =
+  "html,body{background-color:#f8fafc}html.dark,html.dark body{background-color:#0a0d11}";
 
 export default function RootLayout({
   children,
@@ -42,12 +43,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="motion-safe:scroll-smooth" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
+        {/* Blocking theme init for dev; production HTML gets an earlier copy via postbuild. */}
+        <script src="/theme-init.js" />
+        <style dangerouslySetInnerHTML={{ __html: themeFlashGuardStyle }} />
         <SystemThemeSync />
         {children}
       </body>

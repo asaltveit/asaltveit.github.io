@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { renderHook, act, waitFor, fireEvent } from '@testing-library/react'
+import { endAutoScroll, beginAutoScroll } from '../../app/utils/autoScrollLock'
 import { useNavScrollState } from '@/utils/useNavScrollState'
 
 function setScrollY(y) {
@@ -26,6 +27,7 @@ function scrollTo(y) {
 describe('useNavScrollState', () => {
   beforeEach(() => {
     jest.useFakeTimers()
+    endAutoScroll()
     setScrollY(0)
   })
 
@@ -87,6 +89,64 @@ describe('useNavScrollState', () => {
     })
 
     scrollTo(199)
+
+    await waitFor(() => {
+      expect(result.current.variant).toBe('compact')
+    })
+  })
+
+  it('stays hidden when scrolling up during auto-scroll', async () => {
+    const { result } = renderHook(() => useNavScrollState())
+
+    scrollTo(200)
+    await waitFor(() => {
+      expect(result.current.variant).toBe('hidden')
+    })
+
+    beginAutoScroll()
+    scrollTo(199)
+
+    await waitFor(() => {
+      expect(result.current.variant).toBe('hidden')
+    })
+  })
+
+  it('returns to full at top during auto-scroll and ends the lock', async () => {
+    const { result } = renderHook(() => useNavScrollState())
+
+    scrollTo(200)
+    await waitFor(() => {
+      expect(result.current.variant).toBe('hidden')
+    })
+
+    beginAutoScroll()
+    scrollTo(0)
+
+    await waitFor(() => {
+      expect(result.current.variant).toBe('full')
+    })
+  })
+
+  it('shows compact again after auto-scroll settles and user scrolls up', async () => {
+    const { result } = renderHook(() => useNavScrollState())
+
+    scrollTo(200)
+    await waitFor(() => {
+      expect(result.current.variant).toBe('hidden')
+    })
+
+    beginAutoScroll()
+    scrollTo(199)
+    await waitFor(() => {
+      expect(result.current.variant).toBe('hidden')
+    })
+
+    act(() => {
+      jest.advanceTimersByTime(150)
+    })
+    endAutoScroll()
+
+    scrollTo(198)
 
     await waitFor(() => {
       expect(result.current.variant).toBe('compact')
