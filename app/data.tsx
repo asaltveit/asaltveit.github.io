@@ -92,7 +92,7 @@ export const hackathons = [
     title: "ElevenLabs Worldwide Hackathon",
     dates: "12/11/25",
     items: [
-      "",
+      "People struggle to prepare for difficult conversations with their boss, including body language and facial expressions.",
       "Created SteadyTalk, an emotionally intelligent AI manager designed for practicing live performance conversations via video.",
     ],
     image: "/angry_boss.webp",
@@ -106,7 +106,7 @@ export const hackathons = [
     title: "Navi AI x GDG DevFest: Aviation Hackathon",
     dates: "November 2025",
     items: [
-      "",
+      "Pilots and ATC controllers still miscommunicate due to misinterpretation of instructions.",
       "Created a product that alerts pilots if they've read back instructions from ATC controllers incorrectly.",
     ],
     techStack: ["Otter.ai"],
