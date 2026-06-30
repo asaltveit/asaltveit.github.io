@@ -107,6 +107,18 @@ body {
   }
 }
 
+.theme-toggle-icon--sun {
+  display: none;
+}
+
+html.dark .theme-toggle-icon--moon {
+  display: none;
+}
+
+html.dark .theme-toggle-icon--sun {
+  display: block;
+}
+
 /* Make non-clickable text elements show default arrow cursor */
 p, span, div, h1, h2, h3, h4, h5, h6, li, ul, ol {
   cursor: default;

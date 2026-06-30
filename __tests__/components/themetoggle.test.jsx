@@ -61,7 +61,10 @@ describe('ThemeToggle', () => {
     render(<ThemeToggle />)
 
     screen.getByRole('button', { name: 'Switch to dark theme' })
-    const icon = document.querySelector('button svg')
-    expect(icon).toHaveAttribute('aria-hidden', 'true')
+    const iconWrappers = document.querySelectorAll('button .theme-toggle-icon')
+    expect(iconWrappers).toHaveLength(2)
+    iconWrappers.forEach((wrapper) => {
+      expect(wrapper).toHaveAttribute('aria-hidden', 'true')
+    })
   })
 })

@@ -61,6 +61,20 @@ export const projects: ProjectProps[] = [...featuredProjects, ...otherProjects];
 
 export const hackathons = [
   {
+    title: "Hackathon: Humanizing The Prototype",
+    dates: "6/27/26",
+    items: [
+      "IELTS Speaking prep for English learners",
+      "AI video practice with a Tavus examiner, mock exams, and personalized study plans.",
+    ],
+    image: "/IELTS-speaking-practice.webp",
+    link: "https://github.com/byseon/speak-lab-ai",
+    techStack: ["Tavus", "Lovable", "Python", "Next.js", "TypeScript", "TailwindCSS"],
+    award: "3rd Place",
+    teamSize: 4,
+    duration: "4 hours",
+  },
+  {
     title: "Open Metaverse Hackathon",
     dates: "3/7/26",
     items: [

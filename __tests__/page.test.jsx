@@ -144,6 +144,7 @@ describe('Page', () => {
         it('renders HackathonsSection', async () => {
             render(<Page />)
             await waitFor(() => {
+                expect(screen.getByText('Hackathon: Humanizing The Prototype')).toBeInTheDocument()
                 expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
             })
         })

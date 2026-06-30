@@ -47,15 +47,16 @@ export default function ThemeToggle() {
       type="button"
       suppressHydrationWarning
       onClick={toggleTheme}
-      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-transparent text-text-primary transition-colors duration-200 hover:border-border hover:bg-surface hover:text-accent focus:outline-none focus-visible:text-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+      className="theme-toggle inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-transparent text-text-primary transition-colors duration-200 hover:border-border hover:bg-surface hover:text-accent focus:outline-none focus-visible:text-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       aria-label={label}
       aria-pressed={isDark}
     >
-      {isDark ? (
-        <Sun className="h-5 w-5" aria-hidden />
-      ) : (
-        <Moon className="h-5 w-5" aria-hidden />
-      )}
+      <span className="theme-toggle-icon theme-toggle-icon--moon" aria-hidden>
+        <Moon className="h-5 w-5" />
+      </span>
+      <span className="theme-toggle-icon theme-toggle-icon--sun" aria-hidden>
+        <Sun className="h-5 w-5" />
+      </span>
     </button>
   );
 }
