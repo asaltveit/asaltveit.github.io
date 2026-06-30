@@ -15,23 +15,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
-        uses: ./.github/workflows/setup-node
-
-      - name: Test 🧪
-        run: npm run test
-
-      - name: Install Playwright browsers 🎭
-        run: npx playwright install --with-deps chromium
-
-      - name: E2E smoke tests 🌐
-        run: npm run test:e2e
+    uses: ./.github/workflows/test.yml
 
   build:
     runs-on: ubuntu-latest
