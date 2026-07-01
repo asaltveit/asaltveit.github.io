@@ -1,142 +1,89 @@
-'use client';
-
+import Section from '@/components/containers/Section';
+import ScrollAwareHeader from '@/components/ScrollAwareHeader';
+import Experience from '@/components/Experience';
+import HeroSocialLinks from '@/components/HeroSocialLinks';
+import SkillsSection from '@/components/containers/SkillsSection';
+import DeferredBackToTop from '@/components/lazy/DeferredBackToTop';
+import DeferredProjectsSection from '@/components/lazy/DeferredProjectsSection';
+import DeferredHackathonsSection from '@/components/lazy/DeferredHackathonsSection';
+import { navLinks, experienceEntries } from '@/data';
+import { ACCENT_EXTERNAL_LINK_CLASS } from '@/components/linkStyles';
+import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
-import { TEXT_LINK_EXTERNAL_ICON_CLASS } from '@/components/cards/externalLinkIndicators';
-import { handleSpacebarKeyDown } from '@/utils/keyboard';
-
-// Custom Components
-import Section from '@/components/containers/Section';
-import NavBar from '@/components/NavBar';
-import Experience from '@/components/Experience';
-import BackToTopButton from '@/components/BackToTopButton';
-import ProjectsContainer from '@/components/containers/ProjectsContainer';
-import HackathonsContainer from '@/components/containers/HackathonsContainer';
-import { projects, hackathons, navLinks } from '@/data';
-
 
 export default function Home() {
   return (
-    <div className="bg-indigo-700 grid min-h-screen px-10 pb-20 gap-8 md:gap-16 font-[family-name:var(--font-geist-sans)]">
-        <header className="text-white" >
-          <NavBar links={navLinks} />
-        </header>
-        <main id="main-content" tabIndex={-1}>
-          <h1 className="text-white text-4xl mt-6 md:mt-10 md:text-6xl items-center text-center font-medium" >
+    <div className="bg-bg min-h-screen px-4 pb-20 pt-0 md:px-10">
+      <ScrollAwareHeader links={navLinks} />
+      <main id="main-content" tabIndex={-1} className="min-w-0 max-w-[68.75rem] mx-auto w-full">
+        <section id="about" aria-labelledby="about-heading" className="scroll-mt-16 py-16 md:py-28 lg:py-32 space-y-6">
+          <h1
+            id="about-heading"
+            tabIndex={-1}
+            className="text-hero text-text-primary leading-tight font-sans focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          >
             Anna Saltveit
           </h1>
-          <div className="flex flex-col gap-[4px] row-start-2 items-start sm:items-start">
-            <Section title="About Me" id="about" >
-              <div className="grid">
-                <div className="text-white pb-6 md:pb-8 text-lg md:text-xl">
-                  I&apos;m a web developer who enjoys creating attractive and accessible products.
-                </div>
-                <h3 className="text-white text-xl md:text-2xl font-bold grid mb-4">
-                  Technical Skills
-                </h3>
-                <div className='mb-2'>
-                  <span className="text-white text-lg md:text-xl font-bold items-start pr-3">
-                    Frontend:
-                  </span>
-                  <span className="text-white text-lg md:text-xl items-end">
-                    Next.js, React, TypeScript, JavaScript, TailwindCSS, Material UI, Zustand, Observable Plot, HTML, CSS, Jest, Vite
-                  </span>
-                </div>
-                <div className='mb-2'>
-                  <span className="text-white text-lg md:text-xl font-bold items-start pr-3">
-                    Backend:
-                  </span>
-                  <span className="text-white text-lg md:text-xl items-end">
-                    Python, Supabase, Node.js, PostgreSQL, Express.js, Sequelize.js
-                  </span>
-                </div>
-                <div className='mb-2'>
-                  <span className="text-white text-lg md:text-xl font-bold items-start pr-3">
-                    Tools:
-                  </span>
-                  <span className="text-white text-lg md:text-xl items-end">
-                    Github Actions, Git, Vercel, npm, LaunchDarkly, Slack, Jira, Agile Development
-                  </span>
-                </div>
-                <div>
-                  <span className="text-white text-lg md:text-xl font-bold items-start pr-3">
-                    AI Tools:
-                  </span>
-                  <span className="text-white text-lg md:text-xl items-end">
-                     Letta, n8n, W&B Weave, Pipecat, OpenAGI, fal, Black Forest (Flux), Cursor AI, Claude Code, Kiro
-                  </span>
-                </div>
-              </div>
-            </Section>
-            <Section title="Experience" id="experience" >
-              <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-              <Experience title="Real Estate Investment Group, Software Engineer" dates="2026 - Present" items={[
-                  "Took ownership of an incomplete scraping system, rebuilding and extending it using Python and Playwright to reliably extract real estate data from multiple sources.",
-                  "Designing data processing pipelines to clean, normalize, and structuring inconsistent inputs into usable datasets for downstream analysis in spreadsheet workflows.",
-                  "Working directly with stakeholders to define requirements and iterate on product direction.",
-                  "Designing systems to handle inconsistent real-world data and evolving business logic."
-                  ]} 							       
-                />
-                <Experience title="Less Fluorescent, Software Developer" dates="2025 - 2025" items={[
-                  "Conducted research and design of machine learning pipelines for EEG signal and audio analysis, including signal preprocessing techniques and feature extraction methods, and a custom graph database architecture in C.",
-                  "Built responsive web and mobile prototypes using JavaScript, HTML, CSS.",
-                  "Worked on early-stage architecture and component design for MVP validation."
-                  ]} 
-                />
-                <Experience title="Included Health, Web Developer" dates="2021 - 2024" items={[
-                  "Led code base maintenance initiatives for my team and collaborated with a multi-team committee to improve maintenance using Github Actions and Rollbar, reducing bug and Dependabot alerts by 80% and preventing deployment locks.",
-                  "Led the development of medium and large features from code design to release.",
-                  "Collaborated with cross-functional teams, including project managers, designers, and data engineers among others.",
-                ]} />
-                <Experience title="Code for PDX, Frontend Developer" dates="2020 - 2020" items={[
-                  "Volunteered on Dwellingly app, which connects property managers with social workers to help homeless people find housing.",
-                  "Contributed components in React and SCSS."
-                ]} />
-                <Experience title="Waitrainer, Intern" dates="2017 - 2017" items={[
-                  "Worked with the full stack (PHP, MongoDB, Vue.js) in a waiter-training startup.",
-                  "Designed and implemented features such as live search menus and refactored webpages."
-                ]} />
-              </div>
-            </Section>
-            <Section title="Projects" id="projects" >
-              <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <ProjectsContainer projects={projects} />
-              </div>
-            </Section>
-            <Section title="Hackathons" id="hackathons" >
-              <div className="grid grid-cols-1 space-y-6 md:space-y-12">
-                <HackathonsContainer hackathons={hackathons} />
-              </div>
-            </Section>
-          </div>
-        </main>
+          <p className="text-h2 text-text-secondary max-w-[65ch] leading-snug">
+            Product engineer building AI-powered tools and interactive experiences.
+          </p>
+          <HeroSocialLinks />
+        </section>
+        <div className="flex flex-col gap-4 items-start">
+          <Section title="Featured Projects" id="projects">
+            <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+              <DeferredProjectsSection />
+            </div>
+          </Section>
+          <Section title="Experience" id="experience">
+            <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+              {experienceEntries.map((entry) => (
+                <Experience key={entry.title} {...entry} />
+              ))}
+            </div>
+          </Section>
+          <Section title="Selected Hackathons" id="hackathons">
+            <div className="grid grid-cols-1 space-y-6 md:space-y-10">
+              <DeferredHackathonsSection />
+            </div>
+          </Section>
+        </div>
+        <Section title="Skills" id="skills">
+          <SkillsSection />
+        </Section>
+      </main>
 
-        <footer className="row-start-3 flex gap-[24px] text-white flex-wrap items-center justify-center">
-          <Link
-            className="group flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
-            href="https://github.com/asaltveit"
-            aria-label="link to Github (opens in new tab)"
-            target="_blank"
-            rel="noopener noreferrer"
-            onKeyDown={handleSpacebarKeyDown}
-          >
-            Github
+      <footer className="text-text-secondary text-small py-6">
+        <p className="flex flex-wrap items-center justify-center gap-4">
+          <span className="inline-flex items-center gap-2">
+            © {new Date().getFullYear()} Anna Saltveit
             <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
-          </Link>
+          </span>
           <Link
-            className="group flex items-center gap-2 underline underline-offset-5 md:no-underline hover:underline hover:underline-offset-4"
             href="https://www.linkedin.com/in/anna-saltveit-4a70b2184/"
+            className={ACCENT_EXTERNAL_LINK_CLASS}
             aria-label="link to LinkedIn (opens in new tab)"
             target="_blank"
             rel="noopener noreferrer"
-            onKeyDown={handleSpacebarKeyDown}
           >
             LinkedIn
             <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
           </Link>
-        </footer>
+          <Link
+            href="https://github.com/asaltveit"
+            className={ACCENT_EXTERNAL_LINK_CLASS}
+            aria-label="link to Github (opens in new tab)"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github
+            <ExternalLink className={TEXT_LINK_EXTERNAL_ICON_CLASS} aria-hidden />
+          </Link>
+        </p>
+      </footer>
 
-        <BackToTopButton />
+      <DeferredBackToTop />
     </div>
   );
 }

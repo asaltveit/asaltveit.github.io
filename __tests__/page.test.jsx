@@ -1,12 +1,18 @@
 import '@testing-library/jest-dom'
-import { render, screen, within } from '@testing-library/react'
-import './mocks/matchMediaFalse.mock'
+import { render, screen, within, waitFor } from '@testing-library/react'
+import axe from 'axe-core'
 import Page from '../app/page'
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
   return ({ children, href, ...props }) => {
     return <a href={href} {...props}>{children}</a>
+  }
+})
+
+jest.mock('next/image', () => {
+  return ({ src, alt, ...props }) => {
+    return <img src={src} alt={alt} {...props} />
   }
 })
  
@@ -46,25 +52,28 @@ describe('Page', () => {
 
         it('renders all navigation links', () => {
             render(<Page />)
-            expect(screen.getByRole('link', { name: 'link to Experience section' })).toBeInTheDocument()
+            expect(screen.getByRole('link', { name: 'link to About section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Projects section' })).toBeInTheDocument()
+            expect(screen.getByRole('link', { name: 'link to Experience section' })).toBeInTheDocument()
             expect(screen.getByRole('link', { name: 'link to Hackathons section' })).toBeInTheDocument()
+            expect(screen.getByRole('link', { name: 'link to Skills section' })).toBeInTheDocument()
         })
     })
 
     describe('Sections', () => {
-        it('renders About Me section', () => {
+        it('renders About section', () => {
             render(<Page />)
             const aboutSection = document.getElementById('about')
             expect(aboutSection).toBeInTheDocument()
-            expect(screen.getByText('About Me')).toBeInTheDocument()
+            if (aboutSection) {
+                expect(within(aboutSection).getByRole('heading', { name: 'Anna Saltveit', level: 1 })).toBeInTheDocument()
+            }
         })
 
         it('renders Experience section', () => {
             render(<Page />)
             const experienceSection = document.getElementById('experience')
             expect(experienceSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (experienceSection) {
                 const { getByText } = within(experienceSection)
                 expect(getByText('Experience')).toBeInTheDocument()
@@ -75,10 +84,9 @@ describe('Page', () => {
             render(<Page />)
             const projectsSection = document.getElementById('projects')
             expect(projectsSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (projectsSection) {
                 const { getByText } = within(projectsSection)
-                expect(getByText('Projects')).toBeInTheDocument()
+                expect(getByText('Featured Projects')).toBeInTheDocument()
             }
         })
 
@@ -86,70 +94,59 @@ describe('Page', () => {
             render(<Page />)
             const hackathonsSection = document.getElementById('hackathons')
             expect(hackathonsSection).toBeInTheDocument()
-            // Section title should live inside the section, not only in the nav
             if (hackathonsSection) {
                 const { getByText } = within(hackathonsSection)
-                expect(getByText('Hackathons')).toBeInTheDocument()
+                expect(getByText('Selected Hackathons')).toBeInTheDocument()
             }
         })
     })
 
-    describe('About Me Content', () => {
-        it('renders about me text', () => {
+    describe('Hero content', () => {
+        it('renders hero tagline', () => {
             render(<Page />)
-            expect(screen.getByText(/I'm a web developer who enjoys creating attractive and accessible products/)).toBeInTheDocument()
+            expect(
+                screen.getByText(/Product engineer building AI-powered tools and interactive experiences/i)
+            ).toBeInTheDocument()
         })
 
-        it('renders Technical Skills heading', () => {
+        it('renders skills headings', () => {
             render(<Page />)
-            expect(screen.getByText('Technical Skills')).toBeInTheDocument()
-        })
-        // Long skill strings are brittle; we only assert section labels here
-        it('renders Frontend skills', () => {
-            render(<Page />)
-            expect(screen.getByText('Frontend:')).toBeInTheDocument()
-        })
-
-        it('renders Backend skills', () => {
-            render(<Page />)
-            expect(screen.getByText('Backend:')).toBeInTheDocument()
-        })
-
-        it('renders Tools', () => {
-            render(<Page />)
-            expect(screen.getByText('Tools:')).toBeInTheDocument()
+            expect(screen.getByText('Product Engineering')).toBeInTheDocument()
+            expect(screen.getByText('AI and Agents')).toBeInTheDocument()
+            expect(screen.getByText('Backend and data')).toBeInTheDocument()
         })
     })
 
     describe('Experience Components', () => {
         it('renders all experience entries', () => {
             render(<Page />)
+            expect(screen.getByText('Real Estate Investment Group, Software Engineer')).toBeInTheDocument()
             expect(screen.getByText('Less Fluorescent, Software Developer')).toBeInTheDocument()
             expect(screen.getByText('Included Health, Web Developer')).toBeInTheDocument()
-            expect(screen.getByText('Code for PDX, Frontend Developer')).toBeInTheDocument()
-            expect(screen.getByText('Waitrainer, Intern')).toBeInTheDocument()
         })
 
         it('renders experience dates', () => {
             render(<Page />)
+            expect(screen.getByText('2026 - Present')).toBeInTheDocument()
             expect(screen.getByText('2025 - 2025')).toBeInTheDocument()
             expect(screen.getByText('2021 - 2024')).toBeInTheDocument()
-            expect(screen.getByText('2020 - 2020')).toBeInTheDocument()
-            expect(screen.getByText('2017 - 2017')).toBeInTheDocument()
         })
     })
 
     describe('Projects and Hackathons', () => {
-        it('renders ProjectsContainer', () => {
+        it('renders ProjectsSection', async () => {
             render(<Page />)
-            // At least one project title from app data
-            expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            await waitFor(() => {
+                expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            })
         })
 
-        it('renders HackathonsContainer', () => {
+        it('renders HackathonsSection', async () => {
             render(<Page />)
-            // At least one hackathon title from app data
-            expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
+            await waitFor(() => {
+                expect(screen.getByText('Hackathon: Humanizing The Prototype')).toBeInTheDocument()
+                expect(screen.getByText('ElevenLabs Worldwide Hackathon')).toBeInTheDocument()
+            })
         })
     })
 
@@ -164,46 +161,52 @@ describe('Page', () => {
 
     describe('Footer Links', () => {
         describe('Github', () => {
-            it('renders', () => {
+            it('renders in footer', () => {
                 render(<Page />)
-                const github = screen.getByText('Github')
-                expect(github).toBeInTheDocument()
+                const footer = screen.getByRole('contentinfo')
+                expect(within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })).toBeInTheDocument()
             })
             it('has correct href', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('href', 'https://github.com/asaltveit')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const githubLink = within(footer).getByRole('link', { name: 'link to Github (opens in new tab)' })
                 expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
         describe('LinkedIn', () => {
-            it('renders', () => {
+            it('renders in footer', () => {
                 render(<Page />)
-                const linkedin = screen.getByText('LinkedIn')
-                expect(linkedin).toBeInTheDocument()
+                const footer = screen.getByRole('contentinfo')
+                expect(within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })).toBeInTheDocument()
             })
             it('has correct href', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/in/anna-saltveit-4a70b2184/')
             })
             it('opens in new tab', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('target', '_blank')
             })
             it('has security attributes', () => {
                 render(<Page />)
-                const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+                const footer = screen.getByRole('contentinfo')
+                const linkedinLink = within(footer).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
                 expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer')
             })
         })
@@ -231,12 +234,30 @@ describe('Page', () => {
             expect(nav).toBeInTheDocument()
         })
 
-        it('has accessible footer links', () => {
+        it('has accessible hero social links', () => {
             render(<Page />)
-            const githubLink = screen.getByRole('link', { name: 'link to Github (opens in new tab)' })
-            const linkedinLink = screen.getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
+            const aboutSection = document.getElementById('about')
+            expect(aboutSection).toBeInTheDocument()
+            const githubLink = within(aboutSection).getByRole('link', { name: 'link to Github (opens in new tab)' })
+            const linkedinLink = within(aboutSection).getByRole('link', { name: 'link to LinkedIn (opens in new tab)' })
             expect(githubLink).toHaveAttribute('aria-label', 'link to Github (opens in new tab)')
             expect(linkedinLink).toHaveAttribute('aria-label', 'link to LinkedIn (opens in new tab)')
+        })
+
+        it('has no axe accessibility violations', async () => {
+            const { container } = render(<Page />)
+
+            await waitFor(() => {
+                expect(screen.getByText('Create Biblio')).toBeInTheDocument()
+            })
+
+            const results = await axe.run(container, {
+                rules: {
+                    // jsdom cannot render canvas for contrast checks
+                    'color-contrast': { enabled: false },
+                },
+            })
+            expect(results.violations).toEqual([])
         })
     })
 })
