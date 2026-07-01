@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 async function scrollTo(page: Page, y: number) {
   await page.evaluate((scrollY) => {
-    window.scrollTo(0, scrollY);
+    window.scrollTo({ top: scrollY, behavior: 'instant' });
   }, y);
   await expect
     .poll(() => page.evaluate(() => window.scrollY))
@@ -42,10 +42,11 @@ test.describe('Portfolio smoke', () => {
     const scrollY = await page.evaluate(() => window.scrollY);
     await scrollTo(page, Math.max(0, scrollY - 300));
     await expect.poll(async () => header.getAttribute('aria-hidden')).toBe('false');
+    await expect(page.locator('header .compact-nav-bar')).toBeVisible();
     await expect(
-      page.getByRole('navigation').getByRole('link', { name: 'link to About section' }).filter({ hasText: 'Anna' })
-    ).toBeVisible();
-    await expect(header.getByRole('link', { name: 'link to Experience section' })).not.toBeVisible();
+      page.locator('header .compact-nav-bar').getByRole('link', { name: 'link to About section' })
+    ).toHaveText('About');
+    await expect(header.getByRole('button', { name: /Switch to .* theme/ })).not.toBeVisible();
   });
 
   test('theme toggle persists after reload', async ({ page }) => {

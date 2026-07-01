@@ -7,9 +7,7 @@
         : 'light';
     }
     var root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    }
+    root.classList.toggle('dark', theme === 'dark');
     root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
   } catch (e) {
     // Ignore storage failures; page still renders in light mode.

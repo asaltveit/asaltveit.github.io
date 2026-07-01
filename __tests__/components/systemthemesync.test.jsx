@@ -24,6 +24,15 @@ describe('SystemThemeSync', () => {
     }))
   })
 
+  it('applies stored theme on mount', () => {
+    localStorage.setItem('theme', 'dark')
+
+    render(<SystemThemeSync />)
+
+    expect(document.documentElement.classList.contains('dark')).toBe(true)
+    expect(document.documentElement.style.colorScheme).toBe('dark')
+  })
+
   it('follows system theme changes when no stored preference exists', () => {
     render(<SystemThemeSync />)
 

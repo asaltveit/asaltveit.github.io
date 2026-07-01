@@ -10,13 +10,28 @@ function getStoredTheme(): string | null {
   }
 }
 
+function applyTheme(theme: 'light' | 'dark'): void {
+  document.documentElement.classList.toggle('dark', theme === 'dark');
+  document.documentElement.style.colorScheme = theme;
+}
+
 function applySystemTheme(): void {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  document.documentElement.classList.toggle('dark', prefersDark);
+  applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+}
+
+function applyStoredOrSystemTheme(): void {
+  const stored = getStoredTheme();
+  if (stored === 'dark' || stored === 'light') {
+    applyTheme(stored);
+    return;
+  }
+  applySystemTheme();
 }
 
 export default function SystemThemeSync() {
   useEffect(() => {
+    applyStoredOrSystemTheme();
+
     const media = window.matchMedia('(prefers-color-scheme: dark)');
 
     const onSystemThemeChange = () => {
