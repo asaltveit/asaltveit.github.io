@@ -13,42 +13,45 @@ import {
   Mic,
   Image as ImageIcon
 } from 'lucide-react';
+import { cloneElement } from 'react';
 
 interface TechStackIconsProps {
   techStack: string[];
 }
 
+const ICON_MD_CLASS = 'w-5 h-5';
+
 // Map tech names to icons
-const techIconMap: Record<string, React.ReactNode> = {
+const techIconMap: Record<string, React.ReactElement<React.SVGProps<SVGSVGElement>>> = {
   // Frontend
-  'React': <Code2 className="w-5 h-5" />,
-  'Next.js': <Code2 className="w-5 h-5" />,
-  'TypeScript': <FileCode className="w-5 h-5" />,
-  'JavaScript': <FileCode className="w-5 h-5" />,
-  'TailwindCSS': <Layers className="w-5 h-5" />,
-  'Material UI': <Package className="w-5 h-5" />,
-  'Zustand': <Package className="w-5 h-5" />,
-  'Observable Plot': <Layers className="w-5 h-5" />,
-  'HTML': <FileCode className="w-5 h-5" />,
-  'CSS': <Layers className="w-5 h-5" />,
-  'Vitest': <Zap className="w-5 h-5" />,
-  'Vue': <Code2 className="w-5 h-5" />,
+  'React': <Code2 className={ICON_MD_CLASS} />,
+  'Next.js': <Code2 className={ICON_MD_CLASS} />,
+  'TypeScript': <FileCode className={ICON_MD_CLASS} />,
+  'JavaScript': <FileCode className={ICON_MD_CLASS} />,
+  'TailwindCSS': <Layers className={ICON_MD_CLASS} />,
+  'Material UI': <Package className={ICON_MD_CLASS} />,
+  'Zustand': <Package className={ICON_MD_CLASS} />,
+  'Observable Plot': <Layers className={ICON_MD_CLASS} />,
+  'HTML': <FileCode className={ICON_MD_CLASS} />,
+  'CSS': <Layers className={ICON_MD_CLASS} />,
+  'Vitest': <Zap className={ICON_MD_CLASS} />,
+  'Vue': <Code2 className={ICON_MD_CLASS} />,
   // Backend
-  'Python': <Terminal className="w-5 h-5" />,
-  'Supabase': <Database className="w-5 h-5" />,
-  'Node.js': <Server className="w-5 h-5" />,
-  'Express.js': <Server className="w-5 h-5" />,
-  'Sequelize.js': <Database className="w-5 h-5" />,
-  'PostgreSQL': <Database className="w-5 h-5" />,
+  'Python': <Terminal className={ICON_MD_CLASS} />,
+  'Supabase': <Database className={ICON_MD_CLASS} />,
+  'Node.js': <Server className={ICON_MD_CLASS} />,
+  'Express.js': <Server className={ICON_MD_CLASS} />,
+  'Sequelize.js': <Database className={ICON_MD_CLASS} />,
+  'PostgreSQL': <Database className={ICON_MD_CLASS} />,
   // AI Tools
-  'ElevenLabs': <Mic className="w-5 h-5" />,
-  'Tavus': <Mic className="w-5 h-5" />,
-  'Otter.ai': <Mic className="w-5 h-5" />,
-  'Anthropic': <Brain className="w-5 h-5" />,
-  'Cursor AI': <Bot className="w-5 h-5" />,
-  'fal': <Sparkles className="w-5 h-5" />,
-  'Black Forest (Flux)': <ImageIcon className="w-5 h-5" />,
-  'n8n': <Sparkles className="w-5 h-5" />,
+  'ElevenLabs': <Mic className={ICON_MD_CLASS} />,
+  'Tavus': <Mic className={ICON_MD_CLASS} />,
+  'Otter.ai': <Mic className={ICON_MD_CLASS} />,
+  'Anthropic': <Brain className={ICON_MD_CLASS} />,
+  'Cursor AI': <Bot className={ICON_MD_CLASS} />,
+  'fal': <Sparkles className={ICON_MD_CLASS} />,
+  'Black Forest (Flux)': <ImageIcon className={ICON_MD_CLASS} />,
+  'n8n': <Sparkles className={ICON_MD_CLASS} />,
 };
 
 export default function TechStackIcons({ techStack }: TechStackIconsProps) {
@@ -67,14 +70,16 @@ export default function TechStackIcons({ techStack }: TechStackIconsProps) {
                          tech.toLowerCase().includes('fal') ||
                          tech.toLowerCase().includes('flux') ||
                          tech.toLowerCase().includes('otter');
-        const icon = techIconMap[tech] || (isAITool ? <Brain className="w-5 h-5" /> : <Code2 className="w-5 h-5" />);
+        const icon =
+          techIconMap[tech] ??
+          (isAITool ? <Brain className={ICON_MD_CLASS} /> : <Code2 className={ICON_MD_CLASS} />);
         return (
           <div
             key={tech}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 rounded-md text-slate-300 text-sm font-medium"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-surface-hover rounded-md text-text-primary text-sm font-medium"
             title={tech}
           >
-            {icon}
+            {cloneElement(icon, { 'aria-hidden': true })}
             <span className="text-xs">{tech}</span>
           </div>
         );

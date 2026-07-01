@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import './__tests__/mocks/matchMediaFalse.mock'
 import { afterEach } from '@jest/globals'
 import { cleanup } from '@testing-library/react'
 
