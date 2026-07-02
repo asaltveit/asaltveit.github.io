@@ -4,7 +4,7 @@ import Experience from '@/components/Experience';
 import HeroSocialLinks from '@/components/HeroSocialLinks';
 import SkillsSection from '@/components/containers/SkillsSection';
 import DeferredBackToTop from '@/components/lazy/DeferredBackToTop';
-import DeferredProjectsSection from '@/components/lazy/DeferredProjectsSection';
+import ProjectsSection from '@/components/containers/ProjectsSection';
 import DeferredHackathonsSection from '@/components/lazy/DeferredHackathonsSection';
 import { navLinks, experienceEntries } from '@/data';
 import { ACCENT_EXTERNAL_LINK_CLASS } from '@/components/linkStyles';
@@ -17,7 +17,7 @@ export default function Home() {
     <div className="bg-bg min-h-screen px-4 pb-20 pt-0 md:px-10">
       <ScrollAwareHeader links={navLinks} />
       <main id="main-content" tabIndex={-1} className="min-w-0 max-w-[68.75rem] mx-auto w-full">
-        <section id="about" aria-labelledby="about-heading" className="scroll-mt-16 py-16 md:py-28 lg:py-32 space-y-6">
+        <section id="about" aria-labelledby="about-heading" className="scroll-mt-16 min-h-[calc(100dvh-var(--full-nav-height))] py-12 md:min-h-0 md:py-28 lg:py-32 space-y-6">
           <h1
             id="about-heading"
             tabIndex={-1}
@@ -33,7 +33,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 items-start">
           <Section title="Featured Projects" id="projects">
             <div className="grid grid-cols-1 space-y-6 md:space-y-10">
-              <DeferredProjectsSection />
+              <ProjectsSection />
             </div>
           </Section>
           <Section title="Experience" id="experience">

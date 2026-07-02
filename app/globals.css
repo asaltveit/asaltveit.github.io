@@ -73,7 +73,7 @@
   --text-small: var(--text-small);
 
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   --leading-tight: var(--leading-tight);
   --leading-snug: var(--leading-snug);

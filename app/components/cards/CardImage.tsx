@@ -1,10 +1,7 @@
-'use client';
-
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { Code2, Trophy, LucideIcon } from 'lucide-react';
 import { CardImageExternalLinkIndicator } from '@/components/cards/externalLinkIndicators';
-import { handleSpacebarKeyDown } from '@/utils/keyboard';
 
 const CARD_IMAGE_SIZES = '(min-width: 768px) 50vw, 100vw';
 
@@ -51,6 +48,8 @@ export default function CardImage({
       width={800}
       height={450}
       sizes={CARD_IMAGE_SIZES}
+      loading="lazy"
+      fetchPriority="low"
       className="w-full h-full object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
     />
   );
@@ -63,7 +62,6 @@ export default function CardImage({
         className="block w-full h-full relative group focus:outline-none focus-visible:ring-4 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface rounded-t-lg"
         target="_blank"
         rel="noopener noreferrer"
-        onKeyDown={handleSpacebarKeyDown}
       >
         <div className="w-full h-full overflow-hidden rounded-t-lg relative z-0">
           {imageElement}
