@@ -41,7 +41,11 @@ describe('Section', () => {
       </div>
     )
     
-    render(<Section {...defaultProps} children={children} />)
+    render(
+      <Section title={defaultProps.title} id={defaultProps.id}>
+        {children}
+      </Section>
+    )
     
     expect(screen.getByText('Child paragraph 1')).toBeInTheDocument()
     expect(screen.getByText('Child paragraph 2')).toBeInTheDocument()

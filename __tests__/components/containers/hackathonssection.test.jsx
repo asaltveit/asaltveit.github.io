@@ -2,18 +2,8 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import HackathonsSection from '@/components/containers/HackathonsSection'
 
-// Mock Next.js Link and Image components
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
-
-jest.mock('next/image', () => {
-  return ({ src, alt, ...props }) => {
-    return <img src={src} alt={alt} {...props} />
-  }
-})
+jest.mock('next/link')
+jest.mock('next/image')
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');
 

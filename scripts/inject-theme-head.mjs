@@ -1,27 +1,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const SNIPPET =
-  '<script src="/theme-init.js"></script><style>html,body{background-color:#f8fafc}html.dark,html.dark body{background-color:#0a0d11}</style>';
+const { script, style } = JSON.parse(
+  fs.readFileSync(path.join(process.cwd(), 'app/theme-snippet.json'), 'utf8'),
+);
+
+const SNIPPET = `<script data-theme-init>${script}</script><style data-theme-init>${style}</style>`;
 
 const outDir = path.join(process.cwd(), 'out');
 
+const THEME_SCRIPT_RE =
+  /<script[^>]*data-theme-init[^>]*>[\s\S]*?<\/script>|<script src="\/theme-init\.js"><\/script>/g;
+const THEME_STYLE_RE =
+  /<style[^>]*data-theme-init[^>]*>[\s\S]*?<\/style>|<style>html,body\{background-color:#f8fafc\}html\.dark,html\.dark body\{background-color:#0a0d11\}<\/style>/g;
+
 function injectThemeHead(html) {
   const headEnd = html.indexOf('</head>');
-  const bodyStart = html.indexOf('<body');
 
   if (headEnd === -1) return html;
 
-  let updated = html;
-
-  if (bodyStart !== -1 && updated.slice(bodyStart).includes(SNIPPET)) {
-    updated =
-      updated.slice(0, bodyStart) + updated.slice(bodyStart).replace(SNIPPET, '');
-  }
-
-  if (updated.slice(0, headEnd).includes('/theme-init.js')) {
-    return updated;
-  }
+  let updated = html.replace(THEME_SCRIPT_RE, '').replace(THEME_STYLE_RE, '');
 
   if (updated.includes('<link rel="stylesheet"')) {
     return updated.replace('<link rel="stylesheet"', `${SNIPPET}<link rel="stylesheet"`);

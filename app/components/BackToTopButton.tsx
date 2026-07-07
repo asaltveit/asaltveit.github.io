@@ -10,11 +10,23 @@ const EXIT_MS = 300;
 export default function BackToTopButton() {
   const { variant } = useNavScrollState();
   const [isPastTop, setIsPastTop] = useState(false);
-  const [isRendered, setIsRendered] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const [prevShouldShow, setPrevShouldShow] = useState(false);
   const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const shouldShow = isPastTop && variant !== 'compact';
+
+  if (shouldShow !== prevShouldShow) {
+    setPrevShouldShow(shouldShow);
+    if (shouldShow) {
+      setIsExiting(false);
+    } else {
+      setIsExiting(true);
+    }
+  }
+
+  const isRendered = shouldShow || isExiting;
+  const showExitingStyles = isExiting && !shouldShow;
 
   useEffect(() => {
     const update = () => {
@@ -27,21 +39,16 @@ export default function BackToTopButton() {
   }, []);
 
   useEffect(() => {
-    if (shouldShow) {
-      if (exitTimerRef.current) {
-        clearTimeout(exitTimerRef.current);
-        exitTimerRef.current = null;
-      }
-      setIsExiting(false);
-      setIsRendered(true);
-      return;
+    if (shouldShow && exitTimerRef.current) {
+      clearTimeout(exitTimerRef.current);
+      exitTimerRef.current = null;
     }
+  }, [shouldShow]);
 
-    if (!isRendered) return;
+  useEffect(() => {
+    if (!isExiting || shouldShow) return;
 
-    setIsExiting(true);
     exitTimerRef.current = setTimeout(() => {
-      setIsRendered(false);
       setIsExiting(false);
       exitTimerRef.current = null;
     }, EXIT_MS);
@@ -52,7 +59,7 @@ export default function BackToTopButton() {
         exitTimerRef.current = null;
       }
     };
-  }, [shouldShow, isRendered]);
+  }, [isExiting, shouldShow]);
 
   const scrollToTop = () => {
     scrollToTopWithMotion();
@@ -75,12 +82,12 @@ export default function BackToTopButton() {
             'transition-all duration-300 motion-reduce:transition-none',
             'hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-accent/50',
             'focus:outline-none focus-visible:ring-4 focus-visible:ring-accent-hover z-50',
-            isExiting
+            showExitingStyles
               ? 'pointer-events-none opacity-0 translate-y-2 scale-95 motion-reduce:translate-y-0 motion-reduce:scale-100'
               : 'opacity-100 translate-y-0 scale-100',
           ].join(' ')}
           aria-label="Back to top"
-          aria-hidden={isExiting}
+          aria-hidden={showExitingStyles}
           type="button"
         >
           <ArrowUp size={24} className="text-surface" aria-hidden />

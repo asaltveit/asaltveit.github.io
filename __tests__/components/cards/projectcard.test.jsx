@@ -2,19 +2,8 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import ProjectCard from '@/components/cards/ProjectCard'
 
-// Mock Next.js Image and Link components
-jest.mock('next/image', () => {
-  return ({ src, alt, ...props }) => {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} {...props} />
-  }
-})
-
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
+jest.mock('next/image')
+jest.mock('next/link')
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');
 

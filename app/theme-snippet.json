@@ -1,0 +1,4 @@
+{
+  "script": "(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';var r=document.documentElement;r.classList.toggle('dark',t==='dark');r.classList.toggle('light',t==='light');r.style.colorScheme=t==='dark'?'dark':'light'}catch{}})();",
+  "style": "html,body{background-color:#f8fafc}@media (prefers-color-scheme:dark){html:not(.light),html:not(.light) body{background-color:#0a0d11}}html.dark,html.dark body{background-color:#0a0d11}html.light,html.light body{background-color:#f8fafc}"
+}

@@ -23,8 +23,8 @@ export default function ProjectsSection({
           ariaDescribedBy="projects-description"
           cellCount={featuredProjects.length}
         >
-          {featuredProjects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.title} {...project} priority={index === 0} />
           ))}
         </CardGrid>
       </div>

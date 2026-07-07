@@ -11,6 +11,7 @@ export interface ProjectProps {
   image?: StaticImageData | string;
   imageTitle?: string;
   techStack?: string[];
+  priority?: boolean;
 }
 
 export default function ProjectCard({
@@ -21,6 +22,7 @@ export default function ProjectCard({
   image,
   imageTitle,
   techStack = [],
+  priority = false,
 }: ProjectProps) {
   return (
     <BaseCard
@@ -30,7 +32,7 @@ export default function ProjectCard({
       link={link}
       footerContent={<TechStackIcons techStack={techStack} />}
     >
-      <CardImage title={title} link={link} image={image} imageTitle={imageTitle} variant="project" />
+      <CardImage title={title} link={link} image={image} imageTitle={imageTitle} variant="project" priority={priority} />
     </BaseCard>
   );
 }

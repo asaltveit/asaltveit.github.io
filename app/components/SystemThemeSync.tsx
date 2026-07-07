@@ -12,6 +12,7 @@ function getStoredTheme(): string | null {
 
 function applyTheme(theme: 'light' | 'dark'): void {
   document.documentElement.classList.toggle('dark', theme === 'dark');
+  document.documentElement.classList.toggle('light', theme === 'light');
   document.documentElement.style.colorScheme = theme;
 }
 

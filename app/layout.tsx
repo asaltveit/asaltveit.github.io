@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist } from "next/font/google";
 import DeferredSystemThemeSync from "@/components/lazy/DeferredSystemThemeSync";
+import themeSnippet from "@/theme-snippet.json";
 import "@/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "optional",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -28,10 +31,6 @@ export const metadata: Metadata = {
   creator: "Anna Saltveit",
 };
 
-// Matches --color-slate-50 in globals.css (light bg / dark bg tokens).
-const themeFlashGuardStyle =
-  "html,body{background-color:#f8fafc}html.dark,html.dark body{background-color:#0a0d11}";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -39,10 +38,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="motion-safe:scroll-smooth" suppressHydrationWarning>
+      <head>
+        <style
+          data-theme-init
+          dangerouslySetInnerHTML={{ __html: themeSnippet.style }}
+        />
+      </head>
       <body className={`${geistSans.variable} font-sans antialiased`}>
-        {/* Blocking theme init for dev; production HTML gets an earlier copy via postbuild. */}
-        <script src="/theme-init.js" />
-        <style dangerouslySetInnerHTML={{ __html: themeFlashGuardStyle }} />
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeSnippet.script }}
+        />
         <DeferredSystemThemeSync />
         {children}
       </body>

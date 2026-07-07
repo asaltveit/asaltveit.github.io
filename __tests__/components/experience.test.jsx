@@ -2,12 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen, within, fireEvent } from '@testing-library/react'
 import Experience from '@/components/Experience'
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
+jest.mock('next/link')
 
 describe('Experience', () => {
   const defaultProps = {
@@ -90,7 +85,6 @@ describe('Experience', () => {
     render(<Experience {...defaultProps} items={[]} />);
     
     const lists = screen.getAllByRole('list');
-    const listItems = screen.queryAllByRole('listitem');
     
     expect(lists.length).toBeGreaterThan(0);
     const itemsList = lists.find(list => {

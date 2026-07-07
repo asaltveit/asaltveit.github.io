@@ -21,6 +21,7 @@ interface CardImageProps {
   image?: StaticImageData | string;
   imageTitle?: string;
   variant?: CardImageVariant;
+  priority?: boolean;
 }
 
 export default function CardImage({
@@ -29,6 +30,7 @@ export default function CardImage({
   image,
   imageTitle,
   variant = 'project',
+  priority = false,
 }: CardImageProps) {
   const defaultImageTitle = imageTitle || title;
   const { bgClass, Icon } = PLACEHOLDER_CONFIG[variant];
@@ -48,8 +50,9 @@ export default function CardImage({
       width={800}
       height={450}
       sizes={CARD_IMAGE_SIZES}
-      loading="lazy"
-      fetchPriority="low"
+      {...(priority
+        ? { priority: true }
+        : { loading: 'lazy' as const, fetchPriority: 'low' as const })}
       className="w-full h-full object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-110 group-focus-visible:scale-110 motion-reduce:group-hover:scale-100 motion-reduce:group-focus-visible:scale-100"
     />
   );
