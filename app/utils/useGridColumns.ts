@@ -31,7 +31,7 @@ export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>): numbe
                             setColumns(1);
                         }
                     }
-                } catch (error) {
+                } catch {
                     // Fallback for test environments where getComputedStyle might not work
                     if (typeof window !== 'undefined' && window.matchMedia) {
                         const isDesktop = window.matchMedia('(min-width: 768px)').matches;

@@ -3,18 +3,8 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import HackathonCard from '@/components/cards/HackathonCard'
 
 // Mock Next.js Image and Link components
-jest.mock('next/image', () => {
-  return ({ src, alt, ...props }) => {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} {...props} />
-  }
-})
-
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
+jest.mock('next/image')
+jest.mock('next/link')
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');
 
@@ -56,7 +46,7 @@ describe('HackathonCard', () => {
     
     const image = screen.getByAltText('test hackathon screenshot');
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', '/test-image.png');
+    expect(image).toHaveAttribute('src', '/test-image-800w.webp');
   });
 
   it('renders linked image with decorative alt when link is provided', () => {
@@ -72,7 +62,7 @@ describe('HackathonCard', () => {
     const imageLink = screen.getByRole('link', { name: 'View Test Hackathon (opens in new tab)' });
     const image = imageLink.querySelector('img');
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', '/test-image.png');
+    expect(image).toHaveAttribute('src', '/test-image-800w.webp');
     expect(image).toHaveAttribute('alt', '');
   });
 

@@ -3,18 +3,8 @@ import { render, screen, within, waitFor } from '@testing-library/react'
 import axe from 'axe-core'
 import Page from '../app/page'
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
-
-jest.mock('next/image', () => {
-  return ({ src, alt, ...props }) => {
-    return <img src={src} alt={alt} {...props} />
-  }
-})
+jest.mock('next/link')
+jest.mock('next/image')
  
 describe('Page', () => {
     it('renders', () => {

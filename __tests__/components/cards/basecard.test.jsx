@@ -2,12 +2,7 @@ import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from '@testing-library/react'
 import BaseCard from '@/components/cards/BaseCard'
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
+jest.mock('next/link')
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia');
 
@@ -127,7 +122,7 @@ describe('BaseCard', () => {
 
   describe('Accessibility', () => {
     it('should mark external link icon as decorative with aria-hidden', () => {
-      const { container } = render(
+      render(
         <BaseCard 
           {...defaultProps} 
           link="https://example.com"

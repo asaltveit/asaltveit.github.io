@@ -32,6 +32,8 @@ export const metadata: Metadata = {
 const themeFlashGuardStyle =
   "html,body{background-color:#f8fafc}html.dark,html.dark body{background-color:#0a0d11}";
 
+const themeInitScript = `(function(){try{var theme=localStorage.getItem('theme');if(!theme){theme=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}var root=document.documentElement;root.classList.toggle('dark',theme==='dark');root.style.colorScheme=theme==='dark'?'dark':'light';}catch{}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,7 +43,7 @@ export default function RootLayout({
     <html lang="en" className="motion-safe:scroll-smooth" suppressHydrationWarning>
       <body className={`${geistSans.variable} font-sans antialiased`}>
         {/* Blocking theme init for dev; production HTML gets an earlier copy via postbuild. */}
-        <script src="/theme-init.js" />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <style dangerouslySetInnerHTML={{ __html: themeFlashGuardStyle }} />
         <DeferredSystemThemeSync />
         {children}

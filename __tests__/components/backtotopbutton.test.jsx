@@ -36,12 +36,18 @@ function scrollWindow() {
 describe('BackToTopButton', () => {
   beforeEach(() => {
     jest.useFakeTimers()
+    jest.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+      cb(0)
+      return 1
+    })
+    jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {})
     mockScrollTo.mockClear()
     useNavScrollState.mockReturnValue({ variant: 'hidden' })
     setScrollY(0)
   })
 
   afterEach(() => {
+    jest.restoreAllMocks()
     jest.useRealTimers()
   })
 

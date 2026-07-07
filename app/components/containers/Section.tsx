@@ -2,13 +2,14 @@ interface SectionProps {
     title: string;
     id: string;
     children: React.ReactNode;
+    contentDeferred?: boolean;
 }
 
-export default function Section ({ title, id, children } : SectionProps) {
+export default function Section ({ title, id, children, contentDeferred = false } : SectionProps) {
     const headingId = `${id}-heading`;
 
     return (
-        <section id={`${id}`} aria-labelledby={headingId} role="region" className="relative scroll-mt-16 w-full max-w-[68.75rem] min-w-0 mx-auto break-words bg-surface mb-3 shadow-lg rounded-xl md:mt-16 mt-8">
+        <section id={`${id}`} aria-labelledby={headingId} role="region" className={`relative scroll-mt-16 w-full max-w-[68.75rem] min-w-0 mx-auto break-words bg-surface mb-3 shadow-lg rounded-xl md:mt-16 mt-8${contentDeferred ? ' content-deferred' : ''}`}>
             <div className="px-6 py-9 md:px-12 md:py-16 lg:px-16">
                 <div className="flex flex-wrap"> 
                     <div className="w-full justify-center">

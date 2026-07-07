@@ -33,6 +33,11 @@ function renderTestGrid(columns) {
   return { grid, links }
 }
 
+function activateGridKeyboardNav(grid, link) {
+  fireEvent.focusIn(link)
+  link.focus()
+}
+
 describe('CardGrid', () => {
   beforeEach(() => {
     mockUseGridColumns.mockReset()
@@ -64,7 +69,7 @@ describe('CardGrid', () => {
     it('moves focus down and up between cells', () => {
       const { grid, links } = renderTestGrid(1)
 
-      links[0].focus()
+      activateGridKeyboardNav(grid, links[0])
       expect(links[0]).toHaveFocus()
 
       fireEvent.keyDown(grid, { key: 'ArrowDown' })
@@ -77,7 +82,7 @@ describe('CardGrid', () => {
     it('jumps to first and last cells with Home and End', () => {
       const { grid, links } = renderTestGrid(1)
 
-      links[2].focus()
+      activateGridKeyboardNav(grid, links[2])
       fireEvent.keyDown(grid, { key: 'Home' })
       expect(links[0]).toHaveFocus()
 
@@ -90,7 +95,7 @@ describe('CardGrid', () => {
     it('moves focus right and left between cells in a row', () => {
       const { grid, links } = renderTestGrid(2)
 
-      links[0].focus()
+      activateGridKeyboardNav(grid, links[0])
       fireEvent.keyDown(grid, { key: 'ArrowRight' })
       expect(links[1]).toHaveFocus()
 
@@ -101,7 +106,7 @@ describe('CardGrid', () => {
     it('moves focus down and up between rows', () => {
       const { grid, links } = renderTestGrid(2)
 
-      links[0].focus()
+      activateGridKeyboardNav(grid, links[0])
       fireEvent.keyDown(grid, { key: 'ArrowDown' })
       expect(links[2]).toHaveFocus()
 
@@ -112,7 +117,7 @@ describe('CardGrid', () => {
     it('wraps to next row when moving right from last column', () => {
       const { grid, links } = renderTestGrid(2)
 
-      links[1].focus()
+      activateGridKeyboardNav(grid, links[1])
       fireEvent.keyDown(grid, { key: 'ArrowRight' })
       expect(links[2]).toHaveFocus()
     })

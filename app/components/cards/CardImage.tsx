@@ -2,6 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { Code2, Trophy, LucideIcon } from 'lucide-react';
 import { CardImageExternalLinkIndicator } from '@/components/cards/externalLinkIndicators';
+import { getCardImageSources } from '@/utils/cardImageSrc';
 
 const CARD_IMAGE_SIZES = '(min-width: 768px) 50vw, 100vw';
 
@@ -43,7 +44,7 @@ export default function CardImage({
 
   const imageElement = (
     <Image
-      src={image}
+      {...getCardImageSources(image)}
       alt={link ? '' : `${defaultImageTitle} screenshot`}
       width={800}
       height={450}

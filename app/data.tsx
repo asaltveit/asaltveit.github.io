@@ -24,7 +24,7 @@ export const featuredProjects: ProjectProps[] = [
     ],
     link: "https://rotas-squares-map.vercel.app/",
     techStack: ["React", "TailwindCSS", "Observable Plot", "Supabase", "JavaScript"],
-    image: "/map-screenshot-032725.webp",
+    image: "/map-screenshot.webp",
   },
     {
     title: "Create Biblio",

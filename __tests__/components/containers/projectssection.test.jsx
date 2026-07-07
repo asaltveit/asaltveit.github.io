@@ -3,17 +3,9 @@ import { render, screen } from '@testing-library/react'
 import ProjectsSection from '@/components/containers/ProjectsSection'
 
 // Mock Next.js Link and Image components
-jest.mock('next/link', () => {
-  return ({ children, href, ...props }) => {
-    return <a href={href} {...props}>{children}</a>
-  }
-})
+jest.mock('next/link')
 
-jest.mock('next/image', () => {
-  return ({ src, alt, ...props }) => {
-    return <img src={src} alt={alt} {...props} />
-  }
-})
+jest.mock('next/image')
 
 const matchMediaMock = jest.spyOn(window, 'matchMedia')
 
@@ -91,7 +83,7 @@ describe('ProjectsSection', () => {
     const imageLink = screen.getByRole('link', { name: 'View Project 1 (opens in new tab)' })
     const image = imageLink.querySelector('img')
     expect(image).toBeInTheDocument()
-    expect(image).toHaveAttribute('src', '/project1.png')
+    expect(image).toHaveAttribute('src', '/project1-800w.webp')
     expect(image).toHaveAttribute('alt', '')
   })
 

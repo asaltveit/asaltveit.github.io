@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, KeyboardEvent, ReactNode, Children } from 'react';
+import { useRef, useEffect, KeyboardEvent, FocusEvent, ReactNode, Children } from 'react';
 import { useGridColumns } from '@/utils/useGridColumns';
 
 interface CardGridProps {
@@ -22,6 +22,7 @@ export default function CardGrid({
   const cellRefs = useRef<(HTMLDivElement | null)[]>([]);
   const columns = useGridColumns(gridRef);
   const childArray = Children.toArray(children);
+  const keyboardNavEnabledRef = useRef(false);
 
   useEffect(() => {
     cellRefs.current = cellRefs.current.slice(0, cellCount);
@@ -115,6 +116,22 @@ export default function CardGrid({
     }
   };
 
+  const handleFocusCapture = () => {
+    keyboardNavEnabledRef.current = true;
+  };
+
+  const handleBlurCapture = (e: FocusEvent<HTMLDivElement>) => {
+    const relatedTarget = e.relatedTarget as Node | null;
+    if (!e.currentTarget.contains(relatedTarget)) {
+      keyboardNavEnabledRef.current = false;
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!keyboardNavEnabledRef.current) return;
+    handleGridKeyDown(e);
+  };
+
   if (cellCount === 0) {
     return null;
   }
@@ -132,7 +149,9 @@ export default function CardGrid({
       role="grid"
       aria-label={ariaLabel}
       aria-describedby={ariaDescribedBy}
-      onKeyDown={handleGridKeyDown}
+      onFocusCapture={handleFocusCapture}
+      onBlurCapture={handleBlurCapture}
+      onKeyDown={handleKeyDown}
       tabIndex={-1}
     >
       {rows.map((rowChildren, rowIndex) => (

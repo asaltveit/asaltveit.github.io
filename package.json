@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build && node scripts/inject-theme-head.mjs",
+    "generate:card-images": "node scripts/generate-card-image-variants.mjs",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:e2e": "playwright test",

@@ -36,25 +36,25 @@ export default function Home() {
               <ProjectsSection />
             </div>
           </Section>
-          <Section title="Experience" id="experience">
+          <Section title="Experience" id="experience" contentDeferred>
             <div className="grid grid-cols-1 space-y-6 md:space-y-10">
               {experienceEntries.map((entry) => (
                 <Experience key={entry.title} {...entry} />
               ))}
             </div>
           </Section>
-          <Section title="Selected Hackathons" id="hackathons">
+          <Section title="Selected Hackathons" id="hackathons" contentDeferred>
             <div className="grid grid-cols-1 space-y-6 md:space-y-10">
               <DeferredHackathonsSection />
             </div>
           </Section>
         </div>
-        <Section title="Skills" id="skills">
+        <Section title="Skills" id="skills" contentDeferred>
           <SkillsSection />
         </Section>
       </main>
 
-      <footer className="text-text-secondary text-small py-6">
+      <footer className="text-text-secondary text-small py-6 content-deferred">
         <p className="flex flex-wrap items-center justify-center gap-4">
           <span className="inline-flex items-center gap-2">
             © {new Date().getFullYear()} Anna Saltveit

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import NavBar from '@/components/NavBar';
 import CompactNavBar from '@/components/CompactNavBar';
 import { useNavScrollState } from '@/utils/useNavScrollState';
@@ -24,7 +24,6 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
   useLayoutEffect(() => {
     const header = headerRef.current;
     if (!header || variant !== 'full') {
-      setFullNavHeight(0);
       return;
     }
 
@@ -41,8 +40,9 @@ export default function ScrollAwareHeader({ links }: ScrollAwareHeaderProps) {
     return () => observer.disconnect();
   }, [variant]);
 
-  useEffect(() => {
-    setAnimateSpacer(true);
+  useLayoutEffect(() => {
+    const frame = requestAnimationFrame(() => setAnimateSpacer(true));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const spacerHeight =

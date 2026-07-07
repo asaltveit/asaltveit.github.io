@@ -32,14 +32,16 @@ export default function BackToTopButton() {
         clearTimeout(exitTimerRef.current);
         exitTimerRef.current = null;
       }
-      setIsExiting(false);
-      setIsRendered(true);
-      return;
+      const frame = requestAnimationFrame(() => {
+        setIsExiting(false);
+        setIsRendered(true);
+      });
+      return () => cancelAnimationFrame(frame);
     }
 
     if (!isRendered) return;
 
-    setIsExiting(true);
+    const frame = requestAnimationFrame(() => setIsExiting(true));
     exitTimerRef.current = setTimeout(() => {
       setIsRendered(false);
       setIsExiting(false);
@@ -47,6 +49,7 @@ export default function BackToTopButton() {
     }, EXIT_MS);
 
     return () => {
+      cancelAnimationFrame(frame);
       if (exitTimerRef.current) {
         clearTimeout(exitTimerRef.current);
         exitTimerRef.current = null;
