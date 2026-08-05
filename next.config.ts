@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   output: "export",
   reactStrictMode: true,
   images: { unoptimized: true },
+  experimental: {
+    useTypeScriptCli: true,
+  },
 };
 
 export default nextConfig;
